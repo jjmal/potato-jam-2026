@@ -6,14 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 size = Vector2(34, 2)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gcph1"]
-radius = 3.0
-
 [node name="Needle" type="CharacterBody2D" unique_id=560746324]
 collision_layer = 8
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bfd1i")
+fixed_depth = -12.0
 
 [node name="CollisionPlatform" type="CollisionShape2D" parent="." unique_id=2078299109]
 position = Vector2(3, 0)
@@ -21,16 +19,10 @@ shape = SubResource("RectangleShape2D_qyqk1")
 
 [node name="OtherCollisions" type="Node2D" parent="." unique_id=257312324]
 
-[node name="Hitbox" type="Area2D" parent="OtherCollisions" unique_id=388941726]
-collision_layer = 8
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OtherCollisions/Hitbox" unique_id=1790930920]
-position = Vector2(-17, 0)
-shape = SubResource("CircleShape2D_gcph1")
+[node name="HitRay" type="RayCast2D" parent="OtherCollisions" unique_id=588977534]
+target_position = Vector2(0, 0)
+collision_mask = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gcph1")
-
-[connection signal="body_entered" from="OtherCollisions/Hitbox" to="." method="_on_hitbox_body_entered"]
