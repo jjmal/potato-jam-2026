@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Needle
 
 const COLLIDER_NONE = 0
 const COLLIDER_STATIC = 2

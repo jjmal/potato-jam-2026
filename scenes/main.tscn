@@ -291,5 +291,6 @@ tile_set = SubResource("TileSet_vt404")
 
 [node name="Enemy" parent="." unique_id=1916811873 instance=ExtResource("4_tbgi4")]
 position = Vector2(872, 576)
+speed = null
 
 [connection signal="needle_shot_forward" from="Player" to="." method="_on_player_needle_shot_forward"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-const Needle: PackedScene = preload("res://scenes/needle.tscn")
+const NeedlePreload: PackedScene = preload("res://scenes/needle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_player_needle_shot_forward(needle_spawn_pos, direction_state) -> void:
-	var needle = Needle.instantiate()
+	var needle = NeedlePreload.instantiate()
 	needle.global_position = needle_spawn_pos
 	needle.direction_state = direction_state
 	add_child(needle)
