@@ -6,7 +6,12 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const EPSILON = 0.01
 
+@export var shot_cooldown: float = 0.75
 var flipped: bool = false
+var can_shoot: bool = true
+
+func _ready() -> void:
+	$ShootTimer.wait_time = shot_cooldown
 
 func move(delta: float) -> void:
 	# Add the gravity.
@@ -38,14 +43,21 @@ func flip(direction):
 		flipped = false
 
 func shoot():
-	if Input.is_action_just_pressed("shoot_forward"):
+	if Input.is_action_just_pressed("shoot_forward") and can_shoot:
 		var direction_state
 		if flipped:
 			direction_state = "left"
 		else:
 			direction_state = "right"
 		needle_shot_forward.emit($Marker2D.global_position, direction_state)
+		
+		can_shoot = false
+		$ShootTimer.start()
 
 func _physics_process(delta: float) -> void:
 	move(delta)
 	shoot()
+
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true

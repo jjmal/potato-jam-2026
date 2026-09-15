@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bnyo0fux3026t" path="res://assets/movables/dart_side_gold_red.png" id="1_gcph1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
-size = Vector2(33, 2)
+size = Vector2(34, 2)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gcph1"]
 radius = 3.0
@@ -16,7 +16,7 @@ motion_mode = 1
 script = ExtResource("1_bfd1i")
 
 [node name="CollisionPlatform" type="CollisionShape2D" parent="." unique_id=2078299109]
-position = Vector2(2.5, 0)
+position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_qyqk1")
 
 [node name="OtherCollisions" type="Node2D" parent="." unique_id=257312324]
@@ -30,5 +30,5 @@ position = Vector2(-17, 0)
 shape = SubResource("CircleShape2D_gcph1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
-scale = Vector2(0.075, 0.075)
+scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gcph1")
