@@ -44,7 +44,7 @@ func flip(direction):
 		flipped = false
 
 func can_shoot() -> bool:
-	return not is_shot_on_cooldown and not is_too_close_to_wall_to_shoot 
+	return not is_shot_on_cooldown
 
 func shoot():
 	if Input.is_action_just_pressed("shoot_forward") and can_shoot():
@@ -53,8 +53,11 @@ func shoot():
 			direction_state = "left"
 		else:
 			direction_state = "right"
-		needle_shot_forward.emit($Marker2D.global_position, direction_state)
-		
+			
+		if not is_too_close_to_wall_to_shoot:
+			needle_shot_forward.emit($DefaultShotMarker.global_position, direction_state)
+		else: 
+			needle_shot_forward.emit($AdjustedShotMarker.global_position, direction_state)
 		is_shot_on_cooldown = true
 		$ShootTimer.start()
 

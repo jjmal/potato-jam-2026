@@ -33,10 +33,10 @@ func _physics_process(delta: float) -> void:
 	collide()
 	
 func disable_collision_platform():
-	$CollisionPlatform.disabled = true
+	$CollisionPlatform.set_deferred("disabled", true)
 
 func enable_collision_platform():
-	$CollisionPlatform.disabled = false
+	$CollisionPlatform.set_deferred("disabled", false)
 	
 func set_flip():
 	if direction_state == "right":
@@ -62,3 +62,4 @@ func collide():
 		var hit_normal = hit_ray.get_collision_normal()
 		global_position = hit_point - hit_normal * fixed_depth
 		speed = 0
+		enable_collision_platform()
