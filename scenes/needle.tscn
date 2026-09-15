@@ -20,6 +20,7 @@ shape = SubResource("RectangleShape2D_qyqk1")
 [node name="OtherCollisions" type="Node2D" parent="." unique_id=257312324]
 
 [node name="HitRay" type="RayCast2D" parent="OtherCollisions" unique_id=588977534]
+position = Vector2(20, 0)
 target_position = Vector2(0, 0)
 collision_mask = 6
 

@@ -5,6 +5,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vt404"]
+size = Vector2(32, 20)
+
 [node name="Player" type="CharacterBody2D" unique_id=715291840]
 collision_mask = 3
 script = ExtResource("1_g2els")
@@ -24,4 +27,14 @@ position = Vector2(32, 0)
 wait_time = 0.75
 one_shot = true
 
+[node name="PreventShootNextToWall" type="Area2D" parent="." unique_id=392933475]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PreventShootNextToWall" unique_id=538543383]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_vt404")
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]
+[connection signal="body_exited" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_exited"]
