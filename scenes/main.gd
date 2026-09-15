@@ -17,5 +17,8 @@ func _on_player_needle_shot_forward(needle_spawn_pos, direction_state) -> void:
 	needle.global_position = needle_spawn_pos
 	needle.direction_state = direction_state
 	add_child(needle)
+	needle.collide_with_enemy.connect(_on_needle_collide_with_enemy)
 	
+func _on_needle_collide_with_enemy(collider: Node, needle: Node):
+	needle.reparent(collider)
 	

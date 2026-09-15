@@ -2,10 +2,13 @@ extends CharacterBody2D
 
 const COLLIDER_NONE = 0
 const COLLIDER_STATIC = 2
+const COLLIDER_ENEMY = 3
 
 @export var speed = 1000
 @export var fixed_depth = -8.0
 @onready var hit_ray = $OtherCollisions/HitRay
+
+signal collide_with_enemy(enemy: Node, itself: Node)
 
 var direction_state: String
 var direction: Vector2
@@ -48,18 +51,31 @@ func set_flip():
 		scale.y = 1
 		flipped = false
 
-func get_hit_ray_collision() -> int:
+func get_hit_ray_collision() -> Array:
 	hit_ray.force_raycast_update()
 	if hit_ray.is_colliding():
 		var collider = hit_ray.get_collider()
 		if Utils.is_body_a_tile_set_static(collider):
-			return COLLIDER_STATIC
-	return COLLIDER_NONE
+			return [COLLIDER_STATIC, collider]
+		if collider.is_in_group("Enemy"):
+			return [COLLIDER_ENEMY, collider]
+		
+	return [COLLIDER_NONE, null]
 		
 func collide():
-	if get_hit_ray_collision() == COLLIDER_STATIC:
+	if get_hit_ray_collision()[0] == COLLIDER_STATIC:
 		var hit_point = hit_ray.get_collision_point()
 		var hit_normal = hit_ray.get_collision_normal()
 		global_position = hit_point - hit_normal * fixed_depth
 		speed = 0
 		enable_collision_platform()
+	
+	if get_hit_ray_collision()[0] == COLLIDER_ENEMY:
+		var hit_point = hit_ray.get_collision_point()
+		var hit_normal = hit_ray.get_collision_normal()
+		global_position = hit_point - hit_normal * fixed_depth
+		speed = 0
+		var collider = get_hit_ray_collision()[1]
+		collide_with_enemy.emit(collider, self)
+		
+		
