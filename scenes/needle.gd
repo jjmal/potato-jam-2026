@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 1000
+@export var speed = 1000
 var direction_state: String
 var direction: Vector2
 #var collision_platform_enabled: bool = false
@@ -18,8 +18,8 @@ func get_direction():
 		return Vector2.RIGHT
 
 func _physics_process(delta: float) -> void:
-	velocity = direction * SPEED * delta
-	move_and_collide(velocity)
+	velocity = direction * speed * delta
+	position += velocity
 	
 func disable_collision_platform():
 	$CollisionPlatform.disabled = true
@@ -36,3 +36,11 @@ func flip():
 		rotation = 0
 		scale.y = 1
 		flipped = false
+	
+func collide_with_static():
+	speed = 0
+	
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if  Utils.is_body_a_tile_set_static(body):
+		collide_with_static()

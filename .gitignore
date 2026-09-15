@@ -5,3 +5,4 @@ addons/
 assets/
 icon.svg
 icon.svg.import
+*.tmp

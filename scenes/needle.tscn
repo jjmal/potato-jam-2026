@@ -32,3 +32,5 @@ shape = SubResource("CircleShape2D_gcph1")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gcph1")
+
+[connection signal="body_entered" from="OtherCollisions/Hitbox" to="." method="_on_hitbox_body_entered"]
