@@ -71,7 +71,7 @@ func collide():
 		speed = 0
 		enable_collision_platform()
 	
-	if get_hit_ray_collision()[0] == COLLIDER_ENEMY:
+	elif get_hit_ray_collision()[0] == COLLIDER_ENEMY:
 		var hit_point = hit_ray.get_collision_point()
 		var hit_normal = hit_ray.get_collision_normal()
 		global_position = hit_point - hit_normal * fixed_depth
