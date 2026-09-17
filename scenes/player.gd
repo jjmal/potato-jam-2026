@@ -10,6 +10,8 @@ const EPSILON = 0.01
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
 var is_too_close_to_wall_to_shoot: bool = false
+var is_jump_unblocked: bool = true
+var is_walk_forward_unblocked: bool = true
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
@@ -20,20 +22,22 @@ func move(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and can_jump():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
-	if direction:
+	flip_character(direction)
+	if direction and can_walk_forward():
 		velocity.x = direction * SPEED
-		flip(direction)
-	else:
+	else: # speed 0 guard
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
 	move_and_slide()
 
-func flip(direction):
+
+func flip_character(direction):
 	if direction < - EPSILON:
 		rotation = PI
 		scale.y = -1
@@ -61,20 +65,33 @@ func shoot():
 		is_shot_on_cooldown = true
 		$ShootTimer.start()
 
+func can_jump() -> bool:
+	return is_on_floor() and is_jump_unblocked
+	
+func can_walk_forward() -> bool:
+	return is_walk_forward_unblocked
+
 func _physics_process(delta: float) -> void:
 	move(delta)
 	shoot()
 
-
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false
 
+func _on_prevent_shoot_next_to_wall_body_entered(_body: Node2D) -> void:
+	is_too_close_to_wall_to_shoot = true
 
-func _on_prevent_shoot_next_to_wall_body_entered(body: Node2D) -> void:
-	if Utils.is_body_a_tile_set_static(body):
-		is_too_close_to_wall_to_shoot = true
+func _on_prevent_shoot_next_to_wall_body_exited(_body: Node2D) -> void:
+	is_too_close_to_wall_to_shoot = false
 
+func _on_prevent_jump_body_entered(_body: Node2D) -> void:
+	is_jump_unblocked = false
 
-func _on_prevent_shoot_next_to_wall_body_exited(body: Node2D) -> void:
-	if Utils.is_body_a_tile_set_static(body):
-		is_too_close_to_wall_to_shoot = false
+func _on_prevent_jump_body_exited(_body: Node2D) -> void:
+	is_jump_unblocked = true
+
+func _on_prevent_walk_forward_body_entered(_body: Node2D) -> void:
+	is_walk_forward_unblocked = false
+
+func _on_prevent_walk_forward_body_exited(_body: Node2D) -> void:
+	is_walk_forward_unblocked = true

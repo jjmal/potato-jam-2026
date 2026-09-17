@@ -9,6 +9,12 @@ size = Vector2(39, 52)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vt404"]
 size = Vector2(32, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0e06"]
+size = Vector2(38, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s500w"]
+size = Vector2(29, 50)
+
 [node name="Player" type="CharacterBody2D" unique_id=715291840]
 collision_mask = 11
 script = ExtResource("1_g2els")
@@ -37,6 +43,26 @@ collision_mask = 2
 position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_vt404")
 
+[node name="PreventJump" type="Area2D" parent="." unique_id=1050953254]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PreventJump" unique_id=555909450]
+position = Vector2(0, -34.5)
+shape = SubResource("RectangleShape2D_d0e06")
+
+[node name="PreventWalkForward" type="Area2D" parent="." unique_id=1716637488]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PreventWalkForward" unique_id=1577213074]
+position = Vector2(30.5, 0)
+shape = SubResource("RectangleShape2D_s500w")
+
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]
 [connection signal="body_exited" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_exited"]
+[connection signal="body_entered" from="PreventJump" to="." method="_on_prevent_jump_body_entered"]
+[connection signal="body_exited" from="PreventJump" to="." method="_on_prevent_jump_body_exited"]
+[connection signal="body_entered" from="PreventWalkForward" to="." method="_on_prevent_walk_forward_body_entered"]
+[connection signal="body_exited" from="PreventWalkForward" to="." method="_on_prevent_walk_forward_body_exited"]
