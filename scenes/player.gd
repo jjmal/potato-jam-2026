@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
-signal needle_shot_forward(needle_spawn_pos, direction_state)
+const NeedlePreload: PackedScene = preload("res://scenes/needle.tscn")
+
 signal can_walk_forward_status_change(can_walk_forward_status: bool)
 signal can_jump_status_change(can_jump_status: bool)
-
 
 const JUMP_VELOCITY = -400.0
 const EPSILON = 0.01
 
 @export var shot_cooldown: float = 0.75
+@onready var needle_array = $NeedleManager.needle_array
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
 var is_too_close_to_wall_to_shoot: bool = false
@@ -18,7 +19,7 @@ var speed = 300.0
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
-
+		
 func move(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -56,17 +57,28 @@ func can_shoot() -> bool:
 	return not is_shot_on_cooldown
 
 func shoot():
+	
 	if Input.is_action_just_pressed("shoot_forward") and can_shoot():
+		print('yay')
+		var needle = NeedlePreload.instantiate()
 		var direction_state
+		var needle_spawn_position 
+		
 		if flipped:
 			direction_state = "left"
 		else:
 			direction_state = "right"
 			
 		if not is_too_close_to_wall_to_shoot:
-			needle_shot_forward.emit($DefaultShotMarker.global_position, direction_state)
+			needle_spawn_position  = $DefaultShotMarker.global_position
 		else: 
-			needle_shot_forward.emit($AdjustedShotMarker.global_position, direction_state)
+			needle_spawn_position  = $AdjustedShotMarker.global_position
+		
+		needle.global_position = needle_spawn_position 
+		needle.direction_state = direction_state
+		$NeedleManager.add_child(needle)
+		needle_array.append(needle)
+		
 		is_shot_on_cooldown = true
 		$ShootTimer.start()
 

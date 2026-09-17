@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://mtunaaomciho"]
+
+[ext_resource type="Script" uid="uid://cpafl7l5bx7yh" path="res://scenes/needle_manager.gd" id="1_feo48"]
+
+[node name="NeedleManager" type="Node" unique_id=1637424353]
+script = ExtResource("1_feo48")

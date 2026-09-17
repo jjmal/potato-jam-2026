@@ -1,3 +1,3 @@
-extends Node
+extends  Node
 
-var needles_array: Array[Node] = []
+var needle_array: Array[Needle] = []

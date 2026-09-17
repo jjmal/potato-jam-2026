@@ -11,7 +11,6 @@ const COLLIDER_ENEMY = 3
 @onready var pickup_ray = $Collisions/PickupRay
 @onready var collision_platform = $Collisions/CollisionPlatformBody/CollisionPlatform
 
-signal collide_with_enemy(enemy: Node, itself: Node)
 signal available_for_pickup(distance: float, itself: Node)
 
 var direction_state: String
@@ -83,7 +82,7 @@ func collide():
 		global_position = hit_point - hit_normal * fixed_depth
 		speed = 0
 		var collider = get_hit_ray_collision()[1]
-		collide_with_enemy.emit(collider, self)
+		self.reparent(collider)
 		collided = true
 
 func track_if_can_pickup_with_ray() -> bool:
@@ -109,6 +108,5 @@ func send_signal_enable_pickup():
 func _on_pickup_range_body_entered(body: Node2D) -> void:
 	tracked_player = body
 	
-
 func _on_pickup_range_body_exited(_body: Node2D) -> void:
 	tracked_player = null
