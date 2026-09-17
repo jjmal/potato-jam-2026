@@ -80,22 +80,23 @@ func get_hit_ray_collision() -> Array:
 	return [COLLIDER_NONE, null]
 		
 func collide():
-	if get_hit_ray_collision()[0] == COLLIDER_STATIC:
-		var hit_point = hit_ray.get_collision_point()
-		var hit_normal = hit_ray.get_collision_normal()
-		global_position = hit_point - hit_normal * fixed_depth
-		speed = 0
-		enable_collision_platform()
-		collided = true
-	
-	elif get_hit_ray_collision()[0] == COLLIDER_ENEMY:
-		var hit_point = hit_ray.get_collision_point()
-		var hit_normal = hit_ray.get_collision_normal()
-		global_position = hit_point - hit_normal * fixed_depth
-		speed = 0
-		var collider = get_hit_ray_collision()[1]
-		self.reparent(collider)
-		collided = true
+	if not collided:
+		if get_hit_ray_collision()[0] == COLLIDER_STATIC:
+			var hit_point = hit_ray.get_collision_point()
+			var hit_normal = hit_ray.get_collision_normal()
+			global_position = hit_point - hit_normal * fixed_depth
+			speed = 0
+			enable_collision_platform()
+			collided = true
+		
+		elif get_hit_ray_collision()[0] == COLLIDER_ENEMY:
+			var hit_point = hit_ray.get_collision_point()
+			var hit_normal = hit_ray.get_collision_normal()
+			global_position = hit_point - hit_normal * fixed_depth
+			speed = 0
+			var collider = get_hit_ray_collision()[1]
+			self.reparent(collider)
+			collided = true
 
 func check_if_can_pickup_with_ray() -> bool:
 	if not collided:
