@@ -6,12 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 size = Vector2(34, 2)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bfd1i"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
+radius = 43.0
 
 [node name="Needle" type="CharacterBody2D" unique_id=560746324]
 collision_layer = 8
-collision_mask = 16
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_bfd1i")
 fixed_depth = -12.0
@@ -24,15 +24,25 @@ target_position = Vector2(0, 0)
 collision_mask = 6
 
 [node name="CollisionPlatformBody" type="StaticBody2D" parent="Collisions" unique_id=1082045433]
+collision_layer = 8
 
 [node name="CollisionPlatform" type="CollisionShape2D" parent="Collisions/CollisionPlatformBody" unique_id=2078299109]
 position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_qyqk1")
 one_way_collision = true
 
+[node name="PickupRange" type="Area2D" parent="Collisions" unique_id=1676451866]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/PickupRange" unique_id=1757588634]
+shape = SubResource("CircleShape2D_qyqk1")
+
+[node name="PickupRay" type="RayCast2D" parent="Collisions" unique_id=350755437]
+collision_mask = 2
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gcph1")
 
-[node name="PickupCollision" type="CollisionShape2D" parent="." unique_id=707814305]
-shape = SubResource("CircleShape2D_bfd1i")
+[connection signal="body_entered" from="Collisions/PickupRange" to="." method="_on_pickup_range_body_entered"]
+[connection signal="body_exited" from="Collisions/PickupRange" to="." method="_on_pickup_range_body_exited"]

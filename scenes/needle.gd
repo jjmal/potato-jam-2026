@@ -8,14 +8,17 @@ const COLLIDER_ENEMY = 3
 @export var speed = 1000
 @export var fixed_depth = -8.0
 @onready var hit_ray = $Collisions/HitRay
+@onready var pickup_ray = $Collisions/PickupRay
 @onready var collision_platform = $Collisions/CollisionPlatformBody/CollisionPlatform
 
 signal collide_with_enemy(enemy: Node, itself: Node)
+signal available_for_pickup(distance: float, itself: Node)
 
 var direction_state: String
 var direction: Vector2
-#var collision_platform_enabled: bool = false
 var flipped: bool = false
+var tracked_player: Node2D = null
+var collided: bool = false
 
 func _ready() -> void:
 	direction = get_direction()
@@ -36,6 +39,7 @@ func _physics_process(delta: float) -> void:
 	position += velocity
 	set_ray_cast(velocity)
 	collide()
+	send_signal_enable_pickup()
 	
 func disable_collision_platform():
 	collision_platform.set_deferred("disabled", true)
@@ -71,6 +75,7 @@ func collide():
 		global_position = hit_point - hit_normal * fixed_depth
 		speed = 0
 		enable_collision_platform()
+		collided = true
 	
 	elif get_hit_ray_collision()[0] == COLLIDER_ENEMY:
 		var hit_point = hit_ray.get_collision_point()
@@ -79,5 +84,31 @@ func collide():
 		speed = 0
 		var collider = get_hit_ray_collision()[1]
 		collide_with_enemy.emit(collider, self)
-		
+		collided = true
+
+func track_if_can_pickup_with_ray() -> bool:
+	if not collided:
+		return false
 	
+	if tracked_player != null:
+		hit_ray.target_position = to_local(tracked_player.global_position)
+		hit_ray.force_raycast_update()
+		if hit_ray.is_colliding():
+			return false
+		else:
+			return true
+	else:
+		return false
+
+func send_signal_enable_pickup():
+	if track_if_can_pickup_with_ray():
+		print('can be picked up')
+		var dist = global_position.distance_to(tracked_player.global_position)
+		available_for_pickup.emit(dist, self)
+
+func _on_pickup_range_body_entered(body: Node2D) -> void:
+	tracked_player = body
+	
+
+func _on_pickup_range_body_exited(_body: Node2D) -> void:
+	tracked_player = null

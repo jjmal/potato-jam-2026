@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bp1ibwlu1kenf" path="res://assets/static/tilesheet_complete.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://drjw7t80w7mh2" path="res://scenes/enemy_manager.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://cpafl7l5bx7yh" path="res://scenes/needle_manager.gd" id="6_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("4_jyhfs")
@@ -277,7 +278,6 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_vt404"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_tbgi4")
 
 [node name="Main" type="Node2D" unique_id=1001653021]
@@ -296,7 +296,11 @@ script = ExtResource("4_tefeu")
 [node name="Enemy" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
 position = Vector2(872, 576)
 
+[node name="NeedleManager" type="Node" parent="." unique_id=480974919]
+script = ExtResource("6_tefeu")
+
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
 [connection signal="needle_shot_forward" from="Player" to="." method="_on_player_needle_shot_forward"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="EnemyManager" to="EnemyManager" method="_on_child_exiting_tree"]
