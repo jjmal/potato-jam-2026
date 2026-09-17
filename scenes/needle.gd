@@ -114,8 +114,8 @@ func check_if_can_pickup_with_ray() -> bool:
 func set_distance_to_tracked_player():
 	distance_to_tracked_player = tracked_player.global_position.distance_to(global_position)
 
-func _on_pickup_range_body_entered(body: Node2D) -> void:
-	tracked_player = body
+func _on_pickup_range_area_entered(area: Area2D) -> void: # May need to be reworked - terrible patern...
+	tracked_player = area.get_parent()
 	
-func _on_pickup_range_body_exited(_body: Node2D) -> void:
+func _on_pickup_range_area_exited(area: Area2D) -> void:
 	tracked_player = null

@@ -16,6 +16,9 @@ size = Vector2(38, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s500w"]
 size = Vector2(10, 50)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
+radius = 19.235384
+
 [node name="Player" type="CharacterBody2D" unique_id=715291840]
 collision_mask = 11
 script = ExtResource("1_g2els")
@@ -61,6 +64,13 @@ position = Vector2(21, 0)
 shape = SubResource("RectangleShape2D_s500w")
 
 [node name="NeedleManager" parent="." unique_id=1637424353 instance=ExtResource("3_qhqgy")]
+
+[node name="NeedlePickupSphere" type="Area2D" parent="." unique_id=2106287388]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NeedlePickupSphere" unique_id=104623989]
+shape = SubResource("CircleShape2D_qyqk1")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]
