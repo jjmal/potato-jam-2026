@@ -37,10 +37,10 @@ func _physics_process(delta: float) -> void:
 	collide()
 	
 func disable_collision_platform():
-	$CollisionPlatform.set_deferred("disabled", true)
+	$OtherCollisions/CollisionPlatformBody/CollisionPlatform.set_deferred("disabled", true)
 
 func enable_collision_platform():
-	$CollisionPlatform.set_deferred("disabled", false)
+	$OtherCollisions/CollisionPlatformBody/CollisionPlatform.set_deferred("disabled", false)
 	
 func set_flip():
 	if direction_state == "right":
@@ -79,4 +79,4 @@ func collide():
 		var collider = get_hit_ray_collision()[1]
 		collide_with_enemy.emit(collider, self)
 		
-		
+	

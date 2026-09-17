@@ -13,17 +13,19 @@ motion_mode = 1
 script = ExtResource("1_bfd1i")
 fixed_depth = -12.0
 
-[node name="CollisionPlatform" type="CollisionShape2D" parent="." unique_id=2078299109]
-position = Vector2(3, 0)
-shape = SubResource("RectangleShape2D_qyqk1")
-one_way_collision = true
-
-[node name="OtherCollisions" type="Node2D" parent="." unique_id=257312324]
+[node name="OtherCollisions" type="Node2D" parent="." unique_id=1310368037]
 
 [node name="HitRay" type="RayCast2D" parent="OtherCollisions" unique_id=588977534]
 position = Vector2(21, 0)
 target_position = Vector2(0, 0)
 collision_mask = 6
+
+[node name="CollisionPlatformBody" type="StaticBody2D" parent="OtherCollisions" unique_id=1082045433]
+
+[node name="CollisionPlatform" type="CollisionShape2D" parent="OtherCollisions/CollisionPlatformBody" unique_id=2078299109]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_qyqk1")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
 scale = Vector2(0.08, 0.08)

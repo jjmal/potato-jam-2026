@@ -13,7 +13,10 @@ size = Vector2(32, 20)
 size = Vector2(38, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s500w"]
-size = Vector2(29, 50)
+size = Vector2(10, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
+radius = 63.007935
 
 [node name="Player" type="CharacterBody2D" unique_id=715291840]
 collision_mask = 11
@@ -56,8 +59,15 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PreventWalkForward" unique_id=1577213074]
-position = Vector2(30.5, 0)
+position = Vector2(21, 0)
 shape = SubResource("RectangleShape2D_s500w")
+
+[node name="PickupRange" type="Area2D" parent="." unique_id=759938056]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange" unique_id=673070760]
+shape = SubResource("CircleShape2D_qyqk1")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]
