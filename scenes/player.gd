@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
 signal needle_shot_forward(needle_spawn_pos, direction_state)
+signal can_walk_forward_status_change(can_walk_forward_status: bool)
+signal can_jump_status_change(can_jump_status: bool)
 
-const SPEED = 300.0
+
 const JUMP_VELOCITY = -400.0
 const EPSILON = 0.01
 
@@ -12,6 +14,7 @@ var is_shot_on_cooldown: bool = false
 var is_too_close_to_wall_to_shoot: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
+var speed = 300.0
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
@@ -28,11 +31,13 @@ func move(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
-	flip_character(direction)
-	if direction and can_walk_forward():
-		velocity.x = direction * SPEED
+	flip_character(direction) # can always flip
+	
+	
+	if direction and can_walk_forward(): # can only walk if not too close to the wall
+		velocity.x = direction * speed
 	else: # speed 0 guard
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 	
 	move_and_slide()
 
@@ -66,10 +71,14 @@ func shoot():
 		$ShootTimer.start()
 
 func can_jump() -> bool:
-	return is_on_floor() and is_jump_unblocked
+	var out = is_on_floor() and is_jump_unblocked
+	can_jump_status_change.emit(out)
+	return out
 	
 func can_walk_forward() -> bool:
-	return is_walk_forward_unblocked
+	var out = is_walk_forward_unblocked
+	can_walk_forward_status_change.emit(out)
+	return out
 
 func _physics_process(delta: float) -> void:
 	move(delta)

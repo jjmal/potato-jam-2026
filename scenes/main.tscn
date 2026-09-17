@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d10aex5o3rke0" path="res://scenes/main.gd" id="1_sugp2"]
 [ext_resource type="Texture2D" uid="uid://bp1ibwlu1kenf" path="res://assets/static/tilesheet_complete.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://drjw7t80w7mh2" path="res://scenes/enemy_manager.gd" id="4_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("4_jyhfs")
@@ -283,13 +284,19 @@ sources/0 = SubResource("TileSetAtlasSource_tbgi4")
 script = ExtResource("1_sugp2")
 
 [node name="Player" parent="." unique_id=715291840 instance=ExtResource("1_0wfyh")]
-position = Vector2(616, 576)
+position = Vector2(464, 472)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=680554479]
 tile_map_data = PackedByteArray("AAAFAAoAAAAAAAMAAAAGAAoAAAAAAAMAAAAHAAoAAAAAAAMAAAAIAAoAAAAAAAMAAAAJAAoAAAAAAAMAAAAKAAoAAAAAAAMAAAALAAoAAAAAAAMAAAAMAAoAAAAAAAMAAAANAAoAAAAAAAMAAAAOAAoAAAAAAAMAAAAPAAoAAAAAAAMAAAAQAAoAAAAAAAMAAAAQAAkAAAAAAAMAAAAQAAgAAAAAAAMAAAAQAAcAAAAAAAMAAAAFAAkAAAAAAAMAAAAFAAgAAAAAAAMAAAAFAAcAAAAAAAMAAAAGAAgAAAAAAAMAAAAHAAgAAAAAAAMAAAA=")
 tile_set = SubResource("TileSet_vt404")
 
-[node name="Enemy" parent="." unique_id=1916811873 instance=ExtResource("4_tbgi4")]
+[node name="EnemyManager" type="Node" parent="." unique_id=1494009209]
+script = ExtResource("4_tefeu")
+
+[node name="Enemy" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
 position = Vector2(872, 576)
 
+[connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
+[connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
 [connection signal="needle_shot_forward" from="Player" to="." method="_on_player_needle_shot_forward"]
+[connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
