@@ -7,7 +7,8 @@ const COLLIDER_ENEMY = 3
 
 @export var speed = 1000
 @export var fixed_depth = -8.0
-@onready var hit_ray = $OtherCollisions/HitRay
+@onready var hit_ray = $Collisions/HitRay
+@onready var collision_platform = $Collisions/CollisionPlatformBody/CollisionPlatform
 
 signal collide_with_enemy(enemy: Node, itself: Node)
 
@@ -37,10 +38,10 @@ func _physics_process(delta: float) -> void:
 	collide()
 	
 func disable_collision_platform():
-	$OtherCollisions/CollisionPlatformBody/CollisionPlatform.set_deferred("disabled", true)
+	collision_platform.set_deferred("disabled", true)
 
 func enable_collision_platform():
-	$OtherCollisions/CollisionPlatformBody/CollisionPlatform.set_deferred("disabled", false)
+	collision_platform.set_deferred("disabled", false)
 	
 func set_flip():
 	if direction_state == "right":
