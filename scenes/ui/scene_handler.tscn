@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://c6byntio0mdh5"]
 
+[ext_resource type="Script" uid="uid://d1r6j5ajsdy7v" path="res://scripts/scene_handler.gd" id="1_06v1t"]
+[ext_resource type="PackedScene" uid="uid://bmso1ghgyjhry" path="res://scenes/ui/main_menu.tscn" id="2_t2mm3"]
+[ext_resource type="PackedScene" uid="uid://qhw6s3rd13jw" path="res://scenes/main.tscn" id="3_wonc8"]
+
 [node name="SceneHandler" type="Node" unique_id=75384161]
+process_mode = 3
+script = ExtResource("1_06v1t")
+main_menu_packed = ExtResource("2_t2mm3")
+game_scene_packed = ExtResource("3_wonc8")
