@@ -16,6 +16,8 @@ var is_too_close_to_wall_to_shoot: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
 var speed = 300.0
+var ammo: int = 2
+
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
@@ -54,7 +56,7 @@ func flip_character(direction):
 		flipped = false
 
 func can_shoot() -> bool:
-	return not is_shot_on_cooldown
+	return not is_shot_on_cooldown and ammo > 0
 
 func shoot():
 	
@@ -81,6 +83,8 @@ func shoot():
 		
 		is_shot_on_cooldown = true
 		$ShootTimer.start()
+		
+		ammo -= 1
 
 func can_jump() -> bool:
 	var out = is_on_floor() and is_jump_unblocked
