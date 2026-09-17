@@ -5,7 +5,7 @@ extends Node
 @export var pause_scene_packed: PackedScene
 
 
-var pause_menu: Control = null
+var pause_menu: CanvasLayer = null
 var main_menu: Control = null
 var game_scene: Node2D = null
 
@@ -31,7 +31,7 @@ func load_main_menu(origin: String) -> void:
 		pass
 	else:
 		print("Unknown origin: ", origin)
-
+	
 	main_menu = main_menu_packed.instantiate()
 
 

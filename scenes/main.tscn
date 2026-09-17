@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bp1ibwlu1kenf" path="res://assets/static/tilesheet_complete.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://drjw7t80w7mh2" path="res://scenes/enemy_manager.gd" id="4_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dw7q6y5m2uq0t" path="res://assets/hud/test serduszko.png" id="6_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("4_jyhfs")
@@ -296,6 +297,23 @@ script = ExtResource("4_tefeu")
 
 [node name="Enemy" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
 position = Vector2(872, 576)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2076162681]
+
+[node name="HUD" type="Control" parent="UI" unique_id=2143360299]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD" unique_id=1615617072]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_tefeu")
+expand_mode = 3
+flip_h = true
 
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
