@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dlu28tvaummme" path="res://assets/font/UpheavalPro.ttf" id="1_6tw0m"]
 
 [node name="PauseMenu" type="Control" unique_id=2123088409]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

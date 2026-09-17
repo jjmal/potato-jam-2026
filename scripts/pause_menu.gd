@@ -10,9 +10,9 @@ func _on_resume_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	settings_pressed.emit("pause_menu)")
+	settings_pressed.emit("pause_menu")
 
 
 func _on_exit_to_menu_pressed() -> void:
-	exit_to_menu_pressed.emit("pause_menu)")
+	exit_to_menu_pressed.emit("pause_menu")
 
