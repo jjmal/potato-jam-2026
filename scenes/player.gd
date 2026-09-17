@@ -10,12 +10,14 @@ const EPSILON = 0.01
 
 @export var shot_cooldown: float = 0.75
 @onready var needle_array = $NeedleManager.needle_array
+@onready var pickable_needle_array = $NeedleManager.pickable_needle_array
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
 var is_too_close_to_wall_to_shoot: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
 var speed = 300.0
+var current_max_ammo: int = 2
 var ammo: int = 2
 
 
@@ -58,32 +60,33 @@ func flip_character(direction):
 func can_shoot() -> bool:
 	return not is_shot_on_cooldown and ammo > 0
 
-func shoot():
+func spawn_needle():
+	var needle = NeedlePreload.instantiate()
+	var direction_state
+	var needle_spawn_position 
 	
+	if flipped:
+		direction_state = "left"
+	else:
+		direction_state = "right"
+		
+	if not is_too_close_to_wall_to_shoot:
+		needle_spawn_position  = $DefaultShotMarker.global_position
+	else: 
+		needle_spawn_position  = $AdjustedShotMarker.global_position
+	
+	needle.global_position = needle_spawn_position 
+	needle.direction_state = direction_state
+	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
+
+	$NeedleManager.add_child(needle)
+	needle_array.append(needle)
+
+func shoot():
 	if Input.is_action_just_pressed("shoot_forward") and can_shoot():
-		print('yay')
-		var needle = NeedlePreload.instantiate()
-		var direction_state
-		var needle_spawn_position 
-		
-		if flipped:
-			direction_state = "left"
-		else:
-			direction_state = "right"
-			
-		if not is_too_close_to_wall_to_shoot:
-			needle_spawn_position  = $DefaultShotMarker.global_position
-		else: 
-			needle_spawn_position  = $AdjustedShotMarker.global_position
-		
-		needle.global_position = needle_spawn_position 
-		needle.direction_state = direction_state
-		$NeedleManager.add_child(needle)
-		needle_array.append(needle)
-		
+		spawn_needle()
 		is_shot_on_cooldown = true
 		$ShootTimer.start()
-		
 		ammo -= 1
 
 func can_jump() -> bool:
@@ -95,10 +98,31 @@ func can_walk_forward() -> bool:
 	var out = is_walk_forward_unblocked
 	can_walk_forward_status_change.emit(out)
 	return out
+	
+func can_pickup() -> bool:
+	if pickable_needle_array.size() > 0:
+		return true
+	else:
+		return false
 
+func get_closest_pickable_needle() -> Needle:
+	return $NeedleManager.find_min_dist_pickable_needle()
+
+func remove_needle(needle: Needle):
+	needle_array.erase(needle)
+	pickable_needle_array.erase(needle)
+	needle.queue_free()
+
+func pickup():
+	if Input.is_action_just_pressed("pickup") and can_pickup():
+		var picked_needle = get_closest_pickable_needle()
+		remove_needle(picked_needle)
+		ammo += 1
+		
 func _physics_process(delta: float) -> void:
 	move(delta)
 	shoot()
+	pickup()
 
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false
@@ -120,3 +144,9 @@ func _on_prevent_walk_forward_body_entered(_body: Node2D) -> void:
 
 func _on_prevent_walk_forward_body_exited(_body: Node2D) -> void:
 	is_walk_forward_unblocked = true
+
+func _on_needle_pickup_status_has_changed(needle: Needle, new_value: bool):
+	if new_value == true:
+		pickable_needle_array.append(needle)
+	else:
+		pickable_needle_array.erase(needle)

@@ -11,13 +11,23 @@ const COLLIDER_ENEMY = 3
 @onready var pickup_ray = $Collisions/PickupRay
 @onready var collision_platform = $Collisions/CollisionPlatformBody/CollisionPlatform
 
-signal available_for_pickup(distance: float, itself: Node)
+signal pickup_status_has_changed(itself: Needle, new_value: bool)
+
 
 var direction_state: String
 var direction: Vector2
 var flipped: bool = false
 var tracked_player: Node2D = null
+var distance_to_tracked_player: float = INF
 var collided: bool = false
+
+var can_be_picked_up: bool = false: # only emit the signal if the value has changed
+	set(new_value):
+		if can_be_picked_up == new_value:
+			return
+		can_be_picked_up = new_value
+		pickup_status_has_changed.emit(self, new_value)
+		print("change!")
 
 func _ready() -> void:
 	direction = get_direction()
@@ -38,7 +48,9 @@ func _physics_process(delta: float) -> void:
 	position += velocity
 	set_ray_cast(velocity)
 	collide()
-	send_signal_enable_pickup()
+	can_be_picked_up = check_if_can_pickup_with_ray()
+	if can_be_picked_up:
+		set_distance_to_tracked_player()
 	
 func disable_collision_platform():
 	collision_platform.set_deferred("disabled", true)
@@ -85,25 +97,22 @@ func collide():
 		self.reparent(collider)
 		collided = true
 
-func track_if_can_pickup_with_ray() -> bool:
+func check_if_can_pickup_with_ray() -> bool:
 	if not collided:
 		return false
 	
 	if tracked_player != null:
-		hit_ray.target_position = to_local(tracked_player.global_position)
-		hit_ray.force_raycast_update()
-		if hit_ray.is_colliding():
+		pickup_ray.target_position = to_local(tracked_player.global_position)
+		pickup_ray.force_raycast_update()
+		if pickup_ray.is_colliding():
 			return false
 		else:
 			return true
 	else:
 		return false
 
-func send_signal_enable_pickup():
-	if track_if_can_pickup_with_ray():
-		print('can be picked up')
-		var dist = global_position.distance_to(tracked_player.global_position)
-		available_for_pickup.emit(dist, self)
+func set_distance_to_tracked_player():
+	distance_to_tracked_player = tracked_player.global_position.distance_to(global_position)
 
 func _on_pickup_range_body_entered(body: Node2D) -> void:
 	tracked_player = body
