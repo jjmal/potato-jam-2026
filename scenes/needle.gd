@@ -5,6 +5,11 @@ const COLLIDER_NONE = 0
 const COLLIDER_STATIC = 2
 const COLLIDER_ENEMY = 3
 
+const LEFT = 0
+const UP = 1
+const RIGHT = 2
+
+
 @export var speed = 1000
 @export var fixed_depth = -8.0
 @onready var hit_ray = $Collisions/HitRay
@@ -14,7 +19,7 @@ const COLLIDER_ENEMY = 3
 signal pickup_status_has_changed(itself: Needle, new_value: bool)
 
 
-var direction_state: String
+var direction_state: int
 var direction: Vector2
 var flipped: bool = false
 var tracked_player: Node2D = null
@@ -27,7 +32,6 @@ var can_be_picked_up: bool = false: # only emit the signal if the value has chan
 			return
 		can_be_picked_up = new_value
 		pickup_status_has_changed.emit(self, new_value)
-		print("change!")
 
 func _ready() -> void:
 	direction = get_direction()
@@ -35,10 +39,12 @@ func _ready() -> void:
 	set_flip()
 	
 func get_direction():
-	if direction_state == "left":
+	if direction_state == LEFT:
 		return Vector2.LEFT
-	elif direction_state == "right":
+	elif direction_state == RIGHT:
 		return Vector2.RIGHT
+	elif direction_state == UP:
+		return Vector2.UP
 
 func set_ray_cast(vel: Vector2):
 	hit_ray.target_position = hit_ray.to_local(global_position + vel)
@@ -59,14 +65,16 @@ func enable_collision_platform():
 	collision_platform.set_deferred("disabled", false)
 	
 func set_flip():
-	if direction_state == "right":
+	if direction_state == RIGHT:
 		rotation = PI
 		scale.y = -1
 		flipped = true
-	elif direction_state == "left":
+	elif direction_state == LEFT:
 		rotation = 0
 		scale.y = 1
 		flipped = false
+	elif direction_state == UP:
+		rotation = PI/2
 
 func get_hit_ray_collision() -> Array:
 	hit_ray.force_raycast_update()
@@ -118,5 +126,5 @@ func set_distance_to_tracked_player():
 func _on_pickup_range_area_entered(area: Area2D) -> void: # May need to be reworked - terrible patern...
 	tracked_player = area.get_parent()
 	
-func _on_pickup_range_area_exited(area: Area2D) -> void:
+func _on_pickup_range_area_exited(_area: Area2D) -> void:
 	tracked_player = null

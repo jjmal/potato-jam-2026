@@ -8,12 +8,13 @@ signal can_jump_status_change(can_jump_status: bool)
 const JUMP_VELOCITY = -400.0
 const EPSILON = 0.01
 
+
 @export var shot_cooldown: float = 0.75
 @onready var needle_array = $NeedleManager.needle_array
 @onready var pickable_needle_array = $NeedleManager.pickable_needle_array
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
-var is_too_close_to_wall_to_shoot: bool = false
+# var is_too_close_to_wall_to_shoot: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
 var speed = 300.0
@@ -60,34 +61,40 @@ func flip_character(direction):
 func can_shoot() -> bool:
 	return not is_shot_on_cooldown and ammo > 0
 
-func spawn_needle():
+func spawn_needle(direction_state: int):
 	var needle = NeedlePreload.instantiate()
-	var direction_state
 	var needle_spawn_position 
-	
-	if flipped:
-		direction_state = "left"
-	else:
-		direction_state = "right"
 		
-	if not is_too_close_to_wall_to_shoot:
-		needle_spawn_position  = $DefaultShotMarker.global_position
-	else: 
-		needle_spawn_position  = $AdjustedShotMarker.global_position
+	#if not is_too_close_to_wall_to_shoot:
+		#needle_spawn_position  = $DefaultShotMarker.global_position
+	#else: 
+		#needle_spawn_position  = $AdjustedShotMarker.global_position
 	
+	needle_spawn_position = $AdjustedShotMarker.global_position
 	needle.global_position = needle_spawn_position 
 	needle.direction_state = direction_state
+	print(needle.direction_state)
 	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
 
 	$NeedleManager.add_child(needle)
 	needle_array.append(needle)
 
 func shoot():
-	if Input.is_action_just_pressed("shoot_forward") and can_shoot():
-		spawn_needle()
-		is_shot_on_cooldown = true
-		$ShootTimer.start()
-		ammo -= 1
+	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_shoot():
+		process_shot()
+		if Input.is_action_just_pressed("shoot_forward"):
+			print('yay')
+			if flipped:
+				spawn_needle(Needle.LEFT)
+			else:
+				spawn_needle(Needle.RIGHT)
+		elif Input.is_action_just_pressed("shoot_up"):
+			spawn_needle(Needle.UP)
+
+func process_shot():
+	is_shot_on_cooldown = true
+	$ShootTimer.start()
+	ammo -= 1
 
 func can_jump() -> bool:
 	var out = is_on_floor() and is_jump_unblocked
@@ -127,11 +134,11 @@ func _physics_process(delta: float) -> void:
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false
 
-func _on_prevent_shoot_next_to_wall_body_entered(_body: Node2D) -> void:
-	is_too_close_to_wall_to_shoot = true
-
-func _on_prevent_shoot_next_to_wall_body_exited(_body: Node2D) -> void:
-	is_too_close_to_wall_to_shoot = false
+#func _on_prevent_shoot_next_to_wall_body_entered(_body: Node2D) -> void:
+	#is_too_close_to_wall_to_shoot = true
+#
+#func _on_prevent_shoot_next_to_wall_body_exited(_body: Node2D) -> void:
+	#is_too_close_to_wall_to_shoot = false
 
 func _on_prevent_jump_body_entered(_body: Node2D) -> void:
 	is_jump_unblocked = false
