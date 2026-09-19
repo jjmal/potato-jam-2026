@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://4mspabq0x47s"]
+
+[ext_resource type="Script" uid="uid://vglqh3h4hu6t" path="res://ramp.gd" id="1_iffpq"]
+
+[node name="Ramp" type="StaticBody2D" unique_id=858742288]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_iffpq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1083297325]
+one_way_collision = true
+metadata/_edit_lock_ = true
+
+[node name="Line2D" type="Line2D" parent="." unique_id=757599889]
+metadata/_edit_lock_ = true
+
+[node name="PointA" type="Marker2D" parent="." unique_id=1451519908]
+position = Vector2(-8, 0)
+
+[node name="PointB" type="Marker2D" parent="." unique_id=2060975109]
+position = Vector2(7, 0)

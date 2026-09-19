@@ -76,6 +76,8 @@ shoot_up={
 2d_physics/layer_4="Needle"
 2d_physics/layer_5="PlayerNeedlePickup"
 2d_physics/layer_6="PlayerHeadVerticalNeedleTarget"
+2d_physics/layer_7="NeedleHead"
+2d_physics/layer_8="Ramp"
 
 [physics]
 
