@@ -5,4 +5,6 @@
 
 [node name="VerticalNeedle" unique_id=560746324 instance=ExtResource("1_mh4gf")]
 script = ExtResource("2_sl60o")
-fixed_depth = -8.0
+
+[node name="HitRay" parent="Collisions" parent_id_path=PackedInt32Array(1310368037) index="0" unique_id=588977534]
+collision_mask = 38

@@ -4,6 +4,7 @@ class_name Needle
 const COLLIDER_NONE = 0
 const COLLIDER_STATIC = 2
 const COLLIDER_ENEMY = 3
+const COLLIDER_PLAYER_HEAD = 6
 
 const LEFT = 0
 const UP = 1
@@ -72,23 +73,29 @@ func get_hit_ray_collision() -> Array:
 	var collider = hit_ray.get_collider()
 	if Utils.is_body_a_tile_set_static(collider):
 		return [COLLIDER_STATIC, collider]
-	if collider.is_in_group("Enemy"):
+	elif collider.is_in_group("Enemy"):
 		return [COLLIDER_ENEMY, collider]
+	elif collider.is_in_group("PlayerHead"):
+		return [COLLIDER_PLAYER_HEAD, collider]
 		
 	return [COLLIDER_NONE, null]
 		
 func collide():
 	hit_ray.force_raycast_update()
 	if check_if_collision_occurs():
-		var hit_point = hit_ray.get_collision_point()
-		var hit_normal = hit_ray.get_collision_normal()
-		global_position = hit_point - hit_normal * fixed_depth
-		speed = 0
-		
+		var collider = get_hit_ray_collision()[1]
+		if Utils.is_body_a_tile_set_static(collider):
+			resolve_collision()
 		if get_hit_ray_collision()[0] == COLLIDER_ENEMY:
-			var collider = get_hit_ray_collision()[1]
+			resolve_collision()
 			self.reparent(collider)
-		collided = true
+		
+func resolve_collision():
+	var hit_point = hit_ray.get_collision_point()
+	var hit_normal = hit_ray.get_collision_normal()
+	global_position = hit_point - hit_normal * fixed_depth
+	speed = 0
+	collided = true
 
 func check_if_collision_occurs() -> bool:
 	return not collided and hit_ray.is_colliding()

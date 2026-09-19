@@ -17,6 +17,7 @@ script = ExtResource("1_bfd1i")
 [node name="HitRay" type="RayCast2D" parent="Collisions" unique_id=588977534]
 target_position = Vector2(0, 0)
 collision_mask = 6
+collide_with_areas = true
 
 [node name="CollisionPlatformBody" type="StaticBody2D" parent="Collisions" unique_id=1082045433]
 collision_layer = 8
