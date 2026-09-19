@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqyoue5kunj6n"]
 
 [ext_resource type="PackedScene" uid="uid://by31vwaoa4prm" path="res://scenes/needle.tscn" id="1_mh4gf"]
-[ext_resource type="Script" uid="uid://ckk8eltutmf0c" path="res://scenes/vertical_needle.gd" id="2_sl60o"]
+[ext_resource type="Script" uid="uid://4bntte0ynrvy" path="res://scripts/vertical_needle.gd" id="2_sl60o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
 radius = 6.0

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4mspabq0x47s"]
 
-[ext_resource type="Script" uid="uid://vglqh3h4hu6t" path="res://ramp.gd" id="1_iffpq"]
+[ext_resource type="Script" uid="uid://cncandqtvusi1" path="res://scripts/ramp.gd" id="1_iffpq"]
 
 [node name="Ramp" type="StaticBody2D" unique_id=858742288]
 collision_layer = 128

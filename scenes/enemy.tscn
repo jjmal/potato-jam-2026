@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dw5rvtgwerhjm"]
 
 [ext_resource type="Texture2D" uid="uid://d1efhiht85how" path="res://assets/characters/minion.png" id="1_7p1mj"]
-[ext_resource type="Script" uid="uid://bsa54x742uo0u" path="res://scenes/enemy.gd" id="1_md0e3"]
+[ext_resource type="Script" uid="uid://nnftrob0fhaq" path="res://scripts/enemy.gd" id="1_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 size = Vector2(52, 54)

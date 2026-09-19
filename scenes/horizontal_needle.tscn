@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://dtko5lnklbtbj"]
 
 [ext_resource type="PackedScene" uid="uid://by31vwaoa4prm" path="res://scenes/needle.tscn" id="1_xe3nm"]
-[ext_resource type="Script" uid="uid://23db32ywyx20" path="res://scenes/horizontal_needle.gd" id="2_0ngor"]
+[ext_resource type="Script" uid="uid://boom1y6y46qkp" path="res://scripts/horizontal_needle.gd" id="2_0ngor"]
 
 [node name="HorizontalNeedle" unique_id=560746324 instance=ExtResource("1_xe3nm")]
 script = ExtResource("2_0ngor")
-fixed_depth = -10.0

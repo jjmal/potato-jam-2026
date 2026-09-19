@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://qhw6s3rd13jw"]
 
 [ext_resource type="PackedScene" uid="uid://dqo0mkilbnivd" path="res://scenes/player.tscn" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://d10aex5o3rke0" path="res://scenes/main.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://bj08ggkjoxfc4" path="res://scripts/main.gd" id="1_tefeu"]
 [ext_resource type="Texture2D" uid="uid://bp1ibwlu1kenf" path="res://assets/static/tilesheet_complete.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
-[ext_resource type="Script" uid="uid://drjw7t80w7mh2" path="res://scenes/enemy_manager.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://c0mkcm42a6s41" path="res://scripts/enemy_manager.gd" id="5_tipki"]
 [ext_resource type="PackedScene" uid="uid://4mspabq0x47s" path="res://scenes/ramp.tscn" id="6_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
@@ -281,7 +281,7 @@ physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_tbgi4")
 
 [node name="Main" type="Node2D" unique_id=1001653021]
-script = ExtResource("1_sugp2")
+script = ExtResource("1_tefeu")
 
 [node name="Player" parent="." unique_id=715291840 instance=ExtResource("1_0wfyh")]
 position = Vector2(464, 472)
@@ -291,7 +291,7 @@ tile_map_data = PackedByteArray("AAAFAAoAAAAAAAMAAAAGAAoAAAAAAAMAAAAHAAoAAAAAAAM
 tile_set = SubResource("TileSet_vt404")
 
 [node name="EnemyManager" type="Node" parent="." unique_id=1494009209]
-script = ExtResource("4_tefeu")
+script = ExtResource("5_tipki")
 
 [node name="Enemy2" parent="EnemyManager" unique_id=1568079037 instance=ExtResource("4_tbgi4")]
 position = Vector2(573, 602)
@@ -301,14 +301,12 @@ position = Vector2(872, 576)
 
 [node name="Ramp" parent="." unique_id=858742288 instance=ExtResource("6_tefeu")]
 position = Vector2(541, 361)
-ramp_width = 2.0
 
 [node name="CollisionPolygon2D" parent="Ramp" index="0" unique_id=1083297325]
-polygon = PackedVector2Array(-67.10746, -8.450968, 28.89254, 181.54903, 27.10746, 182.45097, -68.89254, -7.549032)
+polygon = PackedVector2Array(-67.77686, -8.112741, 28.223135, 181.88725, 27.776865, 182.11275, -68.22314, -7.887258)
 
 [node name="Line2D" parent="Ramp" index="1" unique_id=757599889]
 points = PackedVector2Array(-68, -8, 28, 182)
-width = 2.0
 
 [node name="PointA" parent="Ramp" index="2" unique_id=1451519908]
 position = Vector2(-68, -8)
