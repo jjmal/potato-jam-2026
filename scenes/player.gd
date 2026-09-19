@@ -73,7 +73,6 @@ func spawn_needle(direction_state: int):
 	needle_spawn_position = $AdjustedShotMarker.global_position
 	needle.global_position = needle_spawn_position 
 	needle.direction_state = direction_state
-	print(needle.direction_state)
 	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
 
 	$NeedleManager.add_child(needle)
@@ -83,7 +82,6 @@ func shoot():
 	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_shoot():
 		process_shot()
 		if Input.is_action_just_pressed("shoot_forward"):
-			print('yay')
 			if flipped:
 				spawn_needle(Needle.LEFT)
 			else:
