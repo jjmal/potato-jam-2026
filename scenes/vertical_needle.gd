@@ -18,8 +18,8 @@ func set_flip():
 		flipped = false
 
 func move(delta):
-	velocity += gravity * delta
 	if not collided:
+		velocity += gravity * delta
 		if is_on_ramp:
 			move_and_slide()
 		else:
