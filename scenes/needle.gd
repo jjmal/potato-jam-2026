@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 class_name Needle
 
 const COLLIDER_NONE = 0
@@ -11,7 +11,7 @@ const RIGHT = 2
 
 
 @export var speed = 1000
-@export var fixed_depth = -8.0
+@export var fixed_depth = -10.0
 @onready var hit_ray = $Collisions/HitRay
 @onready var pickup_ray = $Collisions/PickupRay
 @onready var collision_platform = $Collisions/CollisionPlatformBody/CollisionPlatform
@@ -21,6 +21,7 @@ signal pickup_status_has_changed(itself: Needle, new_value: bool)
 
 var direction_state: int
 var direction: Vector2
+var velocity: Vector2
 var flipped: bool = false
 var tracked_player: Node2D = null
 var distance_to_tracked_player: float = INF
@@ -34,9 +35,9 @@ var can_be_picked_up: bool = false: # only emit the signal if the value has chan
 		pickup_status_has_changed.emit(self, new_value)
 
 func _ready() -> void:
+	set_flip()
 	direction = get_direction()
 	disable_collision_platform()
-	velocity = direction * speed
 	
 func get_direction():
 	if direction_state == LEFT:
@@ -47,32 +48,16 @@ func get_direction():
 		return Vector2.UP
 
 func set_ray_cast(vel: Vector2):
-	hit_ray.target_position = hit_ray.to_local(global_position + vel)
+	hit_ray.target_position = hit_ray.to_local(hit_ray.global_position + vel)
 
 func _physics_process(delta: float) -> void:
-	
-	if direction_state == UP:
-		move_vertically(delta)
-		set_ray_cast(velocity * delta)
-	else:
-		move_horizontally(delta)
-		set_ray_cast(velocity)
-	
-	set_flip()
-	
 	collide()
 	can_be_picked_up = check_if_can_pickup_with_ray()
 	if can_be_picked_up:
 		set_distance_to_tracked_player()
 
-func move_horizontally(delta):
-	velocity = direction * speed * delta
-	position += velocity
-	
-func move_vertically(delta):
-	if not collided:
-			velocity += get_gravity() * delta
-			position += velocity * delta
+func move(delta):
+	pass
 
 func disable_collision_platform():
 	collision_platform.set_deferred("disabled", true)
@@ -81,49 +66,32 @@ func enable_collision_platform():
 	collision_platform.set_deferred("disabled", false)
 	
 func set_flip():
-	if direction_state == RIGHT:
-		rotation = PI
-		scale.y = -1
-		flipped = true
-	elif direction_state == LEFT:
-		rotation = 0
-		scale.y = 1
-		flipped = false
-	elif direction_state == UP:
-		if velocity.y > 0:
-			rotation = -PI/2
-		else:
-			rotation =  PI/2
+	pass
 
 func get_hit_ray_collision() -> Array:
-	hit_ray.force_raycast_update()
-	if hit_ray.is_colliding():
-		var collider = hit_ray.get_collider()
-		if Utils.is_body_a_tile_set_static(collider):
-			return [COLLIDER_STATIC, collider]
-		if collider.is_in_group("Enemy"):
-			return [COLLIDER_ENEMY, collider]
+	var collider = hit_ray.get_collider()
+	if Utils.is_body_a_tile_set_static(collider):
+		return [COLLIDER_STATIC, collider]
+	if collider.is_in_group("Enemy"):
+		return [COLLIDER_ENEMY, collider]
 		
 	return [COLLIDER_NONE, null]
 		
 func collide():
-	if not collided:
-		if get_hit_ray_collision()[0] == COLLIDER_STATIC:
-			var hit_point = hit_ray.get_collision_point()
-			var hit_normal = hit_ray.get_collision_normal()
-			global_position = hit_point - hit_normal * fixed_depth
-			speed = 0
-			enable_collision_platform()
-			collided = true
+	hit_ray.force_raycast_update()
+	if check_if_collision_occurs():
+		var hit_point = hit_ray.get_collision_point()
+		var hit_normal = hit_ray.get_collision_normal()
+		global_position = hit_point - hit_normal * fixed_depth
+		speed = 0
 		
-		elif get_hit_ray_collision()[0] == COLLIDER_ENEMY:
-			var hit_point = hit_ray.get_collision_point()
-			var hit_normal = hit_ray.get_collision_normal()
-			global_position = hit_point - hit_normal * fixed_depth
-			speed = 0
+		if get_hit_ray_collision()[0] == COLLIDER_ENEMY:
 			var collider = get_hit_ray_collision()[1]
 			self.reparent(collider)
-			collided = true
+		collided = true
+
+func check_if_collision_occurs() -> bool:
+	return not collided and hit_ray.is_colliding()
 
 func check_if_can_pickup_with_ray() -> bool:
 	if not collided:

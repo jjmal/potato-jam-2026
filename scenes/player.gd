@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-const NeedlePreload: PackedScene = preload("res://scenes/needle.tscn")
-
 signal can_walk_forward_status_change(can_walk_forward_status: bool)
 signal can_jump_status_change(can_jump_status: bool)
 
@@ -62,17 +60,15 @@ func can_shoot() -> bool:
 	return not is_shot_on_cooldown and ammo > 0
 
 func spawn_needle(direction_state: int):
-	var needle = NeedlePreload.instantiate()
+	var needle = Utils.create_needle(direction_state)
 	var needle_spawn_position 
 		
 	#if not is_too_close_to_wall_to_shoot:
 		#needle_spawn_position  = $DefaultShotMarker.global_position
 	#else: 
 		#needle_spawn_position  = $AdjustedShotMarker.global_position
-	
 	needle_spawn_position = $AdjustedShotMarker.global_position
 	needle.global_position = needle_spawn_position 
-	needle.direction_state = direction_state
 	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
 
 	$NeedleManager.add_child(needle)
@@ -110,10 +106,10 @@ func can_pickup() -> bool:
 	else:
 		return false
 
-func get_closest_pickable_needle() -> Needle:
+func get_closest_pickable_needle():
 	return $NeedleManager.find_min_dist_pickable_needle()
 
-func remove_needle(needle: Needle):
+func remove_needle(needle):
 	needle_array.erase(needle)
 	pickable_needle_array.erase(needle)
 	needle.queue_free()

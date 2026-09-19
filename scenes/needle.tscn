@@ -9,17 +9,12 @@ size = Vector2(34, 2)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
 radius = 31.06445
 
-[node name="Needle" type="CharacterBody2D" unique_id=560746324]
-collision_layer = 8
-collision_mask = 0
-motion_mode = 1
+[node name="Needle" type="Node2D" unique_id=401244330]
 script = ExtResource("1_bfd1i")
-fixed_depth = -12.0
 
 [node name="Collisions" type="Node2D" parent="." unique_id=1310368037]
 
 [node name="HitRay" type="RayCast2D" parent="Collisions" unique_id=588977534]
-position = Vector2(21, 0)
 target_position = Vector2(0, 0)
 collision_mask = 6
 
