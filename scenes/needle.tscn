@@ -9,7 +9,7 @@ size = Vector2(34, 2)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
 radius = 31.06445
 
-[node name="Needle" type="Node2D" unique_id=401244330]
+[node name="Needle" type="CharacterBody2D" unique_id=360757540]
 script = ExtResource("1_bfd1i")
 
 [node name="Collisions" type="Node2D" parent="." unique_id=1310368037]

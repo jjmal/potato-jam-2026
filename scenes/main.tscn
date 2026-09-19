@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bp1ibwlu1kenf" path="res://assets/static/tilesheet_complete.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://drjw7t80w7mh2" path="res://scenes/enemy_manager.gd" id="4_tefeu"]
+[ext_resource type="PackedScene" uid="uid://4mspabq0x47s" path="res://scenes/ramp.tscn" id="6_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("4_jyhfs")
@@ -298,7 +299,26 @@ position = Vector2(573, 602)
 [node name="Enemy" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
 position = Vector2(872, 576)
 
+[node name="Ramp" parent="." unique_id=858742288 instance=ExtResource("6_tefeu")]
+position = Vector2(541, 361)
+ramp_width = 2.0
+
+[node name="CollisionPolygon2D" parent="Ramp" index="0" unique_id=1083297325]
+polygon = PackedVector2Array(-67.10746, -8.450968, 28.89254, 181.54903, 27.10746, 182.45097, -68.89254, -7.549032)
+
+[node name="Line2D" parent="Ramp" index="1" unique_id=757599889]
+points = PackedVector2Array(-68, -8, 28, 182)
+width = 2.0
+
+[node name="PointA" parent="Ramp" index="2" unique_id=1451519908]
+position = Vector2(-68, -8)
+
+[node name="PointB" parent="Ramp" index="3" unique_id=2060975109]
+position = Vector2(28, 182)
+
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="EnemyManager" to="EnemyManager" method="_on_child_exiting_tree"]
+
+[editable path="Ramp"]

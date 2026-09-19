@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 class_name Needle
 
 const COLLIDER_NONE = 0
@@ -22,7 +22,6 @@ signal pickup_status_has_changed(itself: Needle, new_value: bool)
 
 var direction_state: int
 var direction: Vector2
-var velocity: Vector2
 var flipped: bool = false
 var tracked_player: Node2D = null
 var distance_to_tracked_player: float = INF
