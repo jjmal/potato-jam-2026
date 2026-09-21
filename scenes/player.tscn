@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://mtunaaomciho" path="res://scenes/needle_manager.tscn" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://opjl0fd7eg3n" path="res://scenes/state_machine.tscn" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dkld7iclpxo20" path="res://scripts/player_state_machine/idle.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://cj81q8k2b7nug" path="res://scripts/player_state_machine/walk.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://345qh1dho77j" path="res://scripts/player_state_machine/jump.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://e07mr8u8rv2j" path="res://scripts/player_state_machine/fall.gd" id="8_smehm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("2_qlg0r")
@@ -59,7 +62,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_d2wvv")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -87,6 +90,7 @@ script = ExtResource("1_dqkch")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1529544438]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
+animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1718173926]
 shape = SubResource("RectangleShape2D_qyqk1")
@@ -146,6 +150,15 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=199401524]
 script = ExtResource("5_qlg0r")
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=549846219]
+script = ExtResource("6_tuyoq")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=335860697]
+script = ExtResource("7_fjrip")
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=20165621]
+script = ExtResource("8_smehm")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]

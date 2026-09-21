@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	current_state.physics_update(delta)
+	print(current_state)
 
 func transition_to(state_name: String) -> void:
 	var new_state = get_node(state_name) as State

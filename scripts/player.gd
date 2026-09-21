@@ -18,35 +18,34 @@ var is_walk_forward_unblocked: bool = true
 var speed = 300.0
 var current_max_ammo: int = 2
 var ammo: int = 2
+var direction
 
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
-		
-func move(delta: float) -> void:
-	# Add the gravity.
+
+
+func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+func phase_out_horizontal_movement() -> void:
+	velocity.x = move_toward(velocity.x, 0, speed)
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and can_jump():
-		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("left", "right")
-	flip_character(direction) # can always flip
+func move_process(delta: float) -> void:
+	apply_gravity(delta)
+	flip_character()
 	
-	
-	if direction and can_walk_forward(): # can only walk if not too close to the wall
+	if can_walk_forward(): # can only walk if not too close to the wall
 		velocity.x = direction * speed
-	else: # speed 0 guard
-		velocity.x = move_toward(velocity.x, 0, speed)
+	else:
+		velocity.x = move_toward(velocity.x, 0.0, speed)  # or 0.0 instantly
 	
 	move_and_slide()
 
 
-func flip_character(direction):
+func flip_character():
 	if direction < - EPSILON:
 		rotation = PI
 		scale.y = -1
@@ -67,6 +66,7 @@ func spawn_needle(direction_state: int):
 		#needle_spawn_position  = $DefaultShotMarker.global_position
 	#else: 
 		#needle_spawn_position  = $AdjustedShotMarker.global_position
+
 	needle_spawn_position = $AdjustedShotMarker.global_position
 	needle.global_position = needle_spawn_position 
 	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
@@ -74,7 +74,7 @@ func spawn_needle(direction_state: int):
 	$NeedleManager.add_child(needle)
 	needle_array.append(needle)
 
-func shoot():
+func shoot_process():
 	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_shoot():
 		process_shot()
 		if Input.is_action_just_pressed("shoot_forward"):
@@ -114,16 +114,14 @@ func remove_needle(needle):
 	pickable_needle_array.erase(needle)
 	needle.queue_free()
 
-func pickup():
+func pickup_process():
 	if Input.is_action_just_pressed("pickup") and can_pickup():
 		var picked_needle = get_closest_pickable_needle()
 		remove_needle(picked_needle)
 		ammo += 1
 		
 func _physics_process(delta: float) -> void:
-	move(delta)
-	shoot()
-	pickup()
+	print(velocity)
 
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false
