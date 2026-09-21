@@ -70,7 +70,7 @@ size = Vector2(39, 52)
 size = Vector2(32, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0e06"]
-size = Vector2(38, 19)
+size = Vector2(38, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s500w"]
 size = Vector2(10, 50)
@@ -113,7 +113,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PreventJump" unique_id=555909450]
-position = Vector2(0, -34.5)
+position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_d0e06")
 
 [node name="PreventWalkForward" type="Area2D" parent="." unique_id=1716637488]
