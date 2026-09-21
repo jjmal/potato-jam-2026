@@ -1,10 +1,10 @@
 extends State
 
 func enter() -> void:
-	pass 
+	character.animated_sprite.play('walk')
 	
 func exit() -> void:
-	pass
+	character.animated_sprite.stop()
 	
 func physics_update(delta: float) -> void:
 	

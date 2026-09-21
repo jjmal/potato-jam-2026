@@ -10,6 +10,7 @@ const EPSILON = 0.01
 @export var shot_cooldown: float = 0.75
 @onready var needle_array = $NeedleManager.needle_array
 @onready var pickable_needle_array = $NeedleManager.pickable_needle_array
+@onready var animated_sprite = $AnimatedSprite
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
 # var is_too_close_to_wall_to_shoot: bool = false
@@ -112,7 +113,7 @@ func get_closest_pickable_needle():
 func remove_needle(needle):
 	needle_array.erase(needle)
 	pickable_needle_array.erase(needle)
-	needle.queue_free()
+	needle.call_deferred("queue_free")
 
 func pickup_process():
 	if Input.is_action_just_pressed("pickup") and can_pickup():
@@ -121,7 +122,7 @@ func pickup_process():
 		ammo += 1
 		
 func _physics_process(delta: float) -> void:
-	print(velocity)
+	print(is_on_floor())
 
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false

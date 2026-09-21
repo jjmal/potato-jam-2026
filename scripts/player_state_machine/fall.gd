@@ -3,10 +3,10 @@ extends State
 
 # Called when the node enters the scene tree for the first time.
 func enter() -> void:
-	pass
+	character.animated_sprite.play('fall')
 	
 func exit() -> void:
-	pass
+	character.animated_sprite.play('landing')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta: float) -> void:

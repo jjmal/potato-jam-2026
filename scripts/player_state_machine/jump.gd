@@ -3,6 +3,7 @@ extends State
 # Called when the node enters the scene tree for the first time.
 func enter() -> void:
 	character.velocity.y = character.JUMP_VELOCITY
+	character.animated_sprite.play('jump')
 
 func exit() -> void:
 	pass

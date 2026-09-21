@@ -1,10 +1,14 @@
 extends State
 
+var was_exited_at_least_once: bool = false
+
 func enter() -> void:
 	character.phase_out_horizontal_movement()
+	if was_exited_at_least_once:
+		character.animated_sprite.play('idle')
 	
 func exit() -> void:
-	pass
+	was_exited_at_least_once = true
 	
 func physics_update(delta: float) -> void:
 	# Gravity
@@ -15,6 +19,9 @@ func physics_update(delta: float) -> void:
 	
 	# Shooting mechanics
 	character.shoot_process()
+	
+	# Update physicks
+	character.move_and_slide()
 	
 	# Jump
 	if Input.is_action_just_pressed("jump") and character.can_jump():
