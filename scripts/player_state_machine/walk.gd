@@ -10,9 +10,6 @@ func physics_update(delta: float) -> void:
 	
 	character.direction = Input.get_axis("left", "right")
 	
-	# Pickup mechanics
-	character.pickup_process()
-	
 	# Shooting mechanics
 	character.shoot_process()
 	
@@ -33,3 +30,6 @@ func physics_update(delta: float) -> void:
 	if not character.is_on_floor():
 		state_machine.transition_to("Fall")
 		return
+		
+	# Pickup mechanics
+	character.pickup_process()

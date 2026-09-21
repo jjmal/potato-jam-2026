@@ -30,7 +30,7 @@ func move():
 
 func setup_move_controlled():
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and can_player_jump:
+	if Input.is_action_just_pressed("jump") and can_player_jump and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
 	direction = Input.get_axis("left", "right")	

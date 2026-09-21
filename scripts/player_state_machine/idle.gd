@@ -14,9 +14,6 @@ func physics_update(delta: float) -> void:
 	# Gravity
 	character.apply_gravity(delta)
 	
-	# Pickup mechanics
-	character.pickup_process()
-	
 	# Shooting mechanics
 	character.shoot_process()
 	
@@ -38,3 +35,6 @@ func physics_update(delta: float) -> void:
 	if not character.is_on_floor():
 		state_machine.transition_to("Fall")
 		return
+	
+	# Pickup mechanics
+	character.pickup_process()

@@ -173,7 +173,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
-size = Vector2(39, 52)
+size = Vector2(34.5, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vt404"]
 size = Vector2(32, 20)
@@ -188,7 +188,7 @@ size = Vector2(7, 50)
 radius = 19.235384
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suhkf"]
-size = Vector2(39, 5)
+size = Vector2(34, 5)
 
 [node name="Player" type="CharacterBody2D" unique_id=715291840]
 collision_mask = 11
@@ -216,6 +216,7 @@ frame = 9
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1718173926]
+position = Vector2(2.25, 0)
 shape = SubResource("RectangleShape2D_qyqk1")
 
 [node name="DefaultShotMarker" type="Marker2D" parent="." unique_id=437591186]
@@ -265,7 +266,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadVerticalNeedleTarget" unique_id=1324177402]
-position = Vector2(-0.5, -26.5)
+position = Vector2(2, -26.5)
 shape = SubResource("RectangleShape2D_suhkf")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
