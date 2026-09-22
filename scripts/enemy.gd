@@ -11,6 +11,7 @@ var flipped: bool = false
 var direction: float
 var tracked_player: Node2D = null
 var can_aggro: bool = false
+var is_ray_tracking_player: bool = false
 
 func flip_character():
 	if direction > 0:
@@ -40,6 +41,10 @@ func move_controlled_process(delta: float):
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
 
+func move_aggro_process():
+	pass
+
+
 func is_controlled() -> bool:
 	if Utils.has_child_of_type(self, Needle):
 		return true
@@ -47,7 +52,7 @@ func is_controlled() -> bool:
 		return false
 
 func update_aggro_process():
-	if tracked_player != null:
+	if is_ray_tracking_player:
 		wall_detection_ray.target_position = to_local(tracked_player.global_position)
 		wall_detection_ray.force_raycast_update()
 		if wall_detection_ray.is_colliding():
@@ -57,12 +62,13 @@ func update_aggro_process():
 	else:
 		can_aggro = false
 
+
 func _physics_process(delta: float) -> void:
 	update_aggro_process()
 
 func _on_player_initial_detection_body_entered(body: Node2D) -> void:
 	tracked_player = body
-
+	is_ray_tracking_player = true
 
 func _on_player_initial_detection_body_exited(body: Node2D) -> void:
-	tracked_player = null
+	is_ray_tracking_player = false

@@ -5,5 +5,5 @@ extends Enemy
 @export var aggro_speed: float
 @export var controlled_speed: float
 
-func _physics_process(delta: float) -> void:
-	print(direction)
+#func _physics_process(delta: float) -> void:
+	#print(direction)
