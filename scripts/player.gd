@@ -101,11 +101,23 @@ func can_walk_forward() -> bool:
 	can_walk_forward_status_change.emit(out)
 	return out
 	
+func can_walk_forward_emitter():
+	var out = is_walk_forward_unblocked
+	can_walk_forward_status_change.emit(out)
+	
+func can_jump_emitter():
+	var out = is_on_floor() and is_jump_unblocked
+	can_jump_status_change.emit(out)
+	
 func can_pickup() -> bool:
 	if pickable_needle_array.size() > 0:
 		return true
 	else:
 		return false
+
+func _physics_process(delta: float) -> void:
+	can_walk_forward_emitter()
+	can_jump_emitter()
 
 func get_closest_pickable_needle():
 	return $NeedleManager.find_min_dist_pickable_needle()

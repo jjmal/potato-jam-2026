@@ -1,7 +1,7 @@
 extends State
 
 func enter() -> void:
-	pass
+	character.speed = character.roam_speed
 	
 func exit() -> void:
 	pass
