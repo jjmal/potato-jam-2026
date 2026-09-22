@@ -23,7 +23,6 @@ func physics_update(delta: float) -> void:
 	# Jump
 	if Input.is_action_just_pressed("jump") and character.can_jump():
 		state_machine.transition_to("Jump")
-		print('jump!')
 		return
 	
 	# Walk

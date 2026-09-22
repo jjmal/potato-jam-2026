@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://b4kljs7tla8eu"]
+
+[ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="1_3pkf7"]
+[ext_resource type="Script" uid="uid://cklokldd7qw71" path="res://scripts/brzydal.gd" id="2_4mjti"]
+[ext_resource type="Script" uid="uid://dyowlrdoaqmev" path="res://scripts/brzydal_state_machine/aggro.gd" id="3_2bhvc"]
+[ext_resource type="Script" uid="uid://cky44jewlyk4o" path="res://scripts/brzydal_state_machine/roam.gd" id="3_4mjti"]
+[ext_resource type="Script" uid="uid://6mxorxg278lu" path="res://scripts/brzydal_state_machine/controlled.gd" id="4_erjbq"]
+[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8hyd"]
+size = Vector2(49, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erjbq"]
+atlas = ExtResource("4_y8hyd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bhvc"]
+atlas = ExtResource("4_y8hyd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4mjti"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erjbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bhvc")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tefeu"]
+radius = 140.03214
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vt404"]
+radius = 231.0
+
+[node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
+script = ExtResource("2_4mjti")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_y8hyd")
+
+[node name="StateMachine" parent="." index="1" unique_id=636593194 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Roam")
+
+[node name="Aggro" type="Node" parent="StateMachine" index="0" unique_id=573543335]
+script = ExtResource("3_2bhvc")
+
+[node name="Roam" type="Node" parent="StateMachine" index="1" unique_id=1366792039]
+script = ExtResource("3_4mjti")
+
+[node name="Controlled" type="Node" parent="StateMachine" index="2" unique_id=1047020341]
+script = ExtResource("4_erjbq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2" unique_id=1716297206]
+sprite_frames = SubResource("SpriteFrames_4mjti")
+animation = &"walk"
+
+[node name="CollisionShape2D" parent="PlayerInitialDetection" parent_id_path=PackedInt32Array(834977963) index="0" unique_id=7504569]
+position = Vector2(-90, 0)
+shape = SubResource("CircleShape2D_tefeu")
+
+[node name="PlayerDropAggro" type="Area2D" parent="." index="5" unique_id=1616294536]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDropAggro" index="0" unique_id=1773066411]
+shape = SubResource("CircleShape2D_vt404")
+
+[connection signal="body_exited" from="PlayerDropAggro" to="StateMachine/Aggro" method="_on_player_drop_aggro_body_exited"]

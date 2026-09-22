@@ -1,46 +1,25 @@
 [gd_scene format=3 uid="uid://dw5rvtgwerhjm"]
 
 [ext_resource type="Script" uid="uid://nnftrob0fhaq" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="2_md0e3"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
-atlas = ExtResource("2_md0e3")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
-atlas = ExtResource("2_md0e3")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7p1mj"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ra3w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5uy6h")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
-size = Vector2(52, 54)
+[ext_resource type="PackedScene" uid="uid://opjl0fd7eg3n" path="res://scenes/state_machine.tscn" id="3_4ra3w"]
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1916811873 groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_md0e3")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1891100056]
-sprite_frames = SubResource("SpriteFrames_7p1mj")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=465512479]
-shape = SubResource("RectangleShape2D_qyqk1")
 
-[node name="MoveTimer" type="Timer" parent="." unique_id=392332188]
-wait_time = 2.0
-autostart = true
+[node name="StateMachine" parent="." unique_id=636593194 instance=ExtResource("3_4ra3w")]
 
-[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[node name="WallPlayerDetectionRay" type="RayCast2D" parent="." unique_id=1119331808]
+collision_mask = 2
+
+[node name="PlayerInitialDetection" type="Area2D" parent="." unique_id=834977963]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInitialDetection" unique_id=7504569]
+position = Vector2(-158, 0)
+
+[connection signal="body_entered" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_entered"]
+[connection signal="body_exited" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_exited"]

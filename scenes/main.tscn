@@ -2,9 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dqo0mkilbnivd" path="res://scenes/player.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bj08ggkjoxfc4" path="res://scripts/main.gd" id="1_tefeu"]
-[ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="4_tefeu"]
 [ext_resource type="Script" uid="uid://c0mkcm42a6s41" path="res://scripts/enemy_manager.gd" id="5_tipki"]
-[ext_resource type="PackedScene" uid="uid://4mspabq0x47s" path="res://scenes/ramp.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://casfa8nk05ul0" path="res://scenes/biome_1_tile_map.tscn" id="7_o6xl0"]
 
 [node name="Main" type="Node2D" unique_id=1001653021]
@@ -16,28 +15,8 @@ position = Vector2(146, 121)
 [node name="EnemyManager" type="Node" parent="." unique_id=1494009209]
 script = ExtResource("5_tipki")
 
-[node name="Enemy2" parent="EnemyManager" unique_id=1568079037 instance=ExtResource("4_tbgi4")]
-position = Vector2(255, 251)
-
-[node name="Enemy" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
-position = Vector2(554, 225)
-
-[node name="Ramp" parent="." unique_id=858742288 instance=ExtResource("6_tefeu")]
-position = Vector2(223, 10)
-ramp_width = 5.0
-
-[node name="CollisionPolygon2D" parent="Ramp" index="0" unique_id=1083297325]
-polygon = PackedVector2Array(-86.03989, 0.44824255, 103.96011, 240.44824, 100.03989, 243.55176, -89.96011, 3.5517573)
-
-[node name="Line2D" parent="Ramp" index="1" unique_id=757599889]
-points = PackedVector2Array(-88, 2, 102, 242)
-width = 5.0
-
-[node name="PointA" parent="Ramp" index="2" unique_id=1451519908]
-position = Vector2(-88, 2)
-
-[node name="PointB" parent="Ramp" index="3" unique_id=2060975109]
-position = Vector2(102, 242)
+[node name="Brzydal" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tefeu")]
+position = Vector2(183, 256)
 
 [node name="Biome1TileMap" parent="." unique_id=1058304948 instance=ExtResource("7_o6xl0")]
 tile_map_data = PackedByteArray("AAACAAYAAQABAAEAAAADAAYAAQABAAEAAAAEAAYAAQABAAEAAAAFAAYAAQABAAEAAAAGAAkAAQABAAEAAAAFAAkAAQABAAEAAAAEAAkAAQABAAEAAAADAAkAAQABAAEAAAACAAkAAQABAAEAAAAHAAkAAQABAAEAAAAIAAkAAQABAAEAAAAJAAkAAQABAAEAAAAKAAkAAQABAAEAAAALAAkAAQABAAEAAAAMAAkAAQABAAEAAAANAAkAAQABAAEAAAAOAAkAAQABAAEAAAAPAAkAAQABAAEAAAAQAAkAAQABAAEAAAARAAkAAQABAAEAAAASAAkAAQABAAEAAAACAAcAAQAAAAEAAAACAAgAAQAAAAEAAAASAAgAAQAAAAEAAAASAAcAAQAAAAEAAAASAAYAAQAAAAEAAAASAAUAAQAAAAEAAAACAAUAAQAAAAEAAAACAAQAAQAAAAEAAAACAAMAAQAAAAEAAAACAAIAAQAAAAEAAAA=")
@@ -46,5 +25,3 @@ tile_map_data = PackedByteArray("AAACAAYAAQABAAEAAAADAAYAAQABAAEAAAAEAAYAAQABAAE
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="EnemyManager" to="EnemyManager" method="_on_child_exiting_tree"]
-
-[editable path="Ramp"]

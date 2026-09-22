@@ -120,9 +120,6 @@ func pickup_process():
 		var picked_needle = get_closest_pickable_needle()
 		remove_needle(picked_needle)
 		ammo += 1
-		
-func _physics_process(delta: float) -> void:
-	print(is_on_floor())
 
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false
