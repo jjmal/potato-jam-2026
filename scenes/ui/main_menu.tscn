@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dpy4ns2nrq3i6" path="res://scripts/main_menu.gd" id="1_fe2o3"]
 [ext_resource type="FontFile" uid="uid://dlu28tvaummme" path="res://assets/font/UpheavalPro.ttf" id="1_sl1te"]
+[ext_resource type="StyleBox" uid="uid://b786cfq3thp67" path="res://assets/StyleBox/Ui_Apla.tres" id="2_1g8jr"]
+[ext_resource type="Material" uid="uid://bn5n57c2rko80" path="res://assets/StyleBox/balatro_material.tres" id="2_btxxm"]
+[ext_resource type="Texture2D" uid="uid://dmrj8m83wgqbl" path="res://assets/ui_aple/button_idle.png" id="3_uhagc"]
+[ext_resource type="Texture2D" uid="uid://c2fr7piri48ox" path="res://assets/ui_aple/button_pressed.png" id="4_btxxm"]
+[ext_resource type="Texture2D" uid="uid://bm6k5hnjw8e2j" path="res://assets/ui_aple/button_hover.png" id="5_wb0q5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb0q5"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="MainMenu" type="Control" unique_id=643902217]
 layout_mode = 3
@@ -12,7 +20,33 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fe2o3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=945613882]
+[node name="ColorRect" type="Panel" parent="." unique_id=949737021]
+material = ExtResource("2_btxxm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wb0q5")
+
+[node name="TextureRect" type="Panel" parent="ColorRect" unique_id=1573870013]
+custom_minimum_size = Vector2(250, 280)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -300.0
+offset_right = 125.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("2_1g8jr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TextureRect" unique_id=945613882]
 custom_minimum_size = Vector2(180, 250)
 layout_mode = 1
 anchors_preset = 8
@@ -21,19 +55,23 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -90.0
-offset_top = 75.0
+offset_top = -110.0
 offset_right = 90.0
-offset_bottom = 325.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="continue" type="Button" parent="VBoxContainer" unique_id=1342204715]
+[node name="continue" type="TextureButton" parent="ColorRect/TextureRect/VBoxContainer" unique_id=1239077339]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_uhagc")
+texture_pressed = ExtResource("4_btxxm")
+texture_hover = ExtResource("5_wb0q5")
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/continue" unique_id=1752604106]
+[node name="Label" type="Label" parent="ColorRect/TextureRect/VBoxContainer/continue" unique_id=434495326]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 1
 anchors_preset = 8
@@ -41,9 +79,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -49.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 51.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -52,13 +90,17 @@ text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="new_game" type="Button" parent="VBoxContainer" unique_id=1149390561]
+[node name="new_game" type="TextureButton" parent="ColorRect/TextureRect/VBoxContainer" unique_id=773994576]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_uhagc")
+texture_pressed = ExtResource("4_btxxm")
+texture_hover = ExtResource("5_wb0q5")
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/new_game" unique_id=1449036924]
+[node name="Label" type="Label" parent="ColorRect/TextureRect/VBoxContainer/new_game" unique_id=1449036924]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 1
 anchors_preset = 8
@@ -66,9 +108,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -49.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 51.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -77,13 +119,17 @@ text = "New Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="settings" type="Button" parent="VBoxContainer" unique_id=530362751]
+[node name="settings" type="TextureButton" parent="ColorRect/TextureRect/VBoxContainer" unique_id=1510920858]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_uhagc")
+texture_pressed = ExtResource("4_btxxm")
+texture_hover = ExtResource("5_wb0q5")
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/settings" unique_id=747868810]
+[node name="Label" type="Label" parent="ColorRect/TextureRect/VBoxContainer/settings" unique_id=747868810]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 1
 anchors_preset = 8
@@ -91,9 +137,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -49.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 51.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -102,13 +148,17 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="exit" type="Button" parent="VBoxContainer" unique_id=1790915799]
+[node name="exit" type="TextureButton" parent="ColorRect/TextureRect/VBoxContainer" unique_id=1736287887]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_uhagc")
+texture_pressed = ExtResource("4_btxxm")
+texture_hover = ExtResource("5_wb0q5")
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/exit" unique_id=1130176530]
+[node name="Label" type="Label" parent="ColorRect/TextureRect/VBoxContainer/exit" unique_id=1130176530]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 1
 anchors_preset = 8
@@ -116,9 +166,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -50.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 50.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -127,7 +177,7 @@ text = "Exit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="VBoxContainer/new_game" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="ColorRect/TextureRect/VBoxContainer/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="ColorRect/TextureRect/VBoxContainer/new_game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="ColorRect/TextureRect/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="ColorRect/TextureRect/VBoxContainer/exit" to="." method="_on_exit_pressed"]

@@ -5,7 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://bp1ibwlu1kenf" path="res://assets/static/tilesheet_complete.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://drjw7t80w7mh2" path="res://scenes/enemy_manager.gd" id="4_tefeu"]
-[ext_resource type="Texture2D" uid="uid://dw7q6y5m2uq0t" path="res://assets/hud/test serduszko.png" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://dqakrowgxhfp7" path="res://assets/hud/hud_main.png" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://wqkxa35ujtc7" path="res://assets/hud/ammo1.png" id="7_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://dbsqh7wn2a7cy" path="res://assets/hud/ammo2.png" id="8_85g3d"]
+[ext_resource type="Texture2D" uid="uid://ii6pfqiki7io" path="res://assets/hud/ammo3.png" id="9_choun"]
+[ext_resource type="Texture2D" uid="uid://skwax51ywe6c" path="res://assets/hud/ammo4.png" id="10_choun"]
+[ext_resource type="Texture2D" uid="uid://b034wx5nl1hhj" path="res://assets/hud/dziura1.png" id="11_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://7gs4aa4fg3n4" path="res://assets/hud/dziura2.png" id="12_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://cx2nr4k4d7vev" path="res://assets/hud/dziur32.png" id="13_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://dvoexto313rc5" path="res://assets/hud/dziura4.png" id="14_muem4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbgi4"]
 texture = ExtResource("4_jyhfs")
@@ -306,14 +314,151 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/HUD" unique_id=1615617072]
-custom_minimum_size = Vector2(120, 120)
+[node name="Bar" type="TextureRect" parent="UI/HUD" unique_id=1615617072]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 412.85715
+offset_bottom = 120.0
 texture = ExtResource("6_tefeu")
 expand_mode = 3
-flip_h = true
+
+[node name="Slot1" type="TextureRect" parent="UI/HUD/Bar" unique_id=466415950]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_o6xl0")
+expand_mode = 3
+
+[node name="Slot2" type="TextureRect" parent="UI/HUD/Bar/Slot1" unique_id=1638800651]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_85g3d")
+expand_mode = 3
+
+[node name="Slot3" type="TextureRect" parent="UI/HUD/Bar/Slot1/Slot2" unique_id=2129992942]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_choun")
+expand_mode = 3
+
+[node name="Slot4" type="TextureRect" parent="UI/HUD/Bar/Slot1/Slot2/Slot3" unique_id=703241180]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_choun")
+expand_mode = 3
+
+[node name="Dziura1" type="TextureRect" parent="UI/HUD/Bar" unique_id=520160160]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_a8y0u")
+expand_mode = 3
+
+[node name="Dziura2" type="TextureRect" parent="UI/HUD/Bar/Dziura1" unique_id=796515191]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_jkv2x")
+expand_mode = 3
+
+[node name="Dziura3" type="TextureRect" parent="UI/HUD/Bar/Dziura1/Dziura2" unique_id=794427564]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_jbj1t")
+expand_mode = 3
+
+[node name="Dziura4" type="TextureRect" parent="UI/HUD/Bar/Dziura1/Dziura2/Dziura3" unique_id=1049126157]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.42857
+offset_top = -50.0
+offset_right = 196.42857
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_muem4")
+expand_mode = 3
 
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]

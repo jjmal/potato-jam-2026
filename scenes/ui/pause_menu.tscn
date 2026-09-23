@@ -2,33 +2,43 @@
 
 [ext_resource type="Script" uid="uid://brravx4rq1eco" path="res://scripts/pause_menu.gd" id="1_0lmf7"]
 [ext_resource type="FontFile" uid="uid://dlu28tvaummme" path="res://assets/font/UpheavalPro.ttf" id="1_6tw0m"]
+[ext_resource type="Material" uid="uid://bn5n57c2rko80" path="res://assets/StyleBox/balatro_material.tres" id="2_8fwbo"]
+[ext_resource type="StyleBox" uid="uid://b786cfq3thp67" path="res://assets/StyleBox/Ui_Apla.tres" id="2_f6eus"]
+[ext_resource type="Texture2D" uid="uid://dmrj8m83wgqbl" path="res://assets/ui_aple/button_idle.png" id="3_4inpj"]
+[ext_resource type="Texture2D" uid="uid://c2fr7piri48ox" path="res://assets/ui_aple/button_pressed.png" id="4_8fwbo"]
+[ext_resource type="Texture2D" uid="uid://bm6k5hnjw8e2j" path="res://assets/ui_aple/button_hover.png" id="5_2rlsb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jkta"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=73485242]
 process_mode = 3
 layer = 10
 script = ExtResource("1_0lmf7")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=548709523]
+[node name="ColorRect" type="Panel" parent="." unique_id=1153205780]
+material = ExtResource("2_8fwbo")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.32941177)
+theme_override_styles/panel = SubResource("StyleBoxFlat_2jkta")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=892260496]
-custom_minimum_size = Vector2(240, 200)
+[node name="TextureRect" type="Panel" parent="." unique_id=1926280499]
+custom_minimum_size = Vector2(250, 260)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -120.0
+offset_top = -100.0
+offset_right = 120.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_f6eus")
 
 [node name="VBox" type="VBoxContainer" parent="TextureRect" unique_id=1578996199]
 custom_minimum_size = Vector2(180, 150)
@@ -44,12 +54,17 @@ offset_right = 90.0
 offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="resume" type="Button" parent="TextureRect/VBox" unique_id=1889802770]
-custom_minimum_size = Vector2(180, 50)
+[node name="resume" type="TextureButton" parent="TextureRect/VBox" unique_id=60798814]
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_4inpj")
+texture_pressed = ExtResource("4_8fwbo")
+texture_hover = ExtResource("5_2rlsb")
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="TextureRect/VBox/resume" unique_id=180383464]
 custom_minimum_size = Vector2(100, 20)
@@ -59,9 +74,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -49.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 51.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -70,11 +85,15 @@ text = "resume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="settings" type="Button" parent="TextureRect/VBox" unique_id=539740979]
-custom_minimum_size = Vector2(180, 50)
+[node name="settings" type="TextureButton" parent="TextureRect/VBox" unique_id=1583805486]
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_4inpj")
+texture_pressed = ExtResource("4_8fwbo")
+texture_hover = ExtResource("5_2rlsb")
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="TextureRect/VBox/settings" unique_id=1766149760]
 custom_minimum_size = Vector2(100, 20)
@@ -84,9 +103,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
+offset_left = -49.0
 offset_top = -11.5
-offset_right = 20.0
+offset_right = 51.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -95,11 +114,15 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="exit_to_menu" type="Button" parent="TextureRect/VBox" unique_id=140339707]
-custom_minimum_size = Vector2(180, 50)
+[node name="exit_to_menu" type="TextureButton" parent="TextureRect/VBox" unique_id=1210134040]
+custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture_normal = ExtResource("3_4inpj")
+texture_pressed = ExtResource("4_8fwbo")
+texture_hover = ExtResource("5_2rlsb")
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="TextureRect/VBox/exit_to_menu" unique_id=719465701]
 custom_minimum_size = Vector2(100, 20)
@@ -109,10 +132,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -50.0
+offset_top = -12.0
+offset_right = 54.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_6tw0m")

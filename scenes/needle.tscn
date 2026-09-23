@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://by31vwaoa4prm"]
 
 [ext_resource type="Script" uid="uid://be5rg4584upf0" path="res://scenes/needle.gd" id="1_bfd1i"]
-[ext_resource type="Texture2D" uid="uid://bnyo0fux3026t" path="res://assets/movables/dart_side_gold_red.png" id="1_gcph1"]
+[ext_resource type="Texture2D" uid="uid://v56db7okfm1t" path="res://assets/needle/needle.png" id="2_bfd1i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 size = Vector2(34, 2)
@@ -26,5 +26,6 @@ target_position = Vector2(0, 0)
 collision_mask = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("1_gcph1")
+position = Vector2(3, -1)
+rotation = 3.1415927
+texture = ExtResource("2_bfd1i")
