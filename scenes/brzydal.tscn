@@ -79,6 +79,14 @@ shape = SubResource("CircleShape2D_fmkpc")
 [node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" parent_id_path=PackedInt32Array(1177752760, 1481206971) index="0" unique_id=1120140423]
 shape = SubResource("CircleShape2D_66375")
 
+[node name="FallDetectionRay" type="RayCast2D" parent="." index="4" unique_id=66902246]
+position = Vector2(-27, 0)
+collision_mask = 2
+
+[node name="WallDetectionRay" type="RayCast2D" parent="." index="5" unique_id=637187426]
+target_position = Vector2(-26, 0)
+collision_mask = 2
+
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
 [connection signal="body_exited" from="AggroModule/PlayerDropAggro" to="AggroModule" method="_on_player_drop_aggro_body_exited"]
