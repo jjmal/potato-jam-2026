@@ -8,8 +8,8 @@ const EPSILON = 0.01
 
 
 @export var shot_cooldown: float = 0.75
-@onready var needle_array = $NeedleManager.needle_array
-@onready var pickable_needle_array = $NeedleManager.pickable_needle_array
+@onready var needle_array = NeedleManager.needle_array
+@onready var pickable_needle_array = NeedleManager.pickable_needle_array
 @onready var animated_sprite = $AnimatedSprite
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
@@ -72,7 +72,7 @@ func spawn_needle(direction_state: int):
 	needle.global_position = needle_spawn_position 
 	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
 
-	$NeedleManager.add_child(needle)
+	NeedleManager.add_child(needle)
 	needle_array.append(needle)
 
 func shoot_process():
@@ -123,7 +123,7 @@ func _physics_process(delta: float) -> void:
 	can_jump_emitter()
 
 func get_closest_pickable_needle():
-	return $NeedleManager.find_min_dist_pickable_needle()
+	return NeedleManager.find_min_dist_pickable_needle()
 
 func remove_needle(needle):
 	needle_array.erase(needle)

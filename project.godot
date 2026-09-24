@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Utils="*uid://c3mq4lmxqgh8"
+NeedleManager="*uid://cswlwmtesirrd"
 
 [display]
 

@@ -46,5 +46,21 @@ func is_controlled() -> bool:
 	else:
 		return false
 
+func can_throw_needle() -> bool:
+	if Utils.has_child_of_type(self, Needle):
+		return true
+	return false
+
+func get_needle_to_throw() -> Needle:
+	for child in get_children():
+		if is_instance_of(child, Needle):
+			return child
+	return
+	
+func throw_needle():
+	var old_needle = get_needle_to_throw()
+	if old_needle != null:
+		pass
+	
 
 	
