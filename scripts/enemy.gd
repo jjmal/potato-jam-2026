@@ -1,13 +1,12 @@
 extends CharacterBody2D
 class_name Enemy
-const JUMP_VELOCITY = -400.0
 
+@export var jump_velocity: float
 var speed: float
 var can_player_walk_forward: bool = true
 var can_player_jump: bool = true
 var flipped: bool = false
 var direction: float
-
 
 func flip_character():
 	if direction > 0:
@@ -28,7 +27,7 @@ func move_controlled_process(delta: float):
 	flip_character()
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and can_player_jump and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 	
 	direction = Input.get_axis("left", "right")	
 	if direction and can_player_walk_forward: # can only walk if not too close to the wall

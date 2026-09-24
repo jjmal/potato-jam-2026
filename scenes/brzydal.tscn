@@ -45,6 +45,7 @@ roam_speed = 150.0
 aggro_speed = 200.0
 controlled_speed = 200.0
 allow_jump = false
+jump_velocity = -400.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
 position = Vector2(0, -2)
@@ -70,13 +71,17 @@ script = ExtResource("4_erjbq")
 character = NodePath("..")
 
 [node name="PlayerInitialDetection" parent="AggroModule" index="1" unique_id=176107892]
+visible = false
 position = Vector2(-20, 0)
 
 [node name="CollisionShape2D" parent="AggroModule/PlayerInitialDetection" index="0" unique_id=1752100016]
 position = Vector2(-69, 0)
 shape = SubResource("CircleShape2D_fmkpc")
 
-[node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" parent_id_path=PackedInt32Array(1177752760, 1481206971) index="0" unique_id=1120140423]
+[node name="PlayerDropAggro" parent="AggroModule" index="2" unique_id=1481206971]
+visible = false
+
+[node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" index="0" unique_id=1120140423]
 shape = SubResource("CircleShape2D_66375")
 
 [node name="FallDetectionRay" type="RayCast2D" parent="." index="4" unique_id=66902246]
@@ -84,7 +89,7 @@ position = Vector2(-27, 0)
 collision_mask = 2
 
 [node name="WallDetectionRay" type="RayCast2D" parent="." index="5" unique_id=637187426]
-target_position = Vector2(-26, 0)
+target_position = Vector2(-20, 0)
 collision_mask = 2
 
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]

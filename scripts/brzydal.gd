@@ -10,6 +10,7 @@ extends Enemy
 @export var allow_jump: bool
 var can_aggro: bool
 
+
 func _ready() -> void:
 	direction = -1.0
 
@@ -39,6 +40,10 @@ func move_forward():
 	#flip_character()
 	## movement
 	#direction = 
+
+func _physics_process(delta: float) -> void:
+	# print($StateMachine.current_state)
+	print(direction)
 
 func _on_aggro_module_aggro_status(aggro_stat: bool) -> void:
 	can_aggro = aggro_stat

@@ -6,7 +6,11 @@ func enter() -> void:
 	character.speed = character.controlled_speed
 	
 func exit() -> void:
-	pass
+	if character.direction == 0.0:
+		if character.flipped:
+			character.direction = 1.0
+		else:
+			character.direction = -1.0
 	
 func physics_update(delta: float) -> void:
 	character.move_controlled_process(delta)

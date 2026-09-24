@@ -21,6 +21,8 @@ func collide_enable_collision():
 	if check_if_collision_occurs():
 		if get_hit_ray_collision()[0] == COLLIDER_STATIC:
 			enable_collision_platform()
+		elif get_hit_ray_collision()[0] == COLLIDER_ENEMY:
+			enable_collision_platform()
 
 func set_flip():
 	if direction_state == RIGHT:

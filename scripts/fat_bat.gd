@@ -22,7 +22,7 @@ func fatbat_flip_process():
 
 func _physics_process(delta: float) -> void:
 	update_tracked_player()
-	print($StateMachine.current_state)
+	# print($StateMachine.current_state)
 
 func move_controlled_process(delta: float):
 	apply_gravity(delta)
