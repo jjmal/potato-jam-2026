@@ -27,3 +27,16 @@ func create_needle(direction_state: int):
 	var needle = scene.instantiate()
 	needle.direction_state = direction_state
 	return needle
+
+func jump_height(jump_velocity: float, gravity: float) -> float:
+	if gravity == 0.0:
+		return 0.0
+	return (jump_velocity * jump_velocity) / (2.0 * abs(gravity))
+
+func air_time(jump_velocity: float, gravity: float) -> float:
+	if gravity == 0.0:
+		return 0.0
+	return 2.0 * abs(jump_velocity) / abs(gravity)
+	
+func jump_length(speed: float, jump_velocity: float, gravity: float) -> float:
+	return abs(speed) * air_time(jump_velocity, gravity)

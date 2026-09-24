@@ -44,8 +44,9 @@ script = ExtResource("2_4mjti")
 roam_speed = 150.0
 aggro_speed = 350.0
 controlled_speed = 350.0
-allow_jump = false
-distance_for_turning = 64
+aggro_fall_ray_length = 40.0
+distance_for_turning = 64.0
+distance_for_follow_jumping = 64.0
 jump_velocity = -400.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
@@ -85,16 +86,30 @@ visible = false
 [node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" index="0" unique_id=1120140423]
 shape = SubResource("CircleShape2D_66375")
 
-[node name="FallDetectionRay" type="RayCast2D" parent="." index="4" unique_id=66902246]
-position = Vector2(-27, 0)
+[node name="RoamFallDetectionRay" type="RayCast2D" parent="." index="4" unique_id=66902246]
+position = Vector2(-31, 0)
 target_position = Vector2(0, 35)
 collision_mask = 2
 
-[node name="WallDetectionRay" type="RayCast2D" parent="." index="5" unique_id=637187426]
+[node name="AggroFallDetectionRay" type="RayCast2D" parent="." index="5" unique_id=1262439791]
+position = Vector2(-31, 0)
+target_position = Vector2(0, 35)
+collision_mask = 2
+
+[node name="WallDetectionRay" type="RayCast2D" parent="." index="6" unique_id=637187426]
 target_position = Vector2(-20, 0)
 collision_mask = 2
 
+[node name="JumpLengthRay" type="RayCast2D" parent="." index="7" unique_id=118049219]
+position = Vector2(0, -28)
+target_position = Vector2(-89, 53)
+collision_mask = 2
+
+[node name="AggroFrustratedJumpTimer" type="Timer" parent="." index="8" unique_id=448528476]
+one_shot = true
+
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
+[connection signal="timeout" from="AggroFrustratedJumpTimer" to="." method="_on_aggro_frustrated_jump_timer_timeout"]
 
 [editable path="AggroModule"]
