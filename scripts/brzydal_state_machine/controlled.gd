@@ -1,7 +1,6 @@
 extends State
 
 
-
 func enter() -> void:
 	character.speed = character.controlled_speed
 	

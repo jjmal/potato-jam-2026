@@ -42,8 +42,8 @@ radius = 230.03477
 [node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
 script = ExtResource("2_4mjti")
 roam_speed = 150.0
-aggro_speed = 200.0
-controlled_speed = 200.0
+aggro_speed = 350.0
+controlled_speed = 350.0
 allow_jump = false
 jump_velocity = -400.0
 
@@ -93,7 +93,12 @@ collision_mask = 2
 target_position = Vector2(-20, 0)
 collision_mask = 2
 
+[node name="PursuitTurnTimer" type="Timer" parent="." index="6" unique_id=1493841360]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
+[connection signal="timeout" from="PursuitTurnTimer" to="." method="_on_timer_timeout"]
 
 [editable path="AggroModule"]

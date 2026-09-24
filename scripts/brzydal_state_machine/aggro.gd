@@ -7,7 +7,7 @@ func exit() -> void:
 	pass
 	
 func physics_update(delta: float) -> void:
-	
+
 	character.move_aggro_process(delta)
 	
 	# Controlled

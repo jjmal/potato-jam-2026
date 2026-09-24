@@ -38,7 +38,7 @@ func move_controlled_process(delta: float):
 	move_and_slide()
 
 func jump():
-	velocity.y = JUMP_VELOCITY
+	velocity.y = jump_velocity
 
 func is_controlled() -> bool:
 	if Utils.has_child_of_type(self, Needle):

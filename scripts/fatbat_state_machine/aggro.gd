@@ -3,7 +3,9 @@ extends State
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta: float) -> void:
-	character.fatbat_flip_process()
+	character.set_x_dir_to_player()
+	character.flip_character()
+	
 	
 	# Controlled
 	if character.is_controlled():

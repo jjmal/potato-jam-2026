@@ -9,7 +9,7 @@ var projectile_direction: Vector2
 func _on_aggro_module_aggro_status(aggro_stat: bool) -> void:
 	can_aggro = aggro_stat
 
-func fatbat_flip_process():
+func set_x_dir_to_player():
 	if tracked_player == null:
 		direction = 1.0
 		return	
@@ -18,7 +18,6 @@ func fatbat_flip_process():
 		direction = 1.0
 	else:
 		direction = -1.0
-	flip_character()
 
 func _physics_process(delta: float) -> void:
 	update_tracked_player()
