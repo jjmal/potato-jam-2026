@@ -7,6 +7,9 @@ func exit() -> void:
 	pass
 	
 func physics_update(delta: float) -> void:
+	
+	character.move_aggro_process(delta)
+	
 	# Controlled
 	if character.is_controlled():
 		state_machine.transition_to("Controlled")

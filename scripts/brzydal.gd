@@ -21,6 +21,7 @@ func move_roam_process(delta: float):
 		direction = - direction
 	move_forward()
 
+
 func check_if_about_to_fall() -> bool:
 	if not fall_detection_ray.is_colliding() and is_on_floor():
 		return true
@@ -34,12 +35,16 @@ func check_if_about_to_hit_a_wall() -> bool:
 func move_forward():
 	velocity.x = direction * roam_speed
 	move_and_slide()
+
+func attack():
+	pass
+
 	
-#func move_aggro_process(delta: float):
-	#apply_gravity(delta)
-	#flip_character()
-	## movement
-	#direction = 
+func move_aggro_process(delta: float):
+	apply_gravity(delta)
+	flip_character()
+	
+	
 
 func _physics_process(delta: float) -> void:
 	# print($StateMachine.current_state)

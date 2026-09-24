@@ -27,7 +27,8 @@ func move_controlled_process(delta: float):
 	flip_character()
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and can_player_jump and is_on_floor():
-		velocity.y = jump_velocity
+		jump()
+
 	
 	direction = Input.get_axis("left", "right")	
 	if direction and can_player_walk_forward: # can only walk if not too close to the wall
@@ -36,6 +37,8 @@ func move_controlled_process(delta: float):
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
 
+func jump():
+	velocity.y = JUMP_VELOCITY
 
 func is_controlled() -> bool:
 	if Utils.has_child_of_type(self, Needle):

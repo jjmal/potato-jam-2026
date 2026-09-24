@@ -114,7 +114,10 @@ func can_pickup() -> bool:
 		return true
 	else:
 		return false
-
+		
+func can_attack() -> bool:
+	return true
+	
 func _physics_process(delta: float) -> void:
 	can_walk_forward_emitter()
 	can_jump_emitter()

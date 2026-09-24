@@ -86,6 +86,7 @@ shape = SubResource("CircleShape2D_66375")
 
 [node name="FallDetectionRay" type="RayCast2D" parent="." index="4" unique_id=66902246]
 position = Vector2(-27, 0)
+target_position = Vector2(0, 35)
 collision_mask = 2
 
 [node name="WallDetectionRay" type="RayCast2D" parent="." index="5" unique_id=637187426]
