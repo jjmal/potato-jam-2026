@@ -12,6 +12,5 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Controlled")
 		return
 
-func _on_player_drop_aggro_body_exited(_body: Node2D) -> void:
-	# Roam
+func _on_aggro_module_drop_aggro() -> void:
 	state_machine.transition_to("Roam")

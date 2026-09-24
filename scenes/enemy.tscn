@@ -11,15 +11,3 @@ script = ExtResource("1_md0e3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=465512479]
 
 [node name="StateMachine" parent="." unique_id=636593194 instance=ExtResource("3_4ra3w")]
-
-[node name="WallPlayerDetectionRay" type="RayCast2D" parent="." unique_id=1119331808]
-collision_mask = 2
-
-[node name="PlayerInitialDetection" type="Area2D" parent="." unique_id=834977963]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInitialDetection" unique_id=7504569]
-position = Vector2(-158, 0)
-
-[connection signal="body_entered" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_entered"]
-[connection signal="body_exited" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_exited"]

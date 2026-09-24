@@ -6,9 +6,10 @@
 [ext_resource type="Script" uid="uid://cky44jewlyk4o" path="res://scripts/brzydal_state_machine/roam.gd" id="3_4mjti"]
 [ext_resource type="Script" uid="uid://6mxorxg278lu" path="res://scripts/brzydal_state_machine/controlled.gd" id="4_erjbq"]
 [ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
+[ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8hyd"]
-size = Vector2(49, 52)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmkpc"]
+size = Vector2(40, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erjbq"]
 atlas = ExtResource("4_y8hyd")
@@ -32,23 +33,28 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tefeu"]
-radius = 140.03214
+[sub_resource type="CircleShape2D" id="CircleShape2D_fmkpc"]
+radius = 121.004135
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vt404"]
-radius = 231.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_66375"]
+radius = 230.03477
 
 [node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
 script = ExtResource("2_4mjti")
 roam_speed = 150.0
 aggro_speed = 200.0
 controlled_speed = 200.0
+allow_jump = false
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
-position = Vector2(-0.5, -2)
-shape = SubResource("RectangleShape2D_y8hyd")
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_fmkpc")
 
-[node name="StateMachine" parent="." index="1" unique_id=636593194 node_paths=PackedStringArray("initial_state")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1" unique_id=1716297206]
+sprite_frames = SubResource("SpriteFrames_4mjti")
+animation = &"walk"
+
+[node name="StateMachine" parent="." index="2" unique_id=636593194 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam")
 
 [node name="Aggro" type="Node" parent="StateMachine" index="0" unique_id=573543335]
@@ -60,18 +66,21 @@ script = ExtResource("3_4mjti")
 [node name="Controlled" type="Node" parent="StateMachine" index="2" unique_id=1047020341]
 script = ExtResource("4_erjbq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2" unique_id=1716297206]
-sprite_frames = SubResource("SpriteFrames_4mjti")
-animation = &"walk"
+[node name="AggroModule" parent="." index="3" unique_id=1177752760 node_paths=PackedStringArray("character") instance=ExtResource("7_fmkpc")]
+character = NodePath("..")
 
-[node name="CollisionShape2D" parent="PlayerInitialDetection" parent_id_path=PackedInt32Array(834977963) index="0" unique_id=7504569]
-position = Vector2(-90, 0)
-shape = SubResource("CircleShape2D_tefeu")
+[node name="PlayerInitialDetection" parent="AggroModule" index="1" unique_id=176107892]
+position = Vector2(-20, 0)
 
-[node name="PlayerDropAggro" type="Area2D" parent="." index="5" unique_id=1616294536]
-collision_layer = 0
+[node name="CollisionShape2D" parent="AggroModule/PlayerInitialDetection" index="0" unique_id=1752100016]
+position = Vector2(-69, 0)
+shape = SubResource("CircleShape2D_fmkpc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDropAggro" index="0" unique_id=1773066411]
-shape = SubResource("CircleShape2D_vt404")
+[node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" parent_id_path=PackedInt32Array(1177752760, 1481206971) index="0" unique_id=1120140423]
+shape = SubResource("CircleShape2D_66375")
 
-[connection signal="body_exited" from="PlayerDropAggro" to="StateMachine/Aggro" method="_on_player_drop_aggro_body_exited"]
+[connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
+[connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
+[connection signal="body_exited" from="AggroModule/PlayerDropAggro" to="AggroModule" method="_on_player_drop_aggro_body_exited"]
+
+[editable path="AggroModule"]

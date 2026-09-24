@@ -2,16 +2,12 @@ extends CharacterBody2D
 class_name Enemy
 const JUMP_VELOCITY = -400.0
 
-
-@onready var wall_detection_ray: RayCast2D = $WallPlayerDetectionRay
 var speed: float
 var can_player_walk_forward: bool = true
 var can_player_jump: bool = true
 var flipped: bool = false
 var direction: float
-var tracked_player: Node2D = null
-var can_aggro: bool = false
-var is_ray_tracking_player: bool = false
+
 
 func flip_character():
 	if direction > 0:
@@ -41,9 +37,6 @@ func move_controlled_process(delta: float):
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
 
-func move_aggro_process():
-	pass
-
 
 func is_controlled() -> bool:
 	if Utils.has_child_of_type(self, Needle):
@@ -51,24 +44,5 @@ func is_controlled() -> bool:
 	else:
 		return false
 
-func update_aggro_process():
-	if is_ray_tracking_player:
-		wall_detection_ray.target_position = to_local(tracked_player.global_position)
-		wall_detection_ray.force_raycast_update()
-		if wall_detection_ray.is_colliding():
-			can_aggro = false
-		else:
-			can_aggro = true
-	else:
-		can_aggro = false
 
-
-func _physics_process(delta: float) -> void:
-	update_aggro_process()
-
-func _on_player_initial_detection_body_entered(body: Node2D) -> void:
-	tracked_player = body
-	is_ray_tracking_player = true
-
-func _on_player_initial_detection_body_exited(body: Node2D) -> void:
-	is_ray_tracking_player = false
+	

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bbm5mby328wdf"]
+
+[ext_resource type="Script" uid="uid://ccdq0hvt6s45y" path="res://scripts/aggro_module.gd" id="1_3hnj6"]
+
+[node name="AggroModule" type="Node2D" unique_id=1177752760]
+script = ExtResource("1_3hnj6")
+
+[node name="WallPlayerDetectionRay" type="RayCast2D" parent="." unique_id=419684694]
+collision_mask = 2
+
+[node name="PlayerInitialDetection" type="Area2D" parent="." unique_id=176107892]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInitialDetection" unique_id=1752100016]
+
+[node name="PlayerDropAggro" type="Area2D" parent="." unique_id=1481206971]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDropAggro" unique_id=1120140423]
+
+[connection signal="body_entered" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_entered"]
+[connection signal="body_exited" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_exited"]
