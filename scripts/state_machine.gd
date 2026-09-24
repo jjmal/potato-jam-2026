@@ -10,12 +10,10 @@ func _ready() -> void:
 			child.state_machine = self
 			child.character = get_parent()
 	current_state = initial_state
-	current_state.enter()
+	current_state.call_deferred("enter")
 
 func _physics_process(delta: float) -> void:
 	current_state.physics_update(delta)
-	if get_parent() is Enemy:
-		print(current_state)
 		
 func transition_to(state_name: String) -> void:
 	var new_state = get_node(state_name) as State

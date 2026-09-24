@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal can_walk_forward_status_change(can_walk_forward_status: bool)
 signal can_jump_status_change(can_jump_status: bool)
 
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -440.0
 const EPSILON = 0.01
 
 

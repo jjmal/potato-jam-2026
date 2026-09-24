@@ -20,3 +20,4 @@ collision_layer = 0
 
 [connection signal="body_entered" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_entered"]
 [connection signal="body_exited" from="PlayerInitialDetection" to="." method="_on_player_initial_detection_body_exited"]
+[connection signal="body_exited" from="PlayerDropAggro" to="." method="_on_player_drop_aggro_body_exited"]

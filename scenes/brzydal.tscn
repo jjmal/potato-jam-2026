@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmkpc"]
-size = Vector2(40, 50)
+size = Vector2(36, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erjbq"]
 atlas = ExtResource("4_y8hyd")
@@ -89,6 +89,5 @@ collision_mask = 2
 
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
-[connection signal="body_exited" from="AggroModule/PlayerDropAggro" to="AggroModule" method="_on_player_drop_aggro_body_exited"]
 
 [editable path="AggroModule"]

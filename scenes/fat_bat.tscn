@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://drheu77bq0v8a"]
+
+[ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="1_abkqj"]
+[ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="2_oe6j6"]
+[ext_resource type="Script" uid="uid://1w6r506a8kn5" path="res://scripts/fat_bat.gd" id="2_smmv2"]
+[ext_resource type="Texture2D" uid="uid://dgq2fohuyfwlj" path="res://assets/characters/FatBatAnimations/fatbat.png" id="3_g1req"]
+[ext_resource type="Script" uid="uid://cjw84k2ulwvkl" path="res://scripts/fatbat_state_machine/roam.gd" id="3_oe6j6"]
+[ext_resource type="Script" uid="uid://dkebkj5mqslfg" path="res://scripts/fatbat_state_machine/aggro.gd" id="4_e76nb"]
+[ext_resource type="Script" uid="uid://ull808l5hbgl" path="res://scripts/fatbat_state_machine/controlled.gd" id="5_smmv2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e76nb"]
+atlas = ExtResource("3_g1req")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smmv2"]
+atlas = ExtResource("3_g1req")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yap8"]
+atlas = ExtResource("3_g1req")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dud8"]
+atlas = ExtResource("3_g1req")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk3lr"]
+atlas = ExtResource("3_g1req")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy4sv"]
+atlas = ExtResource("3_g1req")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qyqk1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e76nb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smmv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yap8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dud8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fk3lr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy4sv")
+}],
+"loop": 1,
+"name": &"flying",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrluh"]
+size = Vector2(22, 27)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e76nb"]
+radius = 359.0891
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_smmv2"]
+radius = 366.00137
+
+[node name="FatBat" unique_id=1916811873 instance=ExtResource("1_abkqj")]
+script = ExtResource("2_smmv2")
+initial_direction = -1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=2021987413]
+sprite_frames = SubResource("SpriteFrames_qyqk1")
+animation = &"flying"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
+position = Vector2(-2, 4.5)
+shape = SubResource("RectangleShape2D_yrluh")
+
+[node name="StateMachine" parent="." index="2" unique_id=636593194 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Roam")
+
+[node name="Roam" type="Node" parent="StateMachine" index="0" unique_id=464124766]
+script = ExtResource("3_oe6j6")
+
+[node name="Aggro" type="Node" parent="StateMachine" index="1" unique_id=1313226901]
+script = ExtResource("4_e76nb")
+
+[node name="Controlled" type="Node" parent="StateMachine" index="2" unique_id=2078888746]
+script = ExtResource("5_smmv2")
+
+[node name="AggroModule" parent="." index="3" unique_id=1177752760 node_paths=PackedStringArray("character") instance=ExtResource("2_oe6j6")]
+character = NodePath("..")
+
+[node name="CollisionShape2D" parent="AggroModule/PlayerInitialDetection" parent_id_path=PackedInt32Array(1177752760, 176107892) index="0" unique_id=1752100016]
+shape = SubResource("CircleShape2D_e76nb")
+
+[node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" parent_id_path=PackedInt32Array(1177752760, 1481206971) index="0" unique_id=1120140423]
+shape = SubResource("CircleShape2D_smmv2")
+
+[connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
+[connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
+
+[editable path="AggroModule"]
