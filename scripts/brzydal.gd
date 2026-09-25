@@ -13,18 +13,19 @@ const ORIGIN_TO_COLLISION_BOTTOM = 23
 @export var aggro_fall_ray_length: float = 128.0
 @export var distance_for_turning: float = 64.0
 
-
 var can_aggro: bool
 var tracked_player: Node2D
 var walk_anim_play: bool = false
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_aggro_frustrated_jump: bool = true
 var is_aggro_frustrated: bool = false
+var is_attack_on_cooldown: bool = false
 
 func _ready() -> void:
 	direction = -1.0
 	aggro_fall_detection_ray.target_position.y = aggro_fall_ray_length
 	can_jump_over_wall_ray.position.y = - Utils.jump_height(jump_velocity, gravity) + ORIGIN_TO_COLLISION_BOTTOM 
+	$Hitbox/CollisionShape2D.disabled = true
 	
 func check_if_about_to_fall() -> bool:
 	if not roam_fall_detection_ray.is_colliding() and is_on_floor():
@@ -60,8 +61,6 @@ func move_forward_with_jumps_process():
 		jump()
 	velocity.x = direction * speed
 
-func attack():
-	pass
 
 func move_roam_process(delta: float):
 	apply_gravity(delta)
@@ -134,16 +133,27 @@ func set_x_dir_to_player():
 	else:
 		direction = -1.0
 
-
 func update_tracked_player():
 	tracked_player = $AggroModule.tracked_player
 
-
+func can_attack() -> bool:
+	return not is_attack_on_cooldown
+	
 func _physics_process(delta: float) -> void:
 	update_tracked_player()
 	play_walk_animation()
 	jump_length_ray.target_position.x = - Utils.jump_length(speed, jump_velocity, gravity)
 	
+func attack():
+	is_attack_on_cooldown = true	
+	$Hitbox/CollisionShape2D.disabled = false
+	$AttackTimer.start()
+	$AttackFramesTimer.start()
+
+func attack_controlled_process():
+	if Input.is_action_just_pressed("attack") and can_player_attack and can_attack():
+		attack()
+
 func play_walk_animation():
 	if velocity.x != 0.0 and not walk_anim_play:
 		animated_sprite.play('walk')
@@ -157,3 +167,9 @@ func _on_aggro_module_aggro_status(aggro_stat: bool) -> void:
 
 func _on_aggro_frustrated_jump_timer_timeout() -> void:
 	can_aggro_frustrated_jump = true
+	
+func _on_attack_timer_timeout() -> void:
+	is_attack_on_cooldown = false
+	
+func _on_attack_frames_timer_timeout() -> void:
+	$Hitbox/CollisionShape2D.disabled = true

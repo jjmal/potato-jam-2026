@@ -7,6 +7,7 @@ var speed: float
 var can_player_walk_forward: bool = true
 var can_player_jump: bool = true
 var can_player_shoot: bool = true
+var can_player_attack: bool = true
 var flipped: bool = false
 var direction: float
 @onready var needle_array = NeedleManager.needle_array
@@ -70,11 +71,12 @@ func spawn_needle(direction_state: int):
 	needle_pouch.add_child(needle)
 	needle_spawn_position = $ShotMarker.global_position
 	needle.global_position = needle_spawn_position
-	
+
+func attack():
+	pass
 	
 func throw_needle_process():
 	var old_needle = get_needle_to_throw()
-	print(can_player_shoot)
 	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_player_shoot and old_needle != null:
 		print('yay')
 		if Input.is_action_just_pressed("shoot_forward"):

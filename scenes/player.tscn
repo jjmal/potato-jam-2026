@@ -267,7 +267,7 @@ script = ExtResource("8_smehm")
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1529544438]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"attack"
-frame_progress = 0.8528703
+frame_progress = 0.057310652
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1718173926]
 visible = false

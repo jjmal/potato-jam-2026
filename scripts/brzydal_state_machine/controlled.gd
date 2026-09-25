@@ -14,6 +14,8 @@ func exit() -> void:
 func physics_update(delta: float) -> void:
 	character.move_controlled_process(delta)
 	character.throw_needle_process()
+	character.attack_controlled_process()
+	
 	if not character.is_controlled():
 		# Aggro
 		if character.can_aggro:

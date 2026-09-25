@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal can_walk_forward_status_change(can_walk_forward_status: bool)
 signal can_jump_status_change(can_jump_status: bool)
 signal can_shoot_status_change(can_shoot_status: bool)
+signal can_attack_status_change(can_attack_status: bool)
 
 const JUMP_VELOCITY = -440.0
 const EPSILON = 0.01
@@ -118,18 +119,22 @@ func can_pickup() -> bool:
 func can_attack() -> bool:
 	return not is_attack_on_cooldown and not is_shot_on_cooldown
 
+func can_attack_emitter():
+	var out = can_attack()
+	can_shoot_status_change.emit(out)
+
 func attack_process():
 	if Input.is_action_just_pressed("attack") and can_attack():
 		is_attack_on_cooldown = true	
 		$Hitbox/CollisionShape2D.disabled = false
 		$AttackTimer.start()
 		$AttackFramesTimer.start()
-		
-		
+				
 func _physics_process(delta: float) -> void:
 	can_walk_forward_emitter()
 	can_jump_emitter()
 	can_shoot_emitter()
+	can_attack_emitter()
 
 func get_closest_pickable_needle():
 	return NeedleManager.find_min_dist_pickable_needle()
