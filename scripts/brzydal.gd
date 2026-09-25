@@ -12,6 +12,7 @@ const ORIGIN_TO_COLLISION_BOTTOM = 23
 @export var aggro_fall_ray_length: float = 128.0
 @export var distance_for_turning: float = 64.0
 @export var avg_random_jump_interval = 3.0
+@export var allow_random_aggro_jumps: bool = true
 
 var can_aggro: bool
 var tracked_player: Node2D
@@ -73,7 +74,8 @@ func move_aggro_process(delta: float):
 	flip_character()
 	if (check_if_about_to_fall() or check_if_about_to_hit_a_wall() or check_if_about_to_hit_spikes()) and can_jump():
 		jump()
-	random_jump_process(delta)
+	if allow_random_aggro_jumps:
+		random_jump_process(delta)
 	move_forward_setup()
 	move_and_slide()
 	

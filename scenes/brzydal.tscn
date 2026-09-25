@@ -50,6 +50,7 @@ controlled_speed = 350.0
 aggro_fall_ray_length = 128.0
 distance_for_turning = 64.0
 avg_random_jump_interval = 3.0
+allow_random_aggro_jumps = false
 jump_velocity = -400.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
