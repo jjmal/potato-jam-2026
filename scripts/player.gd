@@ -5,7 +5,7 @@ signal can_jump_status_change(can_jump_status: bool)
 signal can_shoot_status_change(can_shoot_status: bool)
 signal can_attack_status_change(can_attack_status: bool)
 
-const JUMP_VELOCITY = -440.0
+const JUMP_VELOCITY = -450.0
 const EPSILON = 0.01
 
 
