@@ -89,6 +89,7 @@ attack={
 2d_physics/layer_9="Lever"
 2d_physics/layer_10="PlayerHitbox"
 2d_physics/layer_11="EnemyHitbox"
+2d_physics/layer_12="Spikes"
 
 [physics]
 
