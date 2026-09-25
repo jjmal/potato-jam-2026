@@ -15,6 +15,7 @@ const EPSILON = 0.01
 @onready var animated_sprite = $AnimatedSprite
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
+var is_attack_on_cooldown: bool = false
 # var is_too_close_to_wall_to_shoot: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
@@ -26,7 +27,7 @@ var direction
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
-
+	$Hitbox/CollisionShape2D.disabled = true
 
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -59,7 +60,7 @@ func flip_character():
 		flipped = false
 
 func can_shoot() -> bool:
-	return not is_shot_on_cooldown and ammo > 0
+	return not is_attack_on_cooldown and not is_shot_on_cooldown and ammo > 0
 
 func spawn_needle(direction_state: int):
 	var needle = NeedleManager.create_needle(direction_state)
@@ -115,8 +116,16 @@ func can_pickup() -> bool:
 		return false
 		
 func can_attack() -> bool:
-	return true
-	
+	return not is_attack_on_cooldown and not is_shot_on_cooldown
+
+func attack_process():
+	if Input.is_action_just_pressed("attack") and can_attack():
+		is_attack_on_cooldown = true	
+		$Hitbox/CollisionShape2D.disabled = false
+		$AttackTimer.start()
+		$AttackFramesTimer.start()
+		
+		
 func _physics_process(delta: float) -> void:
 	can_walk_forward_emitter()
 	can_jump_emitter()
@@ -134,12 +143,6 @@ func pickup_process():
 func _on_shoot_timer_timeout() -> void:
 	is_shot_on_cooldown = false
 
-#func _on_prevent_shoot_next_to_wall_body_entered(_body: Node2D) -> void:
-	#is_too_close_to_wall_to_shoot = true
-#
-#func _on_prevent_shoot_next_to_wall_body_exited(_body: Node2D) -> void:
-	#is_too_close_to_wall_to_shoot = false
-
 func _on_prevent_jump_body_entered(_body: Node2D) -> void:
 	is_jump_unblocked = false
 
@@ -151,3 +154,9 @@ func _on_prevent_walk_forward_body_entered(_body: Node2D) -> void:
 
 func _on_prevent_walk_forward_body_exited(_body: Node2D) -> void:
 	is_walk_forward_unblocked = true
+
+func _on_attack_timer_timeout() -> void:
+	is_attack_on_cooldown = false
+	
+func _on_attack_frames_timer_timeout() -> void:
+	$Hitbox/CollisionShape2D.disabled = true

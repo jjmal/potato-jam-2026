@@ -5,8 +5,6 @@ extends State
 func enter() -> void:
 	character.animated_sprite.play('fall')
 	
-func exit() -> void:
-	character.animated_sprite.play('landing')
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(delta: float) -> void:

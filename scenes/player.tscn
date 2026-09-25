@@ -9,8 +9,37 @@
 [ext_resource type="Texture2D" uid="uid://c0ldrs1hw4e1n" path="res://assets/characters/VoodieAnimations/Sidemovement.png" id="5_jej6c"]
 [ext_resource type="Script" uid="uid://dkld7iclpxo20" path="res://scripts/player_state_machine/idle.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://cj81q8k2b7nug" path="res://scripts/player_state_machine/walk.gd" id="6_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://3t3dn3a3j0oa" path="res://assets/characters/VoodieAnimations/Pushatak.png" id="7_3v2ag"]
 [ext_resource type="Script" uid="uid://345qh1dho77j" path="res://scripts/player_state_machine/jump.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://e07mr8u8rv2j" path="res://scripts/player_state_machine/fall.gd" id="8_smehm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
+atlas = ExtResource("7_3v2ag")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
 atlas = ExtResource("2_d2wvv")
@@ -82,6 +111,32 @@ region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l71n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke2ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujl30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31cv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf23h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7fs")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f1ej7")
@@ -175,7 +230,7 @@ animations = [{
 size = Vector2(25, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vt404"]
-size = Vector2(32, 20)
+size = Vector2(30, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0e06"]
 size = Vector2(25, 19)
@@ -211,30 +266,26 @@ script = ExtResource("8_smehm")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1529544438]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"fall"
+animation = &"attack"
+frame_progress = 0.8528703
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1718173926]
+visible = false
 position = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_qyqk1")
 
-[node name="DefaultShotMarker" type="Marker2D" parent="." unique_id=437591186]
-position = Vector2(32, 0)
-
 [node name="AdjustedShotMarker" type="Marker2D" parent="." unique_id=1763659267]
 
-[node name="ShootTimer" type="Timer" parent="." unique_id=1781015093]
-wait_time = 0.75
-one_shot = true
+[node name="Hitbox" type="Area2D" parent="." unique_id=392933475]
+collision_layer = 512
+collision_mask = 0
 
-[node name="PreventShootNextToWall" type="Area2D" parent="." unique_id=392933475]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PreventShootNextToWall" unique_id=538543383]
-position = Vector2(16, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=538543383]
+position = Vector2(15, 2)
 shape = SubResource("RectangleShape2D_vt404")
 
 [node name="PreventJump" type="Area2D" parent="." unique_id=1050953254]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -243,14 +294,16 @@ position = Vector2(3.5, -34.5)
 shape = SubResource("RectangleShape2D_d0e06")
 
 [node name="PreventWalkForward" type="Area2D" parent="." unique_id=1716637488]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PreventWalkForward" unique_id=1577213074]
-position = Vector2(19.5, 0)
+position = Vector2(19, 0)
 shape = SubResource("RectangleShape2D_s500w")
 
 [node name="NeedlePickupSphere" type="Area2D" parent="." unique_id=2106287388]
+visible = false
 collision_layer = 16
 collision_mask = 0
 
@@ -258,6 +311,7 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_qyqk1")
 
 [node name="HeadVerticalNeedleTarget" type="Area2D" parent="." unique_id=253671922 groups=["PlayerHead"]]
+visible = false
 collision_layer = 32
 collision_mask = 0
 
@@ -267,10 +321,22 @@ shape = SubResource("RectangleShape2D_suhkf")
 
 [node name="Needles" type="Node" parent="." unique_id=1165141412]
 
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
-[connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]
-[connection signal="body_exited" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_exited"]
+[node name="AttackTimer" type="Timer" parent="." unique_id=512914368]
+wait_time = 0.75
+one_shot = true
+
+[node name="AttackFramesTimer" type="Timer" parent="." unique_id=6473576]
+wait_time = 0.5
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1781015093]
+wait_time = 0.75
+one_shot = true
+
 [connection signal="body_entered" from="PreventJump" to="." method="_on_prevent_jump_body_entered"]
 [connection signal="body_exited" from="PreventJump" to="." method="_on_prevent_jump_body_exited"]
 [connection signal="body_entered" from="PreventWalkForward" to="." method="_on_prevent_walk_forward_body_entered"]
 [connection signal="body_exited" from="PreventWalkForward" to="." method="_on_prevent_walk_forward_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackFramesTimer" to="." method="_on_attack_frames_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

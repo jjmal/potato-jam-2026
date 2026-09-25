@@ -13,6 +13,9 @@ func physics_update(delta: float) -> void:
 	# Shooting mechanics
 	character.shoot_process()
 	
+	# Attacking mechanics
+	character.attack_process()
+	
 	# Walk mechanics
 	character.move_process(delta)
 	

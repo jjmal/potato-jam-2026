@@ -86,6 +86,9 @@ attack={
 2d_physics/layer_6="PlayerHeadVerticalNeedleTarget"
 2d_physics/layer_7="NeedleHead"
 2d_physics/layer_8="Ramp"
+2d_physics/layer_9="Lever"
+2d_physics/layer_10="PlayerHitbox"
+2d_physics/layer_11="EnemyHitbox"
 
 [physics]
 
