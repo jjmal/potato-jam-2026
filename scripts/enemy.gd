@@ -1,5 +1,5 @@
 extends CharacterBody2D
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -450.0
 
 @export var speed: int = 150
 var controlled: bool = false

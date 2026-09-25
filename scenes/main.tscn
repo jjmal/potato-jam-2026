@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dqo0mkilbnivd" path="res://scenes/player.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bj08ggkjoxfc4" path="res://scripts/main.gd" id="1_tefeu"]
-[ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="4_tbgi4"]
-[ext_resource type="Script" uid="uid://c0mkcm42a6s41" path="res://scripts/enemy_manager.gd" id="5_tipki"]
+[ext_resource type="PackedScene" uid="uid://mhhxgby3d6xu" path="res://scenes/enemy_manager.tscn" id="3_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://4mspabq0x47s" path="res://scenes/ramp.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://casfa8nk05ul0" path="res://scenes/biome_1_tile_map.tscn" id="7_o6xl0"]
 
@@ -13,14 +12,7 @@ script = ExtResource("1_tefeu")
 [node name="Player" parent="." unique_id=715291840 instance=ExtResource("1_0wfyh")]
 position = Vector2(146, 121)
 
-[node name="EnemyManager" type="Node" parent="." unique_id=1494009209]
-script = ExtResource("5_tipki")
-
-[node name="Enemy2" parent="EnemyManager" unique_id=1568079037 instance=ExtResource("4_tbgi4")]
-position = Vector2(255, 251)
-
-[node name="Enemy" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
-position = Vector2(554, 225)
+[node name="EnemyManager" parent="." unique_id=691424045 instance=ExtResource("3_tbgi4")]
 
 [node name="Ramp" parent="." unique_id=858742288 instance=ExtResource("6_tefeu")]
 position = Vector2(223, 10)
@@ -42,7 +34,5 @@ tile_map_data = PackedByteArray("AAACAAYAAQABAAEAAAADAAYAAQABAAEAAAAEAAYAAQABAAE
 
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
-[connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
-[connection signal="child_exiting_tree" from="EnemyManager" to="EnemyManager" method="_on_child_exiting_tree"]
 
 [editable path="Ramp"]
