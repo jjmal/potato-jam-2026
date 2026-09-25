@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://0j1pbulj4yfu"]
+
+[ext_resource type="PackedScene" uid="uid://dqf0jbmdtubfo" path="res://scenes/interactible.tscn" id="1_4kwec"]
+[ext_resource type="Script" uid="uid://e7nq66l53vif" path="res://scripts/lever.gd" id="2_ncfea"]
+[ext_resource type="Texture2D" uid="uid://dhpju1qr76gub" path="res://assets/interactibles/wajcha_voodie.png" id="3_8di2w"]
+[ext_resource type="Texture2D" uid="uid://cb115a2w4ockq" path="res://assets/interactibles/niebieskawajcha.png" id="4_dkrws"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qyqk1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8di2w")
+}],
+"loop": 1,
+"name": &"v0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dkrws")
+}],
+"loop": 1,
+"name": &"v1",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
+radius = 20.09975
+
+[node name="Lever" unique_id=1382039705 instance=ExtResource("1_4kwec")]
+script = ExtResource("2_ncfea")
+trigger_time = 1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=133545327]
+position = Vector2(0, -17)
+sprite_frames = SubResource("SpriteFrames_qyqk1")
+animation = &"v0"
+
+[node name="Hitbox" type="Area2D" parent="." index="1" unique_id=1660579646]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0" unique_id=645184898]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_qyqk1")
+
+[node name="TriggerTimer" type="Timer" parent="." index="2" unique_id=1248409821]
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="TriggerTimer" to="." method="_on_trigger_timer_timeout"]

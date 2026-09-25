@@ -3,11 +3,16 @@
 [ext_resource type="Script" uid="uid://nnftrob0fhaq" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://opjl0fd7eg3n" path="res://scenes/state_machine.tscn" id="3_4ra3w"]
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1916811873 groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=1916811873 node_paths=PackedStringArray("needle_pouch") groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_md0e3")
+needle_pouch = NodePath("Needles")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=465512479]
 
 [node name="StateMachine" parent="." unique_id=636593194 instance=ExtResource("3_4ra3w")]
+
+[node name="Needles" type="Node" parent="." unique_id=22263832]
+
+[node name="ShotMarker" type="Marker2D" parent="." unique_id=697100100]

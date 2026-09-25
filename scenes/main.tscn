@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dqo0mkilbnivd" path="res://scenes/player.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bj08ggkjoxfc4" path="res://scripts/main.gd" id="1_tefeu"]
-[ext_resource type="PackedScene" uid="uid://drheu77bq0v8a" path="res://scenes/fat_bat.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="4_tefeu"]
 [ext_resource type="Script" uid="uid://c0mkcm42a6s41" path="res://scripts/enemy_manager.gd" id="5_tipki"]
 [ext_resource type="PackedScene" uid="uid://casfa8nk05ul0" path="res://scenes/biome_1_tile_map.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://ck2crf6dyduiw" path="res://scenes/interactible_module.tscn" id="7_tipki"]
+[ext_resource type="PackedScene" uid="uid://c6peyjbytyck4" path="res://scenes/door.tscn" id="8_85g3d"]
 
 [node name="Main" type="Node2D" unique_id=1001653021]
 script = ExtResource("1_tefeu")
@@ -16,18 +17,25 @@ position = Vector2(146, 121)
 [node name="EnemyManager" type="Node" parent="." unique_id=1494009209]
 script = ExtResource("5_tipki")
 
-[node name="FatBat" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("4_tbgi4")]
-position = Vector2(396, 34)
-collision_mask = 2
-
 [node name="Brzydal" parent="EnemyManager" unique_id=1380766594 instance=ExtResource("4_tefeu")]
 position = Vector2(347, 518)
 collision_mask = 2
 
+[node name="Brzydal2" parent="EnemyManager" unique_id=318237855 instance=ExtResource("4_tefeu")]
+position = Vector2(784, 506)
+
 [node name="Biome1TileMap" parent="." unique_id=1058304948 instance=ExtResource("7_o6xl0")]
 tile_map_data = PackedByteArray("AAACAAYAAQABAAEAAAADAAYAAQABAAEAAAAEAAYAAQABAAEAAAAFAAYAAQABAAEAAAAGAAkAAQABAAEAAAAFAAkAAQABAAEAAAAEAAkAAQABAAEAAAADAAkAAQABAAEAAAACAAkAAQABAAEAAAAHAAkAAQABAAEAAAAIAAkAAQABAAEAAAAJAAkAAQABAAEAAAAKAAkAAQABAAEAAAALAAkAAQABAAEAAAAMAAkAAQABAAEAAAANAAkAAQABAAEAAAAQAAkAAQABAAEAAAARAAkAAQABAAEAAAASAAkAAQABAAEAAAACAAcAAQAAAAEAAAACAAgAAQAAAAEAAAASAAgAAQAAAAEAAAASAAcAAQAAAAEAAAASAAYAAQAAAAEAAAASAAUAAQAAAAEAAAAGABEAAQABAAAAAAAHABEAAQABAAAAAAAIABEAAQABAAAAAAAJABEAAQABAAAAAAAKABEAAQABAAAAAAALABEAAQABAAAAAAAMABEAAQABAAAAAAANABEAAQABAAAAAAAOABEAAQABAAAAAAAXABEAAQABAAAAAAAYABEAAQABAAAAAAAZABEAAQABAAAAAAAaABEAAQABAAAAAAAbABEAAQABAAAAAAAcABEAAQABAAAAAAAGABAAAQAAAAEAAAAGAA8AAQAAAAEAAAAGAA4AAQAAAAEAAAAFAA4AAQABAAAAAAAEAA4AAQABAAAAAAADAA4AAQABAAAAAAACAA4AAQABAAAAAAABAA4AAQABAAAAAAAAAA4AAQABAAAAAAD//w4AAQABAAAAAAAWABEAAQABAAAAAAAVABEAAQABAAAAAAAUABEAAQABAAAAAAA=")
 
+[node name="InteractibleModule" parent="." unique_id=529602115 node_paths=PackedStringArray("output") instance=ExtResource("7_tipki")]
+output = NodePath("Door")
+variant = 1.0
+
+[node name="Door" parent="InteractibleModule" unique_id=1382039705 instance=ExtResource("8_85g3d")]
+position = Vector2(429, 256)
+
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
+[connection signal="can_shoot_status_change" from="Player" to="." method="_on_player_can_shoot_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="EnemyManager" to="EnemyManager" method="_on_child_exiting_tree"]

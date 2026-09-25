@@ -2,12 +2,14 @@ extends CharacterBody2D
 
 signal can_walk_forward_status_change(can_walk_forward_status: bool)
 signal can_jump_status_change(can_jump_status: bool)
+signal can_shoot_status_change(can_shoot_status: bool)
 
 const JUMP_VELOCITY = -440.0
 const EPSILON = 0.01
 
 
 @export var shot_cooldown: float = 0.75
+@export var needle_pouch: Node
 @onready var needle_array = NeedleManager.needle_array
 @onready var pickable_needle_array = NeedleManager.pickable_needle_array
 @onready var animated_sprite = $AnimatedSprite
@@ -60,20 +62,13 @@ func can_shoot() -> bool:
 	return not is_shot_on_cooldown and ammo > 0
 
 func spawn_needle(direction_state: int):
-	var needle = Utils.create_needle(direction_state)
+	var needle = NeedleManager.create_needle(direction_state)
 	var needle_spawn_position 
-		
-	#if not is_too_close_to_wall_to_shoot:
-		#needle_spawn_position  = $DefaultShotMarker.global_position
-	#else: 
-		#needle_spawn_position  = $AdjustedShotMarker.global_position
-
+	
+	needle_pouch.add_child(needle)
 	needle_spawn_position = $AdjustedShotMarker.global_position
-	needle.global_position = needle_spawn_position 
-	needle.pickup_status_has_changed.connect(_on_needle_pickup_status_has_changed)
-
-	NeedleManager.add_child(needle)
-	needle_array.append(needle)
+	needle.global_position = needle_spawn_position
+	
 
 func shoot_process():
 	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_shoot():
@@ -108,7 +103,11 @@ func can_walk_forward_emitter():
 func can_jump_emitter():
 	var out = is_on_floor() and is_jump_unblocked
 	can_jump_status_change.emit(out)
-	
+
+func can_shoot_emitter():
+	var out = not is_shot_on_cooldown
+	can_shoot_status_change.emit(out)
+
 func can_pickup() -> bool:
 	if pickable_needle_array.size() > 0:
 		return true
@@ -121,19 +120,15 @@ func can_attack() -> bool:
 func _physics_process(delta: float) -> void:
 	can_walk_forward_emitter()
 	can_jump_emitter()
+	can_shoot_emitter()
 
 func get_closest_pickable_needle():
 	return NeedleManager.find_min_dist_pickable_needle()
 
-func remove_needle(needle):
-	needle_array.erase(needle)
-	pickable_needle_array.erase(needle)
-	needle.call_deferred("queue_free")
-
 func pickup_process():
 	if Input.is_action_just_pressed("pickup") and can_pickup():
 		var picked_needle = get_closest_pickable_needle()
-		remove_needle(picked_needle)
+		NeedleManager.remove_needle(picked_needle)
 		ammo += 1
 
 func _on_shoot_timer_timeout() -> void:
@@ -156,9 +151,3 @@ func _on_prevent_walk_forward_body_entered(_body: Node2D) -> void:
 
 func _on_prevent_walk_forward_body_exited(_body: Node2D) -> void:
 	is_walk_forward_unblocked = true
-
-func _on_needle_pickup_status_has_changed(needle: Needle, new_value: bool):
-	if new_value == true:
-		pickable_needle_array.append(needle)
-	else:
-		pickable_needle_array.erase(needle)

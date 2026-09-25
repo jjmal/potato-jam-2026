@@ -42,11 +42,10 @@ radius = 230.03477
 [node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
 script = ExtResource("2_4mjti")
 roam_speed = 150.0
-aggro_speed = 350.0
+aggro_speed = 150.0
 controlled_speed = 350.0
-aggro_fall_ray_length = 40.0
+aggro_fall_ray_length = 128.0
 distance_for_turning = 64.0
-distance_for_follow_jumping = 64.0
 jump_velocity = -400.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
@@ -105,7 +104,12 @@ position = Vector2(0, -28)
 target_position = Vector2(-89, 53)
 collision_mask = 2
 
-[node name="AggroFrustratedJumpTimer" type="Timer" parent="." index="8" unique_id=448528476]
+[node name="CanJumpOverWallRay" type="RayCast2D" parent="." index="8" unique_id=868138345]
+position = Vector2(0, -45)
+target_position = Vector2(-27, 0)
+collision_mask = 2
+
+[node name="AggroFrustratedJumpTimer" type="Timer" parent="." index="9" unique_id=448528476]
 one_shot = true
 
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]

@@ -100,6 +100,9 @@ shape = SubResource("CircleShape2D_e76nb")
 [node name="CollisionShape2D" parent="AggroModule/PlayerDropAggro" parent_id_path=PackedInt32Array(1177752760, 1481206971) index="0" unique_id=1120140423]
 shape = SubResource("CircleShape2D_smmv2")
 
+[node name="ShotMarker" parent="." index="5" unique_id=697100100]
+position = Vector2(-1, 6)
+
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
 

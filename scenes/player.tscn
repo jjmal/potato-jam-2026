@@ -189,9 +189,10 @@ radius = 19.235384
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suhkf"]
 size = Vector2(34, 5)
 
-[node name="Player" type="CharacterBody2D" unique_id=715291840]
+[node name="Player" type="CharacterBody2D" unique_id=715291840 node_paths=PackedStringArray("needle_pouch")]
 collision_mask = 11
 script = ExtResource("1_dqkch")
+needle_pouch = NodePath("Needles")
 
 [node name="StateMachine" parent="." unique_id=636593194 node_paths=PackedStringArray("initial_state") instance=ExtResource("4_dqkch")]
 initial_state = NodePath("Idle")
@@ -263,6 +264,8 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadVerticalNeedleTarget" unique_id=1324177402]
 position = Vector2(2, -26.5)
 shape = SubResource("RectangleShape2D_suhkf")
+
+[node name="Needles" type="Node" parent="." unique_id=1165141412]
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="body_entered" from="PreventShootNextToWall" to="." method="_on_prevent_shoot_next_to_wall_body_entered"]
