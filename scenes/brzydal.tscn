@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmkpc"]
-size = Vector2(36, 50)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_erjbq"]
 atlas = ExtResource("4_y8hyd")
 region = Rect2(0, 0, 64, 64)
@@ -33,6 +30,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmkpc"]
+size = Vector2(36, 50)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_fmkpc"]
 radius = 121.004135
 
@@ -53,13 +53,13 @@ avg_random_jump_interval = 3.0
 allow_random_aggro_jumps = false
 jump_velocity = -400.0
 
-[node name="CollisionShape2D" parent="." index="0" unique_id=465512479]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_fmkpc")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1" unique_id=1716297206]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=1716297206]
 sprite_frames = SubResource("SpriteFrames_4mjti")
 animation = &"walk"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_fmkpc")
 
 [node name="StateMachine" parent="." index="2" unique_id=636593194 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Roam")
