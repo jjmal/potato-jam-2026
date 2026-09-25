@@ -5,6 +5,7 @@ const COLLIDER_NONE = 0
 const COLLIDER_STATIC = 2
 const COLLIDER_ENEMY = 3
 const COLLIDER_PLAYER_HEAD = 6
+const COLLIDER_DOORS = 2
 
 const LEFT = 0
 const UP = 1
@@ -76,6 +77,8 @@ func get_hit_ray_collision() -> Array:
 		return [COLLIDER_ENEMY, collider]
 	elif collider.is_in_group("PlayerHead"):
 		return [COLLIDER_PLAYER_HEAD, collider]
+	elif collider.is_in_group("Doors"):
+		return [COLLIDER_DOORS, collider]
 		
 	return [COLLIDER_NONE, null]
 		
@@ -86,6 +89,9 @@ func collide():
 		if Utils.is_body_a_tile_set_static(collider):
 			resolve_collision()
 		if get_hit_ray_collision()[0] == COLLIDER_ENEMY:
+			resolve_collision()
+			self.reparent(collider)
+		if get_hit_ray_collision()[0] == COLLIDER_DOORS:
 			resolve_collision()
 			self.reparent(collider)
 		

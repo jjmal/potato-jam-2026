@@ -7,6 +7,7 @@ var is_open := false
 var variant: float
 var closed_pos
 var open_pos
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	closed_pos = position
