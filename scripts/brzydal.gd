@@ -140,4 +140,5 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		$StateMachine.transition_to("Dead")
 
 func _on_hitbox_player_detection_body_entered(body: Node2D) -> void:
-	attack()
+	if $StateMachine.current_state.name == "Aggro":
+		attack()
