@@ -5,6 +5,8 @@ class_name Lever
 var permatriggered: bool = false
 var pushed: bool = false
 
+func _ready():
+	$TriggerTimer.wait_time = trigger_time
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if not pushed or not permatriggered:

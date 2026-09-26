@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dqo0mkilbnivd" path="res://scenes/player.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bj08ggkjoxfc4" path="res://scripts/main.gd" id="1_tefeu"]
+[ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="4_tefeu"]
 [ext_resource type="Script" uid="uid://c0mkcm42a6s41" path="res://scripts/enemy_manager.gd" id="5_tipki"]
 [ext_resource type="PackedScene" uid="uid://ck2crf6dyduiw" path="res://scenes/interactible_module.tscn" id="7_tipki"]
 [ext_resource type="PackedScene" uid="uid://c6peyjbytyck4" path="res://scenes/door.tscn" id="8_85g3d"]
@@ -24,6 +25,13 @@ position = Vector2(146, 121)
 [node name="EnemyManager" type="Node" parent="." unique_id=1494009209]
 script = ExtResource("5_tipki")
 
+[node name="Dumbozaur" parent="EnemyManager" unique_id=1916811873 node_paths=PackedStringArray("path_follow") instance=ExtResource("8_ya4ey")]
+position = Vector2(344, 519)
+path_follow = NodePath("../../Path2D/PathFollow2D")
+
+[node name="Brzydal" parent="EnemyManager" unique_id=1573307186 instance=ExtResource("4_tefeu")]
+position = Vector2(749, 513)
+
 [node name="InteractibleModule" parent="." unique_id=529602115 node_paths=PackedStringArray("inputs", "output") instance=ExtResource("7_tipki")]
 inputs = [NodePath("Lever"), NodePath("Lever2")]
 output = NodePath("Door")
@@ -39,10 +47,6 @@ position = Vector2(119, 289)
 
 [node name="TileSlay" parent="." unique_id=1112404992 instance=ExtResource("8_choun")]
 tile_map_data = PackedByteArray("AAAZABEAAgAEAAQAAAAYABEAAgAEAAQAAAAXABEAAgAEAAQAAAAWABEAAgAEAAQAAAAVABEAAgAEAAQAAAAUABEAAgAEAAQAAAATABEAAgAEAAQAAAASABEAAgAEAAQAAAARABEAAgAEAAQAAAAQABEAAgAEAAQAAAAPABEAAgAEAAQAAAAOABEAAgAEAAQAAAANABEAAgAEAAQAAAAMABEAAgAEAAQAAAALABEAAgAEAAQAAAAKABEAAgAEAAQAAAAJABEAAgAEAAQAAAAIABEAAgAEAAQAAAAHABEAAgAEAAQAAAAGABEAAgAEAAQAAAAFABEAAgAEAAQAAAAEABEAAgAEAAQAAAADABEAAgAEAAQAAAACABEAAgAEAAQAAAACAAkAAgAEAAQAAAADAAkAAgAEAAQAAAAEAAkAAgAEAAQAAAAFAAkAAgAEAAQAAAAGAAkAAgAEAAQAAAAHAAkAAgAEAAQAAAAIAAkAAgAEAAQAAAAJAAkAAgAEAAQAAAAMAAkAAgAEAAQAAAANAAkAAgAEAAQAAAAOAAkAAgAEAAQAAAACAAYAAgAEAAQAAAADAAYAAgAEAAQAAAAEAAYAAgAEAAQAAAAFAAYAAgAEAAQAAAAGAAYAAgAEAAQAAAAHAAYAAgAEAAQAAAACAAcAAgAEAAQAAAACAAgAAgAEAAQAAAACABAAAgAEAAQAAAACAA8AAgAEAAQAAAACAA4AAgAEAAQAAAACAA0AAgAEAAQAAAATABAAAgAEAAMAAAASABAAAgAEAAMAAAA=")
-
-[node name="Dumbozaur" parent="." unique_id=1916811873 node_paths=PackedStringArray("path_follow") instance=ExtResource("8_ya4ey")]
-position = Vector2(344, 519)
-path_follow = NodePath("../Path2D/PathFollow2D")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1689559732]
 curve = SubResource("Curve2D_tipki")

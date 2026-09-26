@@ -244,6 +244,9 @@ radius = 19.235384
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suhkf"]
 size = Vector2(34, 5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3v2ag"]
+size = Vector2(24, 48)
+
 [node name="Player" type="CharacterBody2D" unique_id=715291840 node_paths=PackedStringArray("needle_pouch")]
 collision_mask = 11
 script = ExtResource("1_dqkch")
@@ -277,6 +280,7 @@ shape = SubResource("RectangleShape2D_qyqk1")
 [node name="AdjustedShotMarker" type="Marker2D" parent="." unique_id=1763659267]
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=392933475]
+visible = false
 collision_layer = 512
 collision_mask = 0
 
@@ -333,6 +337,14 @@ one_shot = true
 wait_time = 0.75
 one_shot = true
 
+[node name="Hurtbox" type="Area2D" parent="." unique_id=2075038932]
+collision_layer = 0
+collision_mask = 3072
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1447700093]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_3v2ag")
+
 [connection signal="body_entered" from="PreventJump" to="." method="_on_prevent_jump_body_entered"]
 [connection signal="body_exited" from="PreventJump" to="." method="_on_prevent_jump_body_exited"]
 [connection signal="body_entered" from="PreventWalkForward" to="." method="_on_prevent_walk_forward_body_entered"]
@@ -340,3 +352,5 @@ one_shot = true
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackFramesTimer" to="." method="_on_attack_frames_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
