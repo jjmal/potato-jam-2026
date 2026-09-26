@@ -46,6 +46,9 @@ size = Vector2(63, 36)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayeqw"]
 size = Vector2(36, 50)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pfcd"]
+size = Vector2(63, 36)
+
 [node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
 script = ExtResource("2_4mjti")
 roam_speed = 150.0
@@ -133,7 +136,7 @@ wait_time = 0.75
 one_shot = true
 
 [node name="AttackFramesTimer" type="Timer" parent="." index="11" unique_id=1122631081]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [node name="Hurtbox" type="Area2D" parent="." index="12" unique_id=1628022196]
@@ -146,11 +149,20 @@ visible = false
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_ayeqw")
 
+[node name="HitboxPlayerDetection" type="Area2D" parent="." index="13" unique_id=1803382341]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPlayerDetection" index="0" unique_id=242234426]
+position = Vector2(-21.5, 1)
+shape = SubResource("RectangleShape2D_5pfcd")
+
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackFramesTimer" to="." method="_on_attack_frames_timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="HitboxPlayerDetection" to="." method="_on_hitbox_player_detection_body_entered"]
 
 [editable path="AggroModule"]

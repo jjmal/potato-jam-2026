@@ -46,10 +46,10 @@ func _physics_process(delta: float) -> void:
 		return
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	$StateMachine.transition_to("Dead")
-	print('dumb_dead_spike')
+	if $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")
+	
 	
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area != hitbox:
+	if area != hitbox and $StateMachine.current_state.name != "Dead":
 		$StateMachine.transition_to("Dead")
-		print('dumb_dead_spike')

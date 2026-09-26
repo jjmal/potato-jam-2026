@@ -32,7 +32,9 @@ func update_tracked_player():
 	tracked_player = $AggroModule.tracked_player
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	$StateMachine.transition_to("Dead")
+	if $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
-	$StateMachine.transition_to("Dead")
+	if $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")

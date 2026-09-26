@@ -106,7 +106,7 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	is_attack_on_cooldown = true	
-	$Hitbox/CollisionShape2D.disabled = false
+	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
 	$AttackTimer.start()
 	$AttackFramesTimer.start()
 
@@ -129,14 +129,15 @@ func _on_attack_timer_timeout() -> void:
 	is_attack_on_cooldown = false
 	
 func _on_attack_frames_timer_timeout() -> void:
-	$Hitbox/CollisionShape2D.disabled = true
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	$StateMachine.transition_to("Dead")
-	print('brzyd_dead_spike')
+	if $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")
 	
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if area != hitbox:
+	if area != hitbox and $StateMachine.current_state.name != "Dead":
 		$StateMachine.transition_to("Dead")
-		print('brzyd_dead_attack')
-		
+
+func _on_hitbox_player_detection_body_entered(body: Node2D) -> void:
+	attack()
