@@ -42,6 +42,10 @@ func move_controlled_process(delta: float):
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
 
+func dead_process(delta: float):
+	velocity.x = 0
+	apply_gravity(delta)
+	move_and_slide()
 
 func jump():
 	velocity.y = jump_velocity
@@ -71,6 +75,7 @@ func spawn_needle(direction_state: int):
 	needle_pouch.add_child(needle)
 	needle_spawn_position = $ShotMarker.global_position
 	needle.global_position = needle_spawn_position
+
 
 func attack():
 	pass

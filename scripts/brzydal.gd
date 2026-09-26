@@ -6,6 +6,7 @@ const ORIGIN_TO_COLLISION_BOTTOM = 23
 @onready var roam_fall_detection_ray = $RoamFallDetectionRay
 @onready var wall_detection_ray = $WallDetectionRay
 @onready var spike_detection_ray = $SpikeDetectionRay
+@onready var hitbox = $Hitbox
 @export var roam_speed: float
 @export var aggro_speed: float
 @export var controlled_speed: float
@@ -105,7 +106,7 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	is_attack_on_cooldown = true	
-	$Hitbox/CollisionShape2D.disabled = false
+	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
 	$AttackTimer.start()
 	$AttackFramesTimer.start()
 
@@ -128,4 +129,16 @@ func _on_attack_timer_timeout() -> void:
 	is_attack_on_cooldown = false
 	
 func _on_attack_frames_timer_timeout() -> void:
-	$Hitbox/CollisionShape2D.disabled = true
+	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")
+	
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area != hitbox and $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")
+
+func _on_hitbox_player_detection_body_entered(body: Node2D) -> void:
+	if $StateMachine.current_state.name == "Aggro":
+		attack()

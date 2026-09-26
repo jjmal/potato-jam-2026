@@ -1,9 +1,10 @@
 extends Enemy
 
 const ARRIVAL_THRESHOLD = 4.0
+@onready var hitbox = $Hitbox
 @export var path_follow: PathFollow2D
 @export var movement_speed: float
- 
+
 var path_follow_direction: int = 1  # 1 = forward along path, -1 = backward
 
 func _ready() -> void:
@@ -40,9 +41,15 @@ func roam_move_process(delta):
 	apply_gravity(delta)
 	move_and_slide()
 
-
 func _physics_process(delta: float) -> void:
 	if path_follow == null:
 		return
 
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")
 	
+	
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area != hitbox and $StateMachine.current_state.name != "Dead":
+		$StateMachine.transition_to("Dead")

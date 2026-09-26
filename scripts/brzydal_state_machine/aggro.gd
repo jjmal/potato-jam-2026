@@ -16,4 +16,5 @@ func physics_update(delta: float) -> void:
 		return
 
 func _on_aggro_module_drop_aggro() -> void:
-	state_machine.transition_to("Roam")
+	if state_machine.current_state.name != "Dead":
+		state_machine.transition_to("Roam")

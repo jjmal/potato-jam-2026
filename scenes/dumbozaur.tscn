@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/assets/characters/BrzydalAnimations/Brzydalkrok.png" id="3_io1nu"]
 [ext_resource type="Script" uid="uid://c6raqk8d0ykba" path="res://scripts/dumbozaur_state_machine/roam.gd" id="4_l20an"]
 [ext_resource type="Script" uid="uid://daq42lsf0djwl" path="res://scripts/dumbozaur_state_machine/controlled.gd" id="5_ao0j6"]
+[ext_resource type="Script" uid="uid://b400sp117xoxs" path="res://scripts/dumbozaur_state_machine/state.gd" id="6_rs088"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l20an"]
 atlas = ExtResource("3_io1nu")
@@ -58,10 +59,25 @@ metadata/_custom_type_script = "uid://chhxivpg3jibl"
 script = ExtResource("5_ao0j6")
 metadata/_custom_type_script = "uid://chhxivpg3jibl"
 
+[node name="Dead" type="Node" parent="StateMachine" index="2" unique_id=1893751398]
+script = ExtResource("6_rs088")
+metadata/_custom_type_script = "uid://chhxivpg3jibl"
+
 [node name="Hitbox" type="Area2D" parent="." index="5" unique_id=332576960]
-collision_layer = 0
+collision_layer = 1024
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0" unique_id=1998286562]
 position = Vector2(-1, -3.5)
 shape = SubResource("RectangleShape2D_qyqk1")
+
+[node name="Hurtbox" type="Area2D" parent="." index="6" unique_id=1141827866]
+collision_layer = 4
+collision_mask = 7168
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1889124407]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_817h2")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
