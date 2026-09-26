@@ -6,3 +6,4 @@ assets/
 icon.svg
 icon.svg.import
 *.tmp
+*.DS_Store
