@@ -167,6 +167,9 @@ func _on_attack_frames_timer_timeout() -> void:
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	joniec.emit()
+	print('p_dead_spikes')
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	joniec.emit()
+	print('p_dead_attack')
+	

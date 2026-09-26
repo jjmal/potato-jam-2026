@@ -6,6 +6,7 @@ const ORIGIN_TO_COLLISION_BOTTOM = 23
 @onready var roam_fall_detection_ray = $RoamFallDetectionRay
 @onready var wall_detection_ray = $WallDetectionRay
 @onready var spike_detection_ray = $SpikeDetectionRay
+@onready var hitbox = $Hitbox
 @export var roam_speed: float
 @export var aggro_speed: float
 @export var controlled_speed: float
@@ -129,3 +130,13 @@ func _on_attack_timer_timeout() -> void:
 	
 func _on_attack_frames_timer_timeout() -> void:
 	$Hitbox/CollisionShape2D.disabled = true
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	$StateMachine.transition_to("Dead")
+	print('brzyd_dead_spike')
+	
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area != hitbox:
+		$StateMachine.transition_to("Dead")
+		print('brzyd_dead_attack')
+		

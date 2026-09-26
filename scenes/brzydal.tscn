@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cky44jewlyk4o" path="res://scripts/brzydal_state_machine/roam.gd" id="3_4mjti"]
 [ext_resource type="Script" uid="uid://6mxorxg278lu" path="res://scripts/brzydal_state_machine/controlled.gd" id="4_erjbq"]
 [ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
+[ext_resource type="Script" uid="uid://dyohbwc6fea63" path="res://scripts/brzydal_state_machine/dead.gd" id="7_66375"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erjbq"]
@@ -77,6 +78,10 @@ script = ExtResource("3_4mjti")
 [node name="Controlled" type="Node" parent="StateMachine" index="2" unique_id=1047020341]
 script = ExtResource("4_erjbq")
 
+[node name="Dead" type="Node" parent="StateMachine" index="3" unique_id=1989918011]
+script = ExtResource("7_66375")
+metadata/_custom_type_script = "uid://chhxivpg3jibl"
+
 [node name="AggroModule" parent="." index="3" unique_id=1177752760 node_paths=PackedStringArray("character") instance=ExtResource("7_fmkpc")]
 visible = false
 character = NodePath("..")
@@ -134,7 +139,7 @@ one_shot = true
 [node name="Hurtbox" type="Area2D" parent="." index="12" unique_id=1628022196]
 visible = false
 collision_layer = 4
-collision_mask = 3072
+collision_mask = 7168
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1709941119]
 visible = false
@@ -145,5 +150,7 @@ shape = SubResource("RectangleShape2D_ayeqw")
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackFramesTimer" to="." method="_on_attack_frames_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 
 [editable path="AggroModule"]

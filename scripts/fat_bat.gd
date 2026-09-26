@@ -30,3 +30,9 @@ func move_controlled_process(delta: float):
 
 func update_tracked_player():
 	tracked_player = $AggroModule.tracked_player
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	$StateMachine.transition_to("Dead")
+
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
+	$StateMachine.transition_to("Dead")

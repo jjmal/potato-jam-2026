@@ -26,4 +26,3 @@ func physics_update(delta: float) -> void:
 		else:
 			state_machine.transition_to("Roam")
 			return
-		
