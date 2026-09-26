@@ -41,22 +41,25 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_ngbvi")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=732471873]
-custom_minimum_size = Vector2(240, 200)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -109.0
+offset_right = 120.0
+offset_bottom = 109.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=1495077966]
 material = ExtResource("1_ywggk")
-custom_minimum_size = Vector2(240, 100)
+custom_minimum_size = Vector2(240, 80)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 8
 
 [node name="GridContainer" type="GridContainer" parent="TextureRect/VBoxContainer" unique_id=1357987670]
 custom_minimum_size = Vector2(0, 30)
@@ -150,8 +153,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="CenterContainer" parent="TextureRect/VBoxContainer" unique_id=1628015027]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="return" type="TextureButton" parent="TextureRect/VBoxContainer/HBoxContainer" unique_id=248205005]
 custom_minimum_size = Vector2(120, 60)
