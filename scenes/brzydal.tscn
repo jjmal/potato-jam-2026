@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dyowlrdoaqmev" path="res://scripts/brzydal_state_machine/aggro.gd" id="3_2bhvc"]
 [ext_resource type="Script" uid="uid://cky44jewlyk4o" path="res://scripts/brzydal_state_machine/roam.gd" id="3_4mjti"]
 [ext_resource type="Script" uid="uid://6mxorxg278lu" path="res://scripts/brzydal_state_machine/controlled.gd" id="4_erjbq"]
-[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
+[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erjbq"]
@@ -45,13 +45,13 @@ size = Vector2(63, 36)
 [node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
 script = ExtResource("2_4mjti")
 roam_speed = 150.0
-aggro_speed = 350.0
-controlled_speed = 350.0
-aggro_fall_ray_length = 128.0
+aggro_speed = 320.0
+controlled_speed = 300.0
+aggro_fall_ray_length = 160.0
 distance_for_turning = 64.0
 avg_random_jump_interval = 3.0
 allow_random_aggro_jumps = false
-jump_velocity = -400.0
+jump_velocity = -450.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=1716297206]
 sprite_frames = SubResource("SpriteFrames_4mjti")
