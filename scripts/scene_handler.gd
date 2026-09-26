@@ -3,11 +3,14 @@ extends Node
 @export var main_menu_packed: PackedScene
 @export var game_scene_packed: PackedScene
 @export var pause_scene_packed: PackedScene
-
+@export var settings_scene_packed: PackedScene
 
 var pause_menu: CanvasLayer = null
 var main_menu: Control = null
 var game_scene: Node2D = null
+var settings_menu: CanvasLayer = null
+
+var settings_origin: String = ""
 
 func _ready() -> void:
 	load_main_menu("game_start")
@@ -53,7 +56,25 @@ func exit_game(origin: String) -> void:
 	get_tree().quit()
 
 func open_settings(origin: String) -> void:
-	pass
+	print("Opening settings from: ", origin)
+
+	settings_origin = origin
+
+	settings_menu = settings_scene_packed.instantiate()
+	settings_menu.return_pressed.connect(close_settings)
+
+	add_child(settings_menu)
+	
+func close_settings() -> void:
+	if settings_menu:
+		settings_menu.queue_free()
+		settings_menu = null
+
+	if settings_origin == "pause_menu":
+		display_pause_scene()
+
+	elif settings_origin == "main_menu":
+		pass
 
 func continue_game(origin: String) -> void:
 	pass

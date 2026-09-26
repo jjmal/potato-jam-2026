@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://basevewwb8w4"]
+
+[ext_resource type="Script" uid="uid://dfjlgulj1pkgh" path="res://scripts/settings_menu.gd" id="1_mishw"]
+[ext_resource type="Material" uid="uid://bn5n57c2rko80" path="res://assets/StyleBox/balatro_material.tres" id="1_ywggk"]
+[ext_resource type="StyleBox" uid="uid://b786cfq3thp67" path="res://assets/StyleBox/Ui_Apla.tres" id="2_ngbvi"]
+[ext_resource type="FontFile" uid="uid://dlu28tvaummme" path="res://assets/font/UpheavalPro.ttf" id="3_mishw"]
+[ext_resource type="StyleBox" uid="uid://i7xcj8ycvd7l" path="res://assets/StyleBox/ui_apla_2.tres" id="3_ngbvi"]
+[ext_resource type="Texture2D" uid="uid://dmrj8m83wgqbl" path="res://assets/ui_aple/button_idle.png" id="4_h271e"]
+[ext_resource type="Texture2D" uid="uid://c2fr7piri48ox" path="res://assets/ui_aple/button_pressed.png" id="5_7dpwb"]
+[ext_resource type="Texture2D" uid="uid://bm6k5hnjw8e2j" path="res://assets/ui_aple/button_hover.png" id="6_iii5b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6v77"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="SettingsMenu" type="CanvasLayer" unique_id=167870803]
+layer = 11
+script = ExtResource("1_mishw")
+
+[node name="ColorRect" type="Panel" parent="." unique_id=797449305]
+material = ExtResource("1_ywggk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r6v77")
+
+[node name="TextureRect" type="Panel" parent="." unique_id=1448647422]
+custom_minimum_size = Vector2(300, 260)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -130.0
+offset_right = 150.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_ngbvi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=732471873]
+custom_minimum_size = Vector2(240, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="TextureRect" parent="TextureRect/VBoxContainer" unique_id=1495077966]
+material = ExtResource("1_ywggk")
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect/VBoxContainer" unique_id=1357987670]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 1.1
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="TextureRect" type="Panel" parent="TextureRect/VBoxContainer/GridContainer" unique_id=1677706576]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ngbvi")
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/GridContainer/TextureRect" unique_id=2003976065]
+custom_minimum_size = Vector2(60, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -4.0
+offset_right = 30.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("3_mishw")
+theme_override_font_sizes/font_size = 16
+text = "Audio:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="RichTextLabel" parent="TextureRect/VBoxContainer/GridContainer" unique_id=413896027]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.9411765, 0.6901961, 0.84705883, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("3_mishw")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[color=ce47a2][wave][shake rate=10.0 level=1connected=1]louden your pc ![/shake]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="Panel" parent="TextureRect/VBoxContainer/GridContainer" unique_id=108749674]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_ngbvi")
+
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer/GridContainer/TextureRect2" unique_id=694087]
+custom_minimum_size = Vector2(60, 10)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -4.0
+offset_right = 70.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = 3
+theme_override_fonts/font = ExtResource("3_mishw")
+theme_override_font_sizes/font_size = 16
+text = "Video:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="RichTextLabel" parent="TextureRect/VBoxContainer/GridContainer" unique_id=90393208]
+custom_minimum_size = Vector2(140, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0.43529412, 0.6117647, 0.94509804, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("3_mishw")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[color=adf9fb][wave][shake rate=10.0 level=1connected=1]Upgrade your monitor ![/shake]
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="CenterContainer" parent="TextureRect/VBoxContainer" unique_id=1628015027]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="return" type="TextureButton" parent="TextureRect/VBoxContainer/HBoxContainer" unique_id=248205005]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("4_h271e")
+texture_pressed = ExtResource("5_7dpwb")
+texture_hover = ExtResource("6_iii5b")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/HBoxContainer/return" unique_id=2035382752]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -11.0
+offset_right = 52.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mishw")
+theme_override_font_sizes/font_size = 12
+text = "return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="TextureRect/VBoxContainer/HBoxContainer/return" to="." method="_on_return_pressed"]
