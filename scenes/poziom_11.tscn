@@ -34,5 +34,6 @@ position = Vector2(57, 686)
 
 [node name="PickableNeedle" parent="." unique_id=2013643491 instance=ExtResource("4_efkwm")]
 position = Vector2(460, 719)
+item_id = "second_needle"
 
 [editable path="LevelLogic"]

@@ -316,7 +316,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NeedlePickupSphere" unique_id=104623989]
 shape = SubResource("CircleShape2D_qyqk1")
 
-[node name="HeadVerticalNeedleTarget" type="Area2D" parent="." unique_id=253671922 groups=["PlayerHead"]]
+[node name="HeadVerticalNeedleTarget" type="Area2D" parent="." unique_id=253671922]
 visible = false
 collision_layer = 32
 collision_mask = 0
