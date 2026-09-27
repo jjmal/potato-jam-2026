@@ -28,10 +28,10 @@ func _on_player_can_attack_status_change(can_attack_status: bool) -> void:
 			enemy.can_player_attack = can_attack_status
 
 func _on_player_ammo_changed(ammo: Variant) -> void:
-	set_deferred("hud.ammo", ammo)
+	hud.set_deferred("ammo", ammo)
 
 func _on_scene_handler_toggle_hud(to_on: bool) -> void:
-	set_deferred("hud.visible", to_on)
+	hud.set_deferred("visible", to_on)
 		
 func _on_scene_handler_loaded_level(level: Node2D) -> void:
 	current_level = level

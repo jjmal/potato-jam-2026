@@ -36,7 +36,6 @@ func _ready() -> void:
 	$Hitbox/CollisionShape2D.disabled = true
 
 func emit_ammo_changed(ammo: int):
-	print(ammo)
 	ammo_changed.emit(ammo)
 
 func apply_gravity(delta: float) -> void:

@@ -14,7 +14,8 @@ func _ready():
 		if child.is_in_group("HudSlot"):
 			slot_array.append(child)
 
-
+#func _process(delta):
+	#print(ammo)
 
 	
 	
