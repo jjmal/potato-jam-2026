@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dqf0jbmdtubfo" path="res://scenes/interactible.tscn" id="1_4kwec"]
 [ext_resource type="Script" uid="uid://e7nq66l53vif" path="res://scripts/lever.gd" id="2_ncfea"]
-[ext_resource type="Texture2D" uid="uid://dhpju1qr76gub" path="res://assets/assets/interactibles/wajcha_voodie.png" id="3_8di2w"]
-[ext_resource type="Texture2D" uid="uid://cb115a2w4ockq" path="res://assets/assets/interactibles/niebieskawajcha.png" id="4_dkrws"]
+[ext_resource type="Texture2D" uid="uid://dhpju1qr76gub" path="res://assets/interactibles/wajcha_voodie.png" id="3_8di2w"]
+[ext_resource type="Texture2D" uid="uid://cb115a2w4ockq" path="res://assets/interactibles/niebieskawajcha.png" id="4_dkrws"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8di2w"]
 atlas = ExtResource("3_8di2w")

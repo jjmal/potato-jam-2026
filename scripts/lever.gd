@@ -14,9 +14,11 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		$TriggerTimer.start()
 		pushed = true
 		$AnimatedSprite2D.play()
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 
 func _on_trigger_timer_timeout() -> void:
 	if not permatriggered:
 		untriggered.emit()
 		pushed = false
 		$AnimatedSprite2D.play_backwards()
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", false)
