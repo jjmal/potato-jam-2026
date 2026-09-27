@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bvb72lr8tsag2"]
+
+[ext_resource type="Script" uid="uid://bqyrf1elhmgvr" path="res://scripts/level_logic.gd" id="1_31j6x"]
+
+[node name="LevelLogic" type="Node" unique_id=619644213]
+script = ExtResource("1_31j6x")
+
+[node name="LevelSwitchArea" type="Area2D" parent="." unique_id=231722924]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelSwitchArea" unique_id=201076811]
+
+[node name="PlayerRespawnPoint" type="Marker2D" parent="." unique_id=249683536]
+
+[connection signal="body_entered" from="LevelSwitchArea" to="." method="_on_level_switch_area_body_entered"]

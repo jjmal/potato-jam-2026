@@ -1,20 +1,45 @@
-extends Node2D
-	
+extends Node
+
+@onready var enemy_manager: EnemyManager = find_child("EnemyManager")
+@onready var scene_handler = $SceneHandler
+@onready var hud = $UI/HUD
+@onready var player = $Player
+var current_level
+
 func _on_player_can_jump_status_change(can_jump_status: bool) -> void:
-	for enemy in $EnemyManager.enemies_array:
-		enemy.can_player_jump = can_jump_status
+	if enemy_manager != null:
+		for enemy in enemy_manager.enemies_array:
+			enemy.can_player_jump = can_jump_status		
 
 func _on_player_can_walk_forward_status_change(can_walk_forward_status: bool) -> void:
-	for enemy in $EnemyManager.enemies_array:
-		enemy.can_player_walk_forward = can_walk_forward_status
+	if enemy_manager != null:
+		for enemy in enemy_manager.enemies_array:
+			enemy.can_player_walk_forward = can_walk_forward_status
 
 func _on_player_can_shoot_status_change(can_shoot_status: bool) -> void:
-	for enemy in $EnemyManager.enemies_array:
-		enemy.can_player_shoot = can_shoot_status
+	if enemy_manager != null:
+		for enemy in enemy_manager.enemies_array:
+			enemy.can_player_shoot = can_shoot_status
 
 func _on_player_can_attack_status_change(can_attack_status: bool) -> void:
-	for enemy in $EnemyManager.enemies_array:
-		enemy.can_player_attack = can_attack_status
+	if enemy_manager != null:
+		for enemy in enemy_manager.enemies_array:
+			enemy.can_player_attack = can_attack_status
 
 func _on_player_ammo_changed(ammo: Variant) -> void:
-	$UI/HUD.ammo = ammo
+	set_deferred("hud.ammo", ammo)
+
+func _on_scene_handler_toggle_hud(to_on: bool) -> void:
+	set_deferred("hud.visible", to_on)
+		
+func _on_scene_handler_loaded_level(level: Node2D) -> void:
+	current_level = level
+	var level_logic = level.find_child("LevelLogic")
+	level_logic.switch_to_next_level.connect(_on_current_level_logic_switch_to_next_level)
+	level_logic.start_current_level.connect(_on_current_level_logic_start_current_level)
+
+func _on_current_level_logic_switch_to_next_level():
+	pass
+	
+func _on_current_level_logic_start_current_level():
+	scene_handler.restart()

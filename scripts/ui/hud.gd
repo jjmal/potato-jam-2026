@@ -8,7 +8,6 @@ var ammo: int:
 			slot.visible = true
 		for slot in slot_array.slice(value):
 			slot.visible = false
-		
 
 func _ready():
 	for child in $Bar.get_children():
