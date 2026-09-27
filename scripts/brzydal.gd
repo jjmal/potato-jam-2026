@@ -24,7 +24,7 @@ var is_attack_on_cooldown: bool = false
 func _ready() -> void:
 	direction = -1.0
 	$Hitbox/CollisionShape2D.disabled = true
-	
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 func check_if_about_to_fall() -> bool:
 	if not roam_fall_detection_ray.is_colliding() and is_on_floor():
 		return true
@@ -105,11 +105,11 @@ func _physics_process(delta: float) -> void:
 
 
 func attack():
-	is_attack_on_cooldown = true	
+	is_attack_on_cooldown = true
+	animated_sprite.play("attack")
 	$Hitbox/CollisionShape2D.set_deferred("disabled", false)
 	$AttackTimer.start()
 	$AttackFramesTimer.start()
-	animated_sprite.play("attack")
 	print("enemyattack")
 
 func attack_controlled_process():
@@ -138,3 +138,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func _on_hitbox_player_detection_body_entered(body: Node2D) -> void:
 	if $StateMachine.current_state.name == "Aggro":
 		attack()
+
+func _on_animation_finished():
+	if animated_sprite.animation == "attack":
+		animated_sprite.play("walk")

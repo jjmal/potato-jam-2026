@@ -12,17 +12,21 @@
 [ext_resource type="Script" uid="uid://dyohbwc6fea63" path="res://scripts/brzydal_state_machine/dead.gd" id="7_66375"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fv1ar"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0lcf"]
 atlas = ExtResource("3_5pfcd")
 region = Rect2(0, 0, 128, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6tvyo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wstux"]
 atlas = ExtResource("3_5pfcd")
 region = Rect2(128, 0, 128, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_icd53"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0x7b"]
 atlas = ExtResource("3_5pfcd")
 region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv1ar"]
+atlas = ExtResource("3_5pfcd")
+region = Rect2(384, 0, 128, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd0l2"]
 atlas = ExtResource("4_r0lcf")
@@ -68,15 +72,18 @@ region = Rect2(128, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_r0lcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wstux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0x7b")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fv1ar")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6tvyo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_icd53")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -107,7 +114,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_awyf1")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"walk",
 "speed": 5.0
 }, {
@@ -157,7 +164,7 @@ jump_velocity = -450.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=1716297206]
 sprite_frames = SubResource("SpriteFrames_4mjti")
-animation = &"walk"
+animation = &"attack"
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
 visible = false

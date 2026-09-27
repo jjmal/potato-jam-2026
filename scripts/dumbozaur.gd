@@ -2,6 +2,7 @@ extends Enemy
 
 const ARRIVAL_THRESHOLD = 4.0
 @onready var hitbox = $Hitbox
+@onready var animated_sprite = $AnimatedSprite2D
 @export var path_follow: PathFollow2D
 @export var movement_speed: float
 
