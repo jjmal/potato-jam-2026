@@ -1,16 +1,20 @@
 extends Node
 
 @export var main_menu_packed: PackedScene
-@export var game_scene_packed: PackedScene
+@export var initial_game_scene_packed: PackedScene
 @export var pause_scene_packed: PackedScene
 @export var settings_scene_packed: PackedScene
+@export var level_array: Array[PackedScene]
 
 var pause_menu: CanvasLayer = null
 var main_menu: Control = null
 var game_scene: Node2D = null
 var settings_menu: CanvasLayer = null
-
+var current_level: Node
 var settings_origin: String = ""
+
+signal toggle_hud(to_on: bool)
+signal loaded_level(level: Node2D)
 
 func _ready() -> void:
 	load_main_menu("game_start")
@@ -21,7 +25,6 @@ func load_main_menu(origin: String) -> void:
 		print("Resuming game from pause menu")
 		get_tree().paused = false
 	
-
 		if pause_menu:
 			pause_menu.queue_free()
 			pause_menu = null
@@ -36,20 +39,25 @@ func load_main_menu(origin: String) -> void:
 		print("Unknown origin: ", origin)
 	
 	main_menu = main_menu_packed.instantiate()
-
-
+	
 	main_menu.new_game_pressed.connect(new_game)
 	main_menu.continue_pressed.connect(continue_game)
 	main_menu.exit_pressed.connect(exit_game)
 	main_menu.settings_pressed.connect(open_settings)
 
 	add_child(main_menu)
+	
+	call_deferred("hud_toggle_emitter", false)
 
 func new_game(origin: String) -> void:
 	if origin == "main_menu":
 		get_node("MainMenu").queue_free()
-	game_scene = game_scene_packed.instantiate()
-	add_child(game_scene)
+	load_level(initial_game_scene_packed)
+	call_deferred("hud_toggle_emitter", true)
+	
+
+func hud_toggle_emitter(to_on: bool):
+	toggle_hud.emit(to_on)
 
 func exit_game(origin: String) -> void:
 	print("Quitting game from: ", origin)
@@ -91,7 +99,6 @@ func resume_game(origin: String) -> void:
 
 # not sure if working
 func display_pause_scene() -> void:
-
 	if pause_menu:
 		return
 
@@ -115,3 +122,24 @@ func _process(delta: float) -> void:
 			print("game paused")
 			display_pause_scene()
 			get_tree().paused = true 
+			
+func get_current_level_packed_scene():
+	return level_array[Globals.current_level_idx]
+
+func unload_level(level):
+	level.queue_free()
+
+func load_level(level_packed_scene):
+	game_scene = level_packed_scene.instantiate()
+	add_child(game_scene)
+	current_level = game_scene
+	loaded_level.emit(game_scene)
+	
+func restart():
+	unload_level(current_level)
+	call_deferred("load_level", get_current_level_packed_scene())
+	
+func next_level():
+	unload_level(current_level)
+	Globals.current_level_idx += 1
+	call_deferred("load_level", get_current_level_packed_scene())

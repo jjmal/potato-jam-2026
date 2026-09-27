@@ -11,7 +11,7 @@ const JUMP_VELOCITY = -450.0
 const EPSILON = 0.01
 
 @export var shot_cooldown: float = 0.75
-@export var needle_pouch: Node
+@onready var needle_pouch: Node = $Needles
 @onready var needle_array = NeedleManager.needle_array
 @onready var pickable_needle_array = NeedleManager.pickable_needle_array
 @onready var animated_sprite = $AnimatedSprite
@@ -23,7 +23,6 @@ var is_attack_on_cooldown: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
 var speed = 300.0
-var current_max_ammo: int = 2
 var ammo: int:
 	set(value):
 		ammo = value
@@ -32,8 +31,8 @@ var ammo: int:
 var direction
 
 func _init():
-	self.ammo = current_max_ammo
-# In player.gd
+	ammo = Globals.current_max_ammo
+	# In player.gd
 
 # Replaces direct animation calls and handles scale cleanly
 func play_animation(anim_name: String) -> void:
@@ -155,6 +154,7 @@ func _physics_process(delta: float) -> void:
 	can_jump_emitter()
 	can_shoot_emitter()
 	can_attack_emitter()
+	print(needle_pouch.get_children())
 
 func get_closest_pickable_needle():
 	return NeedleManager.find_min_dist_pickable_needle()
@@ -189,7 +189,6 @@ func _on_attack_frames_timer_timeout() -> void:
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	joniec.emit()
 	
-
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	joniec.emit()
 

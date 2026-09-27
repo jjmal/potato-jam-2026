@@ -618,11 +618,10 @@ size = Vector2(34, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3v2ag"]
 size = Vector2(24, 48)
 
-[node name="Player" type="CharacterBody2D" unique_id=715291840 node_paths=PackedStringArray("needle_pouch")]
+[node name="Player" type="CharacterBody2D" unique_id=715291840]
 process_mode = 1
 collision_mask = 11
 script = ExtResource("1_dqkch")
-needle_pouch = NodePath("Needles")
 
 [node name="StateMachine" parent="." unique_id=636593194 node_paths=PackedStringArray("initial_state") instance=ExtResource("4_dqkch")]
 process_mode = 1
@@ -686,7 +685,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NeedlePickupSphere" unique_id=104623989]
 shape = SubResource("CircleShape2D_qyqk1")
 
-[node name="HeadVerticalNeedleTarget" type="Area2D" parent="." unique_id=253671922 groups=["PlayerHead"]]
+[node name="HeadVerticalNeedleTarget" type="Area2D" parent="." unique_id=253671922]
 visible = false
 collision_layer = 32
 collision_mask = 0

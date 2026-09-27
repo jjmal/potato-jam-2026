@@ -84,6 +84,8 @@ shader_parameter/inner_outline = false
 radius = 2.236068
 
 [node name="Needle" type="CharacterBody2D" unique_id=360757540]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_bfd1i")
 
 [node name="Collisions" type="Node2D" parent="." unique_id=1310368037]

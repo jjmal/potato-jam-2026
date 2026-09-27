@@ -1,13 +1,16 @@
 [gd_scene format=4 uid="uid://iuvrbkqy6v5j"]
 
-[ext_resource type="PackedScene" uid="uid://dqo0mkilbnivd" path="res://scenes/player.tscn" id="1_ryq6v"]
-[ext_resource type="Texture2D" uid="uid://c3fxdv1gvvhv4" path="res://assets/assets/bacgrounds/tlo1.png" id="3_rbdmo"]
+[ext_resource type="Texture2D" uid="uid://c3fxdv1gvvhv4" path="res://assets/bacgrounds/tlo1.png" id="3_rbdmo"]
+[ext_resource type="PackedScene" uid="uid://b338mle2y06x8" path="res://scenes/pickable_needle.tscn" id="4_bp1qe"]
 [ext_resource type="PackedScene" uid="uid://cff8inslrsr8a" path="res://scenes/tile_slay.tscn" id="4_kmgff"]
+[ext_resource type="PackedScene" uid="uid://bvb72lr8tsag2" path="res://scenes/level_logic.tscn" id="4_n0s2j"]
+[ext_resource type="PackedScene" uid="uid://mhhxgby3d6xu" path="res://scenes/enemy_manager.tscn" id="5_bp1qe"]
+[ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="5_yvrcq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmgff"]
+size = Vector2(66, 408)
 
 [node name="Poziom_10" type="Node2D" unique_id=713617619]
-
-[node name="Player" parent="." unique_id=715291840 instance=ExtResource("1_ryq6v")]
-position = Vector2(103, 712)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=422303464]
 
@@ -18,3 +21,25 @@ texture = ExtResource("3_rbdmo")
 
 [node name="TileSlay" parent="." unique_id=1112404992 instance=ExtResource("4_kmgff")]
 tile_map_data = PackedByteArray("AAAAABcAAgAEAAQAAAABABcAAgAEAAQAAAACABcAAgAEAAQAAAADABcAAgAEAAQAAAAEABcAAgAEAAQAAAAFABcAAgAEAAQAAAAGABcAAgAEAAQAAAAHABcAAgAEAAQAAAAIABcAAgAEAAQAAAAJABcAAgAEAAQAAAAKABcAAgAEAAQAAAALABcAAgAEAAQAAAAMABcAAgAEAAQAAAANABcAAgAEAAQAAAAOABcAAgAEAAQAAAAPABcAAgAEAAQAAAAQABcAAgAEAAQAAAARABcAAgAEAAQAAAASABcAAgAEAAQAAAATABcAAgAEAAQAAAAUABcAAgAEAAQAAAAVABcAAgAEAAQAAAAWABcAAgAEAAQAAAAXABcAAgAEAAQAAAAYABcAAgAEAAQAAAAZABcAAgAEAAQAAAAaABcAAgAEAAQAAAAbABcAAgAEAAQAAAAcABcAAgAEAAYAAAAdABcAAgAFAAYAAAAeABcAAgAEAAQAAAAfABcAAgAEAAQAAAAgABcAAgAEAAQAAAAhABcAAgAEAAQAAAAiABcAAgAEAAQAAAAjABcAAgAEAAQAAAAkABcAAgAEAAQAAAAlABcAAgAEAAQAAAAmABcAAgAEAAQAAAAnABcAAgAEAAQAAAAoABcAAgAEAAQAAAApABcAAgAEAAQAAAAqABcAAgAEAAQAAAAcABMAAgAFAAUAAAAdABMAAgAGAAUAAAAcAAkAAgABAAUAAAAcAAoAAgAFAAUAAAAcAAsAAgAFAAUAAAAcAAwAAgAFAAUAAAAcAA0AAgAFAAUAAAAcAA4AAgAFAAUAAAAcAA8AAgAFAAUAAAAcABAAAgAFAAUAAAAcABEAAgAFAAUAAAAcABIAAgAFAAUAAAAcABQAAgAFAAUAAAAcABUAAgAFAAUAAAAcABYAAgAFAAUAAAAdAAkAAgACAAUAAAAdAAoAAgAGAAUAAAAdAAsAAgAGAAUAAAAdAAwAAgAGAAUAAAAdAA0AAgAGAAUAAAAdAA4AAgAGAAUAAAAdAA8AAgAGAAUAAAAdABAAAgAGAAUAAAAdABEAAgAGAAUAAAAdABIAAgAGAAUAAAAdABQAAgAGAAUAAAAdABUAAgAGAAUAAAAdABYAAgAGAAUAAAAHABQAAgACAAUAAAAOAAsAAgACAAUAAAAOABEAAgACAAUAAAAVAAgAAgACAAUAAAAVAA4AAgACAAUAAAAGABQAAgABAAUAAAANAAsAAgABAAUAAAANABEAAgABAAUAAAAUAAgAAgABAAUAAAAUAA4AAgABAAUAAAANAAwAAgABAAYAAAAOAAwAAgACAAYAAAANABIAAgABAAYAAAAOABIAAgACAAYAAAAGABUAAgABAAYAAAAHABUAAgACAAYAAAAUAA8AAgABAAYAAAAVAA8AAgACAAYAAAAUAAkAAgABAAYAAAAVAAkAAgACAAYAAAD//wAAAgACAAQAAAD//wEAAgACAAQAAAD//wIAAgACAAQAAAD//wMAAgACAAQAAAD//wQAAgACAAQAAAD//wUAAgACAAQAAAD//wYAAgACAAQAAAD//wcAAgACAAQAAAD//wgAAgACAAQAAAD//wkAAgACAAQAAAD//woAAgACAAQAAAD//wsAAgACAAQAAAD//wwAAgACAAQAAAD//w0AAgACAAQAAAD//w4AAgACAAQAAAD//w8AAgACAAQAAAD//xAAAgACAAQAAAD//xEAAgACAAQAAAD//xIAAgACAAQAAAD//xMAAgACAAQAAAD//xQAAgACAAQAAAD//xUAAgACAAQAAAD//xYAAgACAAQAAAD//xcAAgACAAQAAAA=")
+
+[node name="LevelLogic" parent="." unique_id=619644213 instance=ExtResource("4_n0s2j")]
+
+[node name="LevelSwitchArea" parent="LevelLogic" index="0" unique_id=231722924]
+position = Vector2(1386, 725)
+
+[node name="CollisionShape2D" parent="LevelLogic/LevelSwitchArea" index="0" unique_id=201076811]
+position = Vector2(23, -155)
+shape = SubResource("RectangleShape2D_kmgff")
+
+[node name="PlayerRespawnPoint" parent="LevelLogic" index="1" unique_id=249683536]
+position = Vector2(56, 702)
+
+[node name="PickableNeedle" parent="." unique_id=2013643491 instance=ExtResource("4_bp1qe")]
+position = Vector2(360, 722)
+item_id = "first_needle"
+
+[node name="EnemyManager" parent="." unique_id=691424045 instance=ExtResource("5_bp1qe")]
+
+[node name="Brzydal" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("5_yvrcq")]
+
+[editable path="LevelLogic"]

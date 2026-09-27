@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cotvbuo1kon6q"]
+
+[ext_resource type="Script" uid="uid://braxddw66l7hu" path="res://scripts/arena_door.gd" id="1_a6cg3"]
+[ext_resource type="Texture2D" uid="uid://dm3skeynish74" path="res://assets/interactibles/Drzwiclassic.png" id="2_ae52b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ae52b"]
+size = Vector2(36, 64)
+
+[node name="ArenaDoor" type="StaticBody2D" unique_id=1903540855 groups=["Doors"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_a6cg3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=20129503]
+texture = ExtResource("2_ae52b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708180358]
+shape = SubResource("RectangleShape2D_ae52b")
