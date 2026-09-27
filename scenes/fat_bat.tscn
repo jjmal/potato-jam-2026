@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dkebkj5mqslfg" path="res://scripts/fatbat_state_machine/aggro.gd" id="4_e76nb"]
 [ext_resource type="Texture2D" uid="uid://c8lqhtf3gefqv" path="res://assets/characters/FatBatAnimations/fatbatpop.png" id="4_yy4sv"]
 [ext_resource type="Script" uid="uid://ull808l5hbgl" path="res://scripts/fatbat_state_machine/controlled.gd" id="5_smmv2"]
+[ext_resource type="Texture2D" uid="uid://diwj8wpe83obm" path="res://assets/characters/Dead/fatbatDED.png" id="5_yrluh"]
 [ext_resource type="Texture2D" uid="uid://ch3kjbsk0ruvl" path="res://assets/characters/FatBatAnimations/fatbatoznaczoned.png" id="6_yrluh"]
 [ext_resource type="Script" uid="uid://bjqxsdkp7nnuc" path="res://scripts/fatbat_state_machine/dead.gd" id="7_4yap8"]
 
@@ -35,6 +36,10 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_074vc"]
 atlas = ExtResource("4_yy4sv")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7f1k0"]
+atlas = ExtResource("5_yrluh")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e76nb"]
 atlas = ExtResource("3_g1req")
@@ -116,6 +121,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7f1k0")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_e76nb")
 }, {
 "duration": 1.0,
@@ -179,7 +192,7 @@ initial_direction = -1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=2021987413]
 sprite_frames = SubResource("SpriteFrames_qyqk1")
-animation = &"flying"
+animation = &"dead"
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
 position = Vector2(-2, 4.5)

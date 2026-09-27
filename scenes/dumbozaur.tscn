@@ -2,11 +2,26 @@
 
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="1_817h2"]
 [ext_resource type="Script" uid="uid://cpthpj53cp0ew" path="res://scripts/dumbozaur.gd" id="2_io1nu"]
+[ext_resource type="Shader" uid="uid://w1sou5b3qokd" path="res://assets/shaders/outline.gdshader" id="3_3g6p4"]
 [ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="3_io1nu"]
+[ext_resource type="Texture2D" uid="uid://d37uexr4jntp" path="res://assets/characters/Dead/BrzydalDED.png" id="4_clafp"]
 [ext_resource type="Script" uid="uid://c6raqk8d0ykba" path="res://scripts/dumbozaur_state_machine/roam.gd" id="4_l20an"]
 [ext_resource type="Texture2D" uid="uid://vkbpgcuxhv4c" path="res://assets/characters/BrzydalAnimations/Brzydalkrokoznaczony.png" id="4_rs088"]
 [ext_resource type="Script" uid="uid://daq42lsf0djwl" path="res://scripts/dumbozaur_state_machine/controlled.gd" id="5_ao0j6"]
 [ext_resource type="Script" uid="uid://b400sp117xoxs" path="res://scripts/dumbozaur_state_machine/state.gd" id="6_rs088"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0x7b"]
+resource_local_to_scene = true
+shader = ExtResource("3_3g6p4")
+shader_parameter/outline_enabled = false
+shader_parameter/outline_color = Color(1, 0, 1, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/sample_count = 8
+shader_parameter/inner_outline = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h8a6"]
+atlas = ExtResource("4_clafp")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l20an"]
 atlas = ExtResource("3_io1nu")
@@ -26,6 +41,14 @@ region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyqk1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h8a6")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l20an")
@@ -60,8 +83,9 @@ script = ExtResource("2_io1nu")
 movement_speed = 400.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=1370799006]
+material = SubResource("ShaderMaterial_u0x7b")
 sprite_frames = SubResource("SpriteFrames_qyqk1")
-animation = &"walk"
+animation = &"dead"
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
 position = Vector2(0, -2)

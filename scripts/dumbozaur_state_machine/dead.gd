@@ -1,7 +1,7 @@
 extends State
 
 func enter():
-	character.animated_sprite.play("dead")
+	pass
 
 func physics_update(delta: float) -> void:
 	character.dead_process(delta)

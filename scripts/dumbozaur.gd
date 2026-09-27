@@ -50,8 +50,11 @@ func _physics_process(delta: float) -> void:
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if $StateMachine.current_state.name != "Dead":
 		$StateMachine.transition_to("Dead")
-	
+		animated_sprite.play("dead")
+		print("dead")
 	
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area != hitbox and $StateMachine.current_state.name != "Dead":
 		$StateMachine.transition_to("Dead")
+		animated_sprite.play("dead")
+		print("dead")

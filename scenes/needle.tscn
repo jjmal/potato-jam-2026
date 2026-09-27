@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://by31vwaoa4prm"]
 
 [ext_resource type="Script" uid="uid://dj1n0gyobsdps" path="res://scripts/needle.gd" id="1_bfd1i"]
-[ext_resource type="Shader" uid="uid://w1sou5b3qokd" path="res://assets/shaders/outline.gdshader" id="2_bem87"]
 [ext_resource type="Texture2D" uid="uid://v56db7okfm1t" path="res://assets/needle/needle.png" id="3_bem87"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
@@ -10,9 +9,71 @@ size = Vector2(34, 2)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
 radius = 49.0
 
+[sub_resource type="Shader" id="Shader_bfd1i"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform bool outline_enabled = false;
+uniform vec4 outline_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float thickness : hint_range(0.0, 20.0, 0.1) = 1.0;
+uniform int sample_count : hint_range(4, 64, 4) = 8;
+uniform bool inner_outline = false;
+
+bool is_outline_edge(vec2 uv, vec2 pixel_size, sampler2D tex) {
+	if (sample_count <= 0) {
+		return false;
+	}
+
+	float angle_step = 6.28318530718 / float(sample_count);
+
+	for (int i = 0; i < sample_count; ++i) {
+		float angle = float(i) * angle_step;
+		vec2 dir = vec2(cos(angle), sin(angle));
+
+		// Sample neighboring pixels directly
+		vec2 sample_uv = uv + dir * thickness * pixel_size;
+		float sample_a = texture(tex, sample_uv).a;
+
+		bool found_opposite = (sample_a <= 0.0) == inner_outline;
+
+		if (found_opposite) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void fragment() {
+	vec4 sprite = texture(TEXTURE, UV);
+
+	if (!outline_enabled) {
+		COLOR = sprite;
+	} else {
+		bool should_draw_outline =
+			(sprite.a > 0.0) == inner_outline &&
+			is_outline_edge(UV, TEXTURE_PIXEL_SIZE, TEXTURE);
+
+		vec3 final_color = sprite.rgb;
+		float final_alpha = sprite.a;
+
+		if (should_draw_outline) {
+			if (inner_outline) {
+				final_color = mix(sprite.rgb, outline_color.rgb, outline_color.a);
+				final_alpha = sprite.a;
+			} else {
+				final_color = outline_color.rgb;
+				final_alpha = max(sprite.a, outline_color.a);
+			}
+		}
+
+		COLOR = vec4(final_color, final_alpha);
+	}
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n2h2"]
 resource_local_to_scene = true
-shader = ExtResource("2_bem87")
+shader = SubResource("Shader_bfd1i")
 shader_parameter/outline_enabled = true
 shader_parameter/outline_color = Color(1, 0.11764706, 1, 1)
 shader_parameter/thickness = 0.5000000074506
