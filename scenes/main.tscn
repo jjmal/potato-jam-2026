@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://csxm3gti4f748" path="res://scenes/poziom_11.tscn" id="5_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://iuvrbkqy6v5j" path="res://scenes/poziom_10.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b2sjmwghqn270" path="res://scenes/hud.tscn" id="6_choun"]
+[ext_resource type="PackedScene" uid="uid://djjhbcvm4og1y" path="res://scenes/test-floor.tscn" id="7_o6xl0"]
 
 [node name="Main" type="Node" unique_id=1226459676]
 script = ExtResource("1_jyhfs")
@@ -18,7 +19,12 @@ script = ExtResource("1_jyhfs")
 initial_game_scene_packed = ExtResource("5_tefeu")
 level_array = Array[PackedScene]([ExtResource("5_tefeu"), ExtResource("5_o6xl0")])
 
+[node name="TestFloor" parent="." unique_id=932786511 instance=ExtResource("7_o6xl0")]
+position = Vector2(-71, 97)
+scale = Vector2(0.035766333, 1.8106577)
+
 [node name="Player" parent="." unique_id=715291840 instance=ExtResource("1_0wfyh")]
+position = Vector2(-72, 53)
 
 [connection signal="loaded_level" from="SceneHandler" to="." method="_on_scene_handler_loaded_level"]
 [connection signal="toggle_hud" from="SceneHandler" to="." method="_on_scene_handler_toggle_hud"]

@@ -138,6 +138,9 @@ func load_level(level_packed_scene):
 	
 func restart():
 	unload_level(current_level)
-	load_level(get_current_level_packed_scene())
+	call_deferred("load_level", get_current_level_packed_scene())
 	
-	
+func next_level():
+	unload_level(current_level)
+	Globals.current_level_idx += 1
+	call_deferred("load_level", get_current_level_packed_scene())

@@ -5,6 +5,7 @@ extends Node
 @onready var hud = $UI/HUD
 @onready var player = $Player
 var current_level
+	
 
 func _on_player_can_jump_status_change(can_jump_status: bool) -> void:
 	if enemy_manager != null:
@@ -35,11 +36,14 @@ func _on_scene_handler_toggle_hud(to_on: bool) -> void:
 func _on_scene_handler_loaded_level(level: Node2D) -> void:
 	current_level = level
 	var level_logic = level.find_child("LevelLogic")
+	var character_marker_spawn_pos = level_logic.spawn_point
 	level_logic.switch_to_next_level.connect(_on_current_level_logic_switch_to_next_level)
 	level_logic.start_current_level.connect(_on_current_level_logic_start_current_level)
-
+	player.global_position = character_marker_spawn_pos.global_position
+	player.ammo = Globals.current_max_ammo
+	
 func _on_current_level_logic_switch_to_next_level():
-	pass
+	scene_handler.next_level()
 	
 func _on_current_level_logic_start_current_level():
 	scene_handler.restart()

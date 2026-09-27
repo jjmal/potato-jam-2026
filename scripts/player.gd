@@ -29,13 +29,14 @@ var ammo: int:
 var direction
 
 func _init():
-	self.ammo = Globals.current_max_ammo
-
+	ammo = Globals.current_max_ammo
+	
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
 	$Hitbox/CollisionShape2D.disabled = true
 
 func emit_ammo_changed(ammo: int):
+	print(ammo)
 	ammo_changed.emit(ammo)
 
 func apply_gravity(delta: float) -> void:
