@@ -33,3 +33,4 @@ position = Vector2(-72, 53)
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_shoot_status_change" from="Player" to="." method="_on_player_can_shoot_status_change"]
 [connection signal="can_walk_forward_status_change" from="Player" to="." method="_on_player_can_walk_forward_status_change"]
+[connection signal="joniec" from="Player" to="." method="_on_player_joniec"]

@@ -47,3 +47,6 @@ func _on_current_level_logic_switch_to_next_level():
 	
 func _on_current_level_logic_start_current_level():
 	scene_handler.restart()
+
+func _on_player_joniec() -> void:
+	scene_handler.restart()

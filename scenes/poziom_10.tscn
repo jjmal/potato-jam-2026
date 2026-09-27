@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bvb72lr8tsag2" path="res://scenes/level_logic.tscn" id="4_n0s2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmgff"]
-size = Vector2(66, 429)
+size = Vector2(66, 408)
 
 [node name="Poziom_10" type="Node2D" unique_id=713617619]
 
@@ -25,7 +25,7 @@ tile_map_data = PackedByteArray("AAAAABcAAgAEAAQAAAABABcAAgAEAAQAAAACABcAAgAEAAQ
 position = Vector2(1386, 725)
 
 [node name="CollisionShape2D" parent="LevelLogic/LevelSwitchArea" index="0" unique_id=201076811]
-position = Vector2(23, -165.5)
+position = Vector2(23, -155)
 shape = SubResource("RectangleShape2D_kmgff")
 
 [node name="PlayerRespawnPoint" parent="LevelLogic" index="1" unique_id=249683536]
