@@ -37,7 +37,7 @@ func collide_with_player_head():
 	hit_ray.force_raycast_update()
 	if check_if_collision_occurs() and flipped:
 		if get_hit_ray_collision()[0] == COLLIDER_PLAYER_HEAD:
-			resolve_collision()
+			resolve_collision_with_static()
 			var collider = get_hit_ray_collision()[1]
 			self.reparent(collider)
 	

@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://by31vwaoa4prm"]
 
 [ext_resource type="Script" uid="uid://dj1n0gyobsdps" path="res://scripts/needle.gd" id="1_bfd1i"]
-[ext_resource type="Texture2D" uid="uid://bnyo0fux3026t" path="res://assets/assets/movables/dart_side_gold_red.png" id="1_gcph1"]
+[ext_resource type="Texture2D" uid="uid://bnyo0fux3026t" path="res://assets/movables/dart_side_gold_red.png" id="1_gcph1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 size = Vector2(34, 2)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
 radius = 49.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfd1i"]
+radius = 2.236068
 
 [node name="Needle" type="CharacterBody2D" unique_id=360757540]
 script = ExtResource("1_bfd1i")
@@ -16,7 +19,7 @@ script = ExtResource("1_bfd1i")
 
 [node name="HitRay" type="RayCast2D" parent="Collisions" unique_id=588977534]
 target_position = Vector2(0, 0)
-collision_mask = 6
+collision_mask = 2
 collide_with_areas = true
 
 [node name="CollisionPlatformBody" type="StaticBody2D" parent="Collisions" unique_id=1082045433]
@@ -41,5 +44,14 @@ collision_mask = 2
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_gcph1")
 
+[node name="EnemyHitbox" type="Area2D" parent="." unique_id=1008809557]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1804913429]
+position = Vector2(-18, 0)
+shape = SubResource("CircleShape2D_bfd1i")
+
 [connection signal="area_entered" from="Collisions/PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_exited" from="Collisions/PickupRange" to="." method="_on_pickup_range_area_exited"]
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_enemy_hitbox_body_entered"]
