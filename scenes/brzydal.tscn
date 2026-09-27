@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bdtix0n8hj05n" path="res://assets/characters/BugAnimations/rATozn.png" id="4_r0lcf"]
 [ext_resource type="Texture2D" uid="uid://ccdqxwhimiacb" path="res://assets/characters/BugAnimations/robaltuptup.png" id="5_wstux"]
 [ext_resource type="Texture2D" uid="uid://wdgnypm6el6g" path="res://assets/characters/BugAnimations/robaltuptupozn.png" id="6_u0x7b"]
-[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
 [ext_resource type="Script" uid="uid://dyohbwc6fea63" path="res://scripts/brzydal_state_machine/dead.gd" id="7_66375"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 

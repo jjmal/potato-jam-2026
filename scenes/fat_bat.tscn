@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c8lqhtf3gefqv" path="res://assets/characters/FatBatAnimations/fatbatpop.png" id="4_yy4sv"]
 [ext_resource type="Script" uid="uid://ull808l5hbgl" path="res://scripts/fatbat_state_machine/controlled.gd" id="5_smmv2"]
 [ext_resource type="Texture2D" uid="uid://ch3kjbsk0ruvl" path="res://assets/characters/FatBatAnimations/fatbatoznaczoned.png" id="6_yrluh"]
+[ext_resource type="Script" uid="uid://bjqxsdkp7nnuc" path="res://scripts/fatbat_state_machine/dead.gd" id="7_4yap8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plmh4"]
 atlas = ExtResource("3_fk3lr")
@@ -34,7 +35,6 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_074vc"]
 atlas = ExtResource("4_yy4sv")
 region = Rect2(128, 0, 64, 64)
-[ext_resource type="Script" uid="uid://bjqxsdkp7nnuc" path="res://scripts/fatbat_state_machine/dead.gd" id="7_4yap8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e76nb"]
 atlas = ExtResource("3_g1req")
