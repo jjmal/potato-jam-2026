@@ -5,6 +5,7 @@ signal can_jump_status_change(can_jump_status: bool)
 signal can_shoot_status_change(can_shoot_status: bool)
 signal can_attack_status_change(can_attack_status: bool)
 signal joniec
+signal ammo_changed(ammo)
 
 const JUMP_VELOCITY = -450.0
 const EPSILON = 0.01
@@ -21,13 +22,22 @@ var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
 var speed = 300.0
 var current_max_ammo: int = 2
-var ammo: int = 2
+var ammo: int:
+	set(value):
+		ammo = value
+		call_deferred("emit_ammo_changed", ammo)
+
 var direction
 
+func _init():
+	self.ammo = current_max_ammo
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
 	$Hitbox/CollisionShape2D.disabled = true
+
+func emit_ammo_changed(ammo: int):
+	ammo_changed.emit(ammo)
 
 func apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -167,9 +177,9 @@ func _on_attack_frames_timer_timeout() -> void:
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	joniec.emit()
-	print('p_dead_spikes')
+	
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	joniec.emit()
-	print('p_dead_attack')
+
 	

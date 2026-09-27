@@ -25,7 +25,6 @@ func _ready() -> void:
 
 func _on_interactible_triggered():
 	nr_of_triggered += 1
-	print(nr_of_triggered)
 	if nr_of_triggered == nr_of_inputs:
 		output.open()
 		perma_trigger_input_levers()

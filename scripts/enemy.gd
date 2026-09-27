@@ -82,7 +82,6 @@ func attack():
 func throw_needle_process():
 	var old_needle = get_needle_to_throw()
 	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_player_shoot and old_needle != null:
-		print('yay')
 		if Input.is_action_just_pressed("shoot_forward"):
 			if flipped:
 				spawn_needle(Needle.RIGHT)

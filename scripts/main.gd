@@ -15,3 +15,6 @@ func _on_player_can_shoot_status_change(can_shoot_status: bool) -> void:
 func _on_player_can_attack_status_change(can_attack_status: bool) -> void:
 	for enemy in $EnemyManager.enemies_array:
 		enemy.can_player_attack = can_attack_status
+
+func _on_player_ammo_changed(ammo: Variant) -> void:
+	$UI/HUD.ammo = ammo
