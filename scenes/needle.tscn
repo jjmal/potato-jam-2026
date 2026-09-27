@@ -17,6 +17,8 @@ shader_parameter/outline_color = Color(1, 0.11764706, 1, 1)
 shader_parameter/thickness = 1.0000000149012
 shader_parameter/sample_count = 64
 shader_parameter/inner_outline = false
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfd1i"]
+radius = 2.236068
 
 [node name="Needle" type="CharacterBody2D" unique_id=360757540]
 script = ExtResource("1_bfd1i")
@@ -25,7 +27,7 @@ script = ExtResource("1_bfd1i")
 
 [node name="HitRay" type="RayCast2D" parent="Collisions" unique_id=588977534]
 target_position = Vector2(0, 0)
-collision_mask = 6
+collision_mask = 2
 collide_with_areas = true
 
 [node name="CollisionPlatformBody" type="StaticBody2D" parent="Collisions" unique_id=1082045433]
@@ -54,5 +56,14 @@ rotation = 3.1415927
 scale = Vector2(2, 2)
 texture = ExtResource("3_bem87")
 
+[node name="EnemyHitbox" type="Area2D" parent="." unique_id=1008809557]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1804913429]
+position = Vector2(-18, 0)
+shape = SubResource("CircleShape2D_bfd1i")
+
 [connection signal="area_entered" from="Collisions/PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_exited" from="Collisions/PickupRange" to="." method="_on_pickup_range_area_exited"]
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_enemy_hitbox_body_entered"]

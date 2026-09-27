@@ -87,15 +87,18 @@ func collide():
 	if check_if_collision_occurs():
 		var collider = get_hit_ray_collision()[1]
 		if Utils.is_body_a_tile_set_static(collider):
-			resolve_collision()
-		if get_hit_ray_collision()[0] == COLLIDER_ENEMY:
-			resolve_collision()
-			self.reparent(collider)
+			resolve_collision_with_static()
 		if get_hit_ray_collision()[0] == COLLIDER_DOORS:
-			resolve_collision()
+			resolve_collision_with_static()
 			self.reparent(collider)
-		
-func resolve_collision():
+
+
+func resolve_collision_with_dynamic(body: Node2D):
+	speed = 0
+	collided = true
+	call_deferred("reparent", body)
+
+func resolve_collision_with_static():
 	var hit_point = hit_ray.get_collision_point()
 	var hit_normal = hit_ray.get_collision_normal()
 	global_position = hit_point - hit_normal * fixed_depth
@@ -127,3 +130,7 @@ func _on_pickup_range_area_entered(area: Area2D) -> void: # May need to be rewor
 	
 func _on_pickup_range_area_exited(_area: Area2D) -> void:
 	tracked_player = null
+
+func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
+	if not collided:
+		resolve_collision_with_dynamic(body)

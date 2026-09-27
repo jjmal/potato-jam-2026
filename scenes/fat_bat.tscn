@@ -34,6 +34,7 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_074vc"]
 atlas = ExtResource("4_yy4sv")
 region = Rect2(128, 0, 64, 64)
+[ext_resource type="Script" uid="uid://bjqxsdkp7nnuc" path="res://scripts/fatbat_state_machine/dead.gd" id="7_4yap8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e76nb"]
 atlas = ExtResource("3_g1req")
@@ -169,6 +170,9 @@ radius = 359.0891
 [sub_resource type="CircleShape2D" id="CircleShape2D_smmv2"]
 radius = 366.00137
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yap8"]
+size = Vector2(22, 27)
+
 [node name="FatBat" unique_id=1916811873 instance=ExtResource("1_abkqj")]
 script = ExtResource("2_smmv2")
 initial_direction = -1.0
@@ -193,6 +197,10 @@ script = ExtResource("4_e76nb")
 [node name="Controlled" type="Node" parent="StateMachine" index="2" unique_id=2078888746]
 script = ExtResource("5_smmv2")
 
+[node name="Dead" type="Node" parent="StateMachine" index="3" unique_id=2140720553]
+script = ExtResource("7_4yap8")
+metadata/_custom_type_script = "uid://chhxivpg3jibl"
+
 [node name="AggroModule" parent="." index="3" unique_id=1177752760 node_paths=PackedStringArray("character") instance=ExtResource("2_oe6j6")]
 character = NodePath("..")
 
@@ -205,7 +213,17 @@ shape = SubResource("CircleShape2D_smmv2")
 [node name="ShotMarker" parent="." index="5" unique_id=697100100]
 position = Vector2(-1, 6)
 
+[node name="Hurtbox" type="Area2D" parent="." index="6" unique_id=1561301974]
+collision_layer = 4
+collision_mask = 7168
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0" unique_id=434162996]
+position = Vector2(-2, 4.5)
+shape = SubResource("RectangleShape2D_4yap8")
+
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 
 [editable path="AggroModule"]

@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bdtix0n8hj05n" path="res://assets/characters/BugAnimations/rATozn.png" id="4_r0lcf"]
 [ext_resource type="Texture2D" uid="uid://ccdqxwhimiacb" path="res://assets/characters/BugAnimations/robaltuptup.png" id="5_wstux"]
 [ext_resource type="Texture2D" uid="uid://wdgnypm6el6g" path="res://assets/characters/BugAnimations/robaltuptupozn.png" id="6_u0x7b"]
+[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="4_y8hyd"]
+[ext_resource type="Script" uid="uid://dyohbwc6fea63" path="res://scripts/brzydal_state_machine/dead.gd" id="7_66375"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fv1ar"]
@@ -137,6 +139,12 @@ radius = 230.03477
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66375"]
 size = Vector2(63, 36)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayeqw"]
+size = Vector2(36, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pfcd"]
+size = Vector2(63, 36)
+
 [node name="Brzydal" unique_id=1916811873 instance=ExtResource("1_3pkf7")]
 script = ExtResource("2_4mjti")
 roam_speed = 150.0
@@ -153,6 +161,7 @@ sprite_frames = SubResource("SpriteFrames_4mjti")
 animation = &"walk"
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
+visible = false
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_fmkpc")
 
@@ -167,6 +176,10 @@ script = ExtResource("3_4mjti")
 
 [node name="Controlled" type="Node" parent="StateMachine" index="2" unique_id=1047020341]
 script = ExtResource("4_erjbq")
+
+[node name="Dead" type="Node" parent="StateMachine" index="3" unique_id=1989918011]
+script = ExtResource("7_66375")
+metadata/_custom_type_script = "uid://chhxivpg3jibl"
 
 [node name="AggroModule" parent="." index="3" unique_id=1177752760 node_paths=PackedStringArray("character") instance=ExtResource("7_fmkpc")]
 visible = false
@@ -193,6 +206,7 @@ target_position = Vector2(0, 35)
 collision_mask = 2
 
 [node name="SpikeDetectionRay" type="RayCast2D" parent="." index="5" unique_id=255121842]
+visible = false
 position = Vector2(-31, 0)
 target_position = Vector2(0, 35)
 collision_mask = 2048
@@ -201,6 +215,9 @@ collision_mask = 2048
 visible = false
 target_position = Vector2(-20, 0)
 collision_mask = 2
+
+[node name="ShotMarker" parent="." index="8" unique_id=697100100]
+visible = false
 
 [node name="Hitbox" type="Area2D" parent="." index="9" unique_id=805915275]
 collision_layer = 1024
@@ -215,12 +232,33 @@ wait_time = 0.75
 one_shot = true
 
 [node name="AttackFramesTimer" type="Timer" parent="." index="11" unique_id=1122631081]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="." index="12" unique_id=1628022196]
+visible = false
+collision_layer = 4
+collision_mask = 7168
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0" unique_id=1709941119]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ayeqw")
+
+[node name="HitboxPlayerDetection" type="Area2D" parent="." index="13" unique_id=1803382341]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPlayerDetection" index="0" unique_id=242234426]
+position = Vector2(-21.5, 1)
+shape = SubResource("RectangleShape2D_5pfcd")
 
 [connection signal="aggro_status" from="AggroModule" to="." method="_on_aggro_module_aggro_status"]
 [connection signal="drop_aggro" from="AggroModule" to="StateMachine/Aggro" method="_on_aggro_module_drop_aggro"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackFramesTimer" to="." method="_on_attack_frames_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="HitboxPlayerDetection" to="." method="_on_hitbox_player_detection_body_entered"]
 
 [editable path="AggroModule"]

@@ -42,6 +42,10 @@ func move_controlled_process(delta: float):
 		velocity.x = move_toward(velocity.x, 0, speed)
 	move_and_slide()
 
+func dead_process(delta: float):
+	velocity.x = 0
+	apply_gravity(delta)
+	move_and_slide()
 
 func jump():
 	velocity.y = jump_velocity
@@ -78,7 +82,6 @@ func attack():
 func throw_needle_process():
 	var old_needle = get_needle_to_throw()
 	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_player_shoot and old_needle != null:
-		print('yay')
 		if Input.is_action_just_pressed("shoot_forward"):
 			if flipped:
 				spawn_needle(Needle.RIGHT)

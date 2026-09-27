@@ -4,31 +4,16 @@
 [ext_resource type="Script" uid="uid://bj08ggkjoxfc4" path="res://scripts/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://c0mkcm42a6s41" path="res://scripts/enemy_manager.gd" id="5_tipki"]
-[ext_resource type="Texture2D" uid="uid://dqakrowgxhfp7" path="res://assets/hud/hud_main.png" id="6_tefeu"]
-[ext_resource type="Texture2D" uid="uid://wqkxa35ujtc7" path="res://assets/hud/ammo1.png" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://b2sjmwghqn270" path="res://scenes/hud.tscn" id="6_choun"]
 [ext_resource type="PackedScene" uid="uid://ck2crf6dyduiw" path="res://scenes/interactible_module.tscn" id="7_tipki"]
-[ext_resource type="Texture2D" uid="uid://dbsqh7wn2a7cy" path="res://assets/hud/ammo2.png" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c6peyjbytyck4" path="res://scenes/door.tscn" id="8_85g4d"]
 [ext_resource type="PackedScene" uid="uid://cff8inslrsr8a" path="res://scenes/tile_slay.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://0j1pbulj4yfu" path="res://scenes/lever.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://dqxp3hi5rpckk" path="res://scenes/dumbozaur.tscn" id="8_ya4ey"]
-[ext_resource type="Texture2D" uid="uid://ii6pfqiki7io" path="res://assets/hud/ammo3.png" id="9_choun"]
-[ext_resource type="Texture2D" uid="uid://skwax51ywe6c" path="res://assets/hud/ammo4.png" id="10_choun"]
-[ext_resource type="Texture2D" uid="uid://b034wx5nl1hhj" path="res://assets/hud/dziura1.png" id="11_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://7gs4aa4fg3n4" path="res://assets/hud/dziura2.png" id="12_jkv2x"]
-[ext_resource type="Texture2D" uid="uid://cx2nr4k4d7vev" path="res://assets/hud/dziur32.png" id="13_jbj1t"]
-[ext_resource type="Texture2D" uid="uid://dvoexto313rc5" path="res://assets/hud/dziura4.png" id="14_muem4"]
 
 [sub_resource type="Curve2D" id="Curve2D_tipki"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 137, 510, 0, 0, 0, 0, 305, 508)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_85g3d"]
-bake_interval = 5.4
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 257, 278, 0, 0, 0, 0, 313, 278)
 }
 point_count = 2
 
@@ -44,164 +29,15 @@ script = ExtResource("5_tipki")
 
 [node name="Dumbozaur" parent="EnemyManager" unique_id=1916811874 node_paths=PackedStringArray("path_follow") instance=ExtResource("8_ya4ey")]
 position = Vector2(344, 519)
-path_follow = NodePath("../../Path2D2/PathFollow2D")
+path_follow = NodePath("../../Path2D/PathFollow2D")
+movement_speed = 320.0
 
 [node name="Brzydal" parent="EnemyManager" unique_id=1015931006 instance=ExtResource("5_85g3d")]
 position = Vector2(207, 258)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2076162681]
 
-[node name="HUD" type="Control" parent="UI" unique_id=2143360299]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Bar" type="TextureRect" parent="UI/HUD" unique_id=1615617072]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 412.85715
-offset_bottom = 120.0
-texture = ExtResource("6_tefeu")
-expand_mode = 3
-
-[node name="Slot1" type="TextureRect" parent="UI/HUD/Bar" unique_id=466415950]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_o6xl0")
-expand_mode = 3
-
-[node name="Slot2" type="TextureRect" parent="UI/HUD/Bar/Slot1" unique_id=1638800651]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_85g3d")
-expand_mode = 3
-
-[node name="Slot3" type="TextureRect" parent="UI/HUD/Bar/Slot1/Slot2" unique_id=2129992942]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("9_choun")
-expand_mode = 3
-
-[node name="Slot4" type="TextureRect" parent="UI/HUD/Bar/Slot1/Slot2/Slot3" unique_id=703241180]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_choun")
-expand_mode = 3
-
-[node name="Dziura1" type="TextureRect" parent="UI/HUD/Bar" unique_id=520160160]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("11_a8y0u")
-expand_mode = 3
-
-[node name="Dziura2" type="TextureRect" parent="UI/HUD/Bar/Dziura1" unique_id=796515191]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("12_jkv2x")
-expand_mode = 3
-
-[node name="Dziura3" type="TextureRect" parent="UI/HUD/Bar/Dziura1/Dziura2" unique_id=794427564]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("13_jbj1t")
-expand_mode = 3
-
-[node name="Dziura4" type="TextureRect" parent="UI/HUD/Bar/Dziura1/Dziura2/Dziura3" unique_id=1049126157]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.42857
-offset_top = -50.0
-offset_right = 196.42857
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("14_muem4")
-expand_mode = 3
+[node name="HUD" parent="UI" unique_id=374776648 instance=ExtResource("6_choun")]
 
 [node name="InteractibleModule" parent="." unique_id=529602115 node_paths=PackedStringArray("inputs", "output") instance=ExtResource("7_tipki")]
 inputs = [NodePath("Lever"), NodePath("Lever2")]
@@ -217,7 +53,7 @@ position = Vector2(99, 192)
 position = Vector2(119, 289)
 
 [node name="TileSlay" parent="." unique_id=1112404992 instance=ExtResource("8_choun")]
-tile_map_data = PackedByteArray("AAAZABEAAgAEAAQAAAAYABEAAgAEAAQAAAAXABEAAgAEAAQAAAAWABEAAgAEAAQAAAAVABEAAgAEAAQAAAAUABEAAgAEAAQAAAATABEAAgAEAAQAAAASABEAAgAEAAQAAAARABEAAgAEAAQAAAAQABEAAgAEAAQAAAAPABEAAgAEAAQAAAAOABEAAgAEAAQAAAANABEAAgAEAAQAAAAMABEAAgAEAAQAAAALABEAAgAEAAQAAAAKABEAAgAEAAQAAAAJABEAAgAEAAQAAAAIABEAAgAEAAQAAAAHABEAAgAEAAQAAAAGABEAAgAEAAQAAAAFABEAAgAEAAQAAAAEABEAAgAEAAQAAAADABEAAgAEAAQAAAACABEAAgAEAAQAAAACAAkAAgAEAAQAAAADAAkAAgAEAAQAAAAEAAkAAgAEAAQAAAAFAAkAAgAEAAQAAAAGAAkAAgAEAAQAAAAHAAkAAgAEAAQAAAAIAAkAAgAEAAQAAAAJAAkAAgAEAAQAAAAMAAkAAgAEAAQAAAANAAkAAgAEAAQAAAAOAAkAAgAEAAQAAAACAAYAAgAEAAQAAAADAAYAAgAEAAQAAAAEAAYAAgAEAAQAAAAFAAYAAgAEAAQAAAAGAAYAAgAEAAQAAAAHAAYAAgAEAAQAAAACAAcAAgAEAAQAAAACAAgAAgAEAAQAAAACABAAAgAEAAQAAAACAA8AAgAEAAQAAAACAA4AAgAEAAQAAAACAA0AAgAEAAQAAAATABAAAgAEAAMAAAASABAAAgAEAAMAAAA=")
+tile_map_data = PackedByteArray("AAAZABEAAgAEAAQAAAAYABEAAgAEAAQAAAAXABEAAgAEAAQAAAAWABEAAgAEAAQAAAAVABEAAgAEAAQAAAAUABEAAgAEAAQAAAATABEAAgAEAAQAAAASABEAAgAEAAQAAAARABEAAgAEAAQAAAAQABEAAgAEAAQAAAAPABEAAgAEAAQAAAAOABEAAgAEAAQAAAANABEAAgAEAAQAAAAMABEAAgAEAAQAAAALABEAAgAEAAQAAAAKABEAAgAEAAQAAAAJABEAAgAEAAQAAAAIABEAAgAEAAQAAAAHABEAAgAEAAQAAAAGABEAAgAEAAQAAAAFABEAAgAEAAQAAAAEABEAAgAEAAQAAAADABEAAgAEAAQAAAACABEAAgAEAAQAAAACAAkAAgAEAAQAAAADAAkAAgAEAAQAAAAEAAkAAgAEAAQAAAAFAAkAAgAEAAQAAAAGAAkAAgAEAAQAAAAHAAkAAgAEAAQAAAAIAAkAAgAEAAQAAAAJAAkAAgAEAAQAAAAMAAkAAgAEAAQAAAANAAkAAgAEAAQAAAAOAAkAAgAEAAQAAAACAAYAAgAEAAQAAAADAAYAAgAEAAQAAAAEAAYAAgAEAAQAAAAFAAYAAgAEAAQAAAAGAAYAAgAEAAQAAAAHAAYAAgAEAAQAAAACABAAAgAEAAQAAAACAA8AAgAEAAQAAAACAA4AAgAEAAQAAAACAA0AAgAEAAQAAAATABAAAgAEAAMAAAASABAAAgAEAAMAAAABAAkAAgAEAAYAAAAAAAkAAgAEAAYAAAA=")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1689559732]
 curve = SubResource("Curve2D_tipki")
@@ -226,12 +62,7 @@ curve = SubResource("Curve2D_tipki")
 position = Vector2(137, 510)
 rotation = -0.011904199
 
-[node name="Path2D2" type="Path2D" parent="." unique_id=1233372745]
-curve = SubResource("Curve2D_85g3d")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2" unique_id=187322836]
-position = Vector2(257, 278)
-
+[connection signal="ammo_changed" from="Player" to="." method="_on_player_ammo_changed"]
 [connection signal="can_attack_status_change" from="Player" to="." method="_on_player_can_attack_status_change"]
 [connection signal="can_jump_status_change" from="Player" to="." method="_on_player_can_jump_status_change"]
 [connection signal="can_shoot_status_change" from="Player" to="." method="_on_player_can_shoot_status_change"]

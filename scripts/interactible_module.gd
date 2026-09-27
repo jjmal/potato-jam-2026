@@ -17,7 +17,6 @@ func _ready() -> void:
 	
 	nr_of_inputs = len(inputs)
 
-	
 	if output not in get_children():
 		output.reparent(self)
 	output.variant = variant
