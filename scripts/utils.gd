@@ -28,3 +28,5 @@ func air_time(jump_velocity: float, gravity: float) -> float:
 	
 func jump_length(speed: float, jump_velocity: float, gravity: float) -> float:
 	return abs(speed) * air_time(jump_velocity, gravity)
+
+# func set_outline()

@@ -101,25 +101,21 @@ func can_attack() -> bool:
 	
 func _physics_process(delta: float) -> void:
 	update_tracked_player()
-	play_walk_animation()
+
 
 func attack():
 	is_attack_on_cooldown = true	
 	$Hitbox/CollisionShape2D.disabled = false
 	$AttackTimer.start()
 	$AttackFramesTimer.start()
+	animated_sprite.play("attack")
+	print("enemyattack")
 
 func attack_controlled_process():
 	if Input.is_action_just_pressed("attack") and can_player_attack and can_attack():
 		attack()
 
-func play_walk_animation():
-	if velocity.x != 0.0 and not walk_anim_play:
-		animated_sprite.play('walk')
-		walk_anim_play = true
-	else:
-		walk_anim_play = false
-		animated_sprite.stop()
+
 
 func _on_aggro_module_aggro_status(aggro_stat: bool) -> void:
 	can_aggro = aggro_stat

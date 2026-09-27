@@ -73,15 +73,17 @@ func spawn_needle(direction_state: int):
 	
 
 func shoot_process():
-	if (Input.is_action_just_pressed("shoot_forward") or Input.is_action_just_pressed("shoot_up")) and can_shoot():
+	if Input.is_action_just_pressed("shoot_forward")  and can_shoot():
 		process_shot()
-		if Input.is_action_just_pressed("shoot_forward"):
+
+		if Input.is_action_pressed("shoot_up"):
+			spawn_needle(Needle.UP)
+		elif Input.is_action_just_pressed("shoot_forward"):
 			if flipped:
 				spawn_needle(Needle.LEFT)
 			else:
 				spawn_needle(Needle.RIGHT)
-		elif Input.is_action_just_pressed("shoot_up"):
-			spawn_needle(Needle.UP)
+		
 
 func process_shot():
 	is_shot_on_cooldown = true

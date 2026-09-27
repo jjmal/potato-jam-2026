@@ -16,6 +16,11 @@ func physics_update(delta: float) -> void:
 	character.throw_needle_process()
 	character.attack_controlled_process()
 	
+	if not character.is_on_floor():
+		character.animated_sprite.stop()
+	else:
+		character.animated_sprite.play("walk")
+		
 	if not character.is_controlled():
 		# Aggro
 		if character.can_aggro:

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="3_j1qwu"]
 [ext_resource type="PackedScene" uid="uid://mhhxgby3d6xu" path="res://scenes/enemy_manager.tscn" id="3_n6kxe"]
 [ext_resource type="PackedScene" uid="uid://cff8inslrsr8a" path="res://scenes/tile_slay.tscn" id="5_n6kxe"]
-[ext_resource type="Texture2D" uid="uid://cpj6b87dargp0" path="res://assets/assets/bacgrounds/tlo3.png" id="6_17rwq"]
+[ext_resource type="Texture2D" uid="uid://cpj6b87dargp0" path="res://assets/bacgrounds/tlo3.png" id="6_17rwq"]
 [ext_resource type="PackedScene" uid="uid://ck2crf6dyduiw" path="res://scenes/interactible_module.tscn" id="7_2m4to"]
 [ext_resource type="PackedScene" uid="uid://c6peyjbytyck4" path="res://scenes/door.tscn" id="8_4ktit"]
 [ext_resource type="PackedScene" uid="uid://xhy0t1ctvl4f" path="res://scenes/plate.tscn" id="9_hv260"]

@@ -10,6 +10,10 @@ func physics_update(delta: float) -> void:
 
 	character.move_aggro_process(delta)
 	
+	if not character.is_on_floor():
+		character.animated_sprite.stop()
+	else:
+		character.animated_sprite.play("walk")
 	# Controlled
 	if character.is_controlled():
 		state_machine.transition_to("Controlled")

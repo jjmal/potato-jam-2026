@@ -3,10 +3,37 @@
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="1_abkqj"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="2_oe6j6"]
 [ext_resource type="Script" uid="uid://1w6r506a8kn5" path="res://scripts/fat_bat.gd" id="2_smmv2"]
+[ext_resource type="Texture2D" uid="uid://bfoocf7yc41px" path="res://assets/characters/FatBatAnimations/fatbatpopNIEOZN.png" id="3_fk3lr"]
 [ext_resource type="Texture2D" uid="uid://dgq2fohuyfwlj" path="res://assets/characters/FatBatAnimations/fatbat.png" id="3_g1req"]
 [ext_resource type="Script" uid="uid://cjw84k2ulwvkl" path="res://scripts/fatbat_state_machine/roam.gd" id="3_oe6j6"]
 [ext_resource type="Script" uid="uid://dkebkj5mqslfg" path="res://scripts/fatbat_state_machine/aggro.gd" id="4_e76nb"]
+[ext_resource type="Texture2D" uid="uid://c8lqhtf3gefqv" path="res://assets/characters/FatBatAnimations/fatbatpop.png" id="4_yy4sv"]
 [ext_resource type="Script" uid="uid://ull808l5hbgl" path="res://scripts/fatbat_state_machine/controlled.gd" id="5_smmv2"]
+[ext_resource type="Texture2D" uid="uid://ch3kjbsk0ruvl" path="res://assets/characters/FatBatAnimations/fatbatoznaczoned.png" id="6_yrluh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plmh4"]
+atlas = ExtResource("3_fk3lr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s8cr"]
+atlas = ExtResource("3_fk3lr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ortk"]
+atlas = ExtResource("3_fk3lr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mh60p"]
+atlas = ExtResource("4_yy4sv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0osoj"]
+atlas = ExtResource("4_yy4sv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074vc"]
+atlas = ExtResource("4_yy4sv")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e76nb"]
 atlas = ExtResource("3_g1req")
@@ -32,8 +59,60 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("3_g1req")
 region = Rect2(320, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjpeo"]
+atlas = ExtResource("6_yrluh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7ulm"]
+atlas = ExtResource("6_yrluh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5axkv"]
+atlas = ExtResource("6_yrluh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub1ar"]
+atlas = ExtResource("6_yrluh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m24ha"]
+atlas = ExtResource("6_yrluh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tr4c"]
+atlas = ExtResource("6_yrluh")
+region = Rect2(320, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyqk1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plmh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s8cr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ortk")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mh60p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0osoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074vc")
+}],
+"loop": 1,
+"name": &"attack_controlled",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e76nb")
@@ -56,6 +135,29 @@ animations = [{
 "loop": 1,
 "name": &"flying",
 "speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjpeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7ulm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5axkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub1ar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m24ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tr4c")
+}],
+"loop": 1,
+"name": &"flying_controlled",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrluh"]

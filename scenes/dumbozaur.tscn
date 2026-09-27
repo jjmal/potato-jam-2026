@@ -2,8 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="1_817h2"]
 [ext_resource type="Script" uid="uid://cpthpj53cp0ew" path="res://scripts/dumbozaur.gd" id="2_io1nu"]
-[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/assets/characters/BrzydalAnimations/Brzydalkrok.png" id="3_io1nu"]
+[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="3_io1nu"]
 [ext_resource type="Script" uid="uid://c6raqk8d0ykba" path="res://scripts/dumbozaur_state_machine/roam.gd" id="4_l20an"]
+[ext_resource type="Texture2D" uid="uid://vkbpgcuxhv4c" path="res://assets/characters/BrzydalAnimations/Brzydalkrokoznaczony.png" id="4_rs088"]
 [ext_resource type="Script" uid="uid://daq42lsf0djwl" path="res://scripts/dumbozaur_state_machine/controlled.gd" id="5_ao0j6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l20an"]
@@ -12,6 +13,14 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ao0j6"]
 atlas = ExtResource("3_io1nu")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ccw7"]
+atlas = ExtResource("4_rs088")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g6p4"]
+atlas = ExtResource("4_rs088")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qyqk1"]
@@ -25,6 +34,17 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ccw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g6p4")
+}],
+"loop": 1,
+"name": &"walk_controlled",
 "speed": 5.0
 }]
 
@@ -41,7 +61,6 @@ movement_speed = 400.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=1370799006]
 sprite_frames = SubResource("SpriteFrames_qyqk1")
 animation = &"walk"
-frame_progress = 0.2641764
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=465512479]
 position = Vector2(0, -2)
