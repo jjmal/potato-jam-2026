@@ -34,6 +34,7 @@ func _on_scene_handler_toggle_hud(to_on: bool) -> void:
 	hud.set_deferred("visible", to_on)
 		
 func _on_scene_handler_loaded_level(level: Node2D) -> void:
+	clear_needles()
 	current_level = level
 	var level_logic = level.find_child("LevelLogic")
 	var character_marker_spawn_pos = level_logic.spawn_point
@@ -43,15 +44,13 @@ func _on_scene_handler_loaded_level(level: Node2D) -> void:
 	player.ammo = Globals.current_max_ammo
 
 func clear_needles():
-	for needle in player.needle_pouch.get_children():
+	for needle in NeedleManager.needle_array.duplicate():
 		NeedleManager.remove_needle(needle)
 
 func _on_current_level_logic_switch_to_next_level():
-	clear_needles()
 	scene_handler.next_level()
 	
 func _on_current_level_logic_start_current_level():
-	clear_needles()
 	scene_handler.restart()
 
 func _on_player_joniec() -> void:

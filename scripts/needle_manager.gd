@@ -10,6 +10,7 @@ func find_min_dist_pickable_needle():
 	var val_arr = []
 	for needle in pickable_needle_array:
 		val_arr.append(needle.distance_to_tracked_player)
+		
 	var min_val = val_arr.min()
 	for needle in pickable_needle_array:
 		if needle.distance_to_tracked_player == min_val:
@@ -33,6 +34,8 @@ func create_needle(direction_state: int):
 	return needle
 
 func remove_needle(needle):
+	if needle.pickup_status_has_changed.is_connected(_on_needle_pickup_status_has_changed):
+		needle.pickup_status_has_changed.disconnect(_on_needle_pickup_status_has_changed)
 	needle_array.erase(needle)
 	pickable_needle_array.erase(needle)
 	needle.call_deferred("queue_free")

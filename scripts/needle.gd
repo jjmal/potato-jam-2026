@@ -76,7 +76,6 @@ func get_hit_ray_collision() -> Array:
 	elif collider.is_in_group("Enemy"):
 		return [COLLIDER_ENEMY, collider]
 	elif collider.is_in_group("PlayerHead"):
-		print('yay')
 		return [COLLIDER_PLAYER_HEAD, collider]
 	elif collider.is_in_group("Doors"):
 		return [COLLIDER_DOORS, collider]

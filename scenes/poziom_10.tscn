@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b338mle2y06x8" path="res://scenes/pickable_needle.tscn" id="4_bp1qe"]
 [ext_resource type="PackedScene" uid="uid://cff8inslrsr8a" path="res://scenes/tile_slay.tscn" id="4_kmgff"]
 [ext_resource type="PackedScene" uid="uid://bvb72lr8tsag2" path="res://scenes/level_logic.tscn" id="4_n0s2j"]
+[ext_resource type="PackedScene" uid="uid://mhhxgby3d6xu" path="res://scenes/enemy_manager.tscn" id="5_bp1qe"]
+[ext_resource type="PackedScene" uid="uid://b4kljs7tla8eu" path="res://scenes/brzydal.tscn" id="5_yvrcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmgff"]
 size = Vector2(66, 408)
@@ -35,5 +37,9 @@ position = Vector2(56, 702)
 [node name="PickableNeedle" parent="." unique_id=2013643491 instance=ExtResource("4_bp1qe")]
 position = Vector2(360, 722)
 item_id = "first_needle"
+
+[node name="EnemyManager" parent="." unique_id=691424045 instance=ExtResource("5_bp1qe")]
+
+[node name="Brzydal" parent="EnemyManager" unique_id=1916811873 instance=ExtResource("5_yvrcq")]
 
 [editable path="LevelLogic"]

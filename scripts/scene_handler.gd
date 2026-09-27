@@ -126,7 +126,6 @@ func _process(delta: float) -> void:
 func get_current_level_packed_scene():
 	return level_array[Globals.current_level_idx]
 
-
 func unload_level(level):
 	level.queue_free()
 

@@ -11,7 +11,7 @@ const JUMP_VELOCITY = -450.0
 const EPSILON = 0.01
 
 @export var shot_cooldown: float = 0.75
-@export var needle_pouch: Node
+@onready var needle_pouch: Node = $Needles
 @onready var needle_array = NeedleManager.needle_array
 @onready var pickable_needle_array = NeedleManager.pickable_needle_array
 @onready var animated_sprite = $AnimatedSprite
@@ -143,6 +143,7 @@ func _physics_process(delta: float) -> void:
 	can_jump_emitter()
 	can_shoot_emitter()
 	can_attack_emitter()
+	print(needle_pouch.get_children())
 
 func get_closest_pickable_needle():
 	return NeedleManager.find_min_dist_pickable_needle()
