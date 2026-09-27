@@ -21,7 +21,7 @@ func set_x_dir_to_player():
 
 func _physics_process(delta: float) -> void:
 	update_tracked_player()
-	# ($StateMachine.current_state)
+	# print($StateMachine.current_state)
 
 func move_controlled_process(delta: float):
 	apply_gravity(delta)

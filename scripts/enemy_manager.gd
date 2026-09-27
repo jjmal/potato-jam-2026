@@ -1,5 +1,4 @@
 extends Node
-class_name EnemyManager
 
 var enemies_array: Array[Node] = []
 

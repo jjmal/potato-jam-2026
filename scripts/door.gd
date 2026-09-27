@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Node2D
 
 @export var opening_time: float = 1
 var open_offset := Vector2(0, -64)
