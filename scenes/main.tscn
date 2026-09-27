@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cff8inslrsr8a" path="res://scenes/tile_slay.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://0j1pbulj4yfu" path="res://scenes/lever.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://dqxp3hi5rpckk" path="res://scenes/dumbozaur.tscn" id="8_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://cotvbuo1kon6q" path="res://scenes/arena_door.tscn" id="11_ya4ey"]
 
 [sub_resource type="Curve2D" id="Curve2D_tipki"]
 _data = {
@@ -44,7 +45,7 @@ inputs = [NodePath("Lever"), NodePath("Lever2")]
 output = NodePath("Door")
 
 [node name="Door" parent="InteractibleModule" unique_id=1382039705 instance=ExtResource("8_85g4d")]
-position = Vector2(431, 255)
+position = Vector2(404, 254)
 
 [node name="Lever" parent="InteractibleModule" unique_id=8933965 instance=ExtResource("8_tipki")]
 position = Vector2(99, 192)
@@ -61,6 +62,10 @@ curve = SubResource("Curve2D_tipki")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=856385018]
 position = Vector2(137, 510)
 rotation = -0.011904199
+
+[node name="ArenaDoor" parent="." unique_id=1903540855 node_paths=PackedStringArray("enemy_manager") instance=ExtResource("11_ya4ey")]
+position = Vector2(780, 510)
+enemy_manager = NodePath("../EnemyManager")
 
 [connection signal="ammo_changed" from="Player" to="." method="_on_player_ammo_changed"]
 [connection signal="can_attack_status_change" from="Player" to="." method="_on_player_can_attack_status_change"]

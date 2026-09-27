@@ -1,24 +1,31 @@
 extends StaticBody2D
 
+
+@export var enemy_manager: EnemyManager
 @export var opening_time: float = 1
 var open_offset := Vector2(0, -64)
 var tween: Tween
 var is_open := false
-var variant: float
 var closed_pos
 var open_pos
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	closed_pos = position
 	open_pos = position + open_offset
-	call_deferred("set_color")
 	
-func set_color():
-	if variant == 0:
-		$AnimatedSprite2D.animation = "v0"
-	elif variant == 1:
-		$AnimatedSprite2D.animation = "v1"
+func check_if_all_enemies_dead() -> bool:
+	for enemy in enemy_manager.enemies_array:
+		var enemy_state_machine = enemy.find_child("StateMachine")
+		if enemy_state_machine.current_state.name != "Dead":
+			return false
+	return true
+
+func _physics_process(delta: float) -> void:
+	if check_if_all_enemies_dead():
+		open()
+	else:
+		close()
 
 func open():
 	if is_open:
