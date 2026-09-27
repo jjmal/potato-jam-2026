@@ -76,7 +76,6 @@ func spawn_needle(direction_state: int):
 	needle_spawn_position = $ShotMarker.global_position
 	needle.global_position = needle_spawn_position
 
-
 func attack():
 	pass
 	

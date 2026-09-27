@@ -39,6 +39,7 @@ func roam_move_process(delta):
 		global_position.x = target_position  # snap exactly, avoids jitter
 	
 	apply_gravity(delta)
+	flip_character()
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:

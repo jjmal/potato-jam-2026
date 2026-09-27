@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dw5rvtgwerhjm" path="res://scenes/enemy.tscn" id="1_817h2"]
 [ext_resource type="Script" uid="uid://cpthpj53cp0ew" path="res://scripts/dumbozaur.gd" id="2_io1nu"]
-[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/assets/characters/BrzydalAnimations/Brzydalkrok.png" id="3_io1nu"]
+[ext_resource type="Texture2D" uid="uid://bg6pidumx6ta6" path="res://assets/characters/BrzydalAnimations/Brzydalkrok.png" id="3_io1nu"]
 [ext_resource type="Script" uid="uid://c6raqk8d0ykba" path="res://scripts/dumbozaur_state_machine/roam.gd" id="4_l20an"]
 [ext_resource type="Script" uid="uid://daq42lsf0djwl" path="res://scripts/dumbozaur_state_machine/controlled.gd" id="5_ao0j6"]
 [ext_resource type="Script" uid="uid://b400sp117xoxs" path="res://scripts/dumbozaur_state_machine/state.gd" id="6_rs088"]

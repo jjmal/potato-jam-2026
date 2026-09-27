@@ -132,4 +132,5 @@ func _on_pickup_range_area_exited(_area: Area2D) -> void:
 	tracked_player = null
 
 func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
-	resolve_collision_with_dynamic(body)
+	if not collided:
+		resolve_collision_with_dynamic(body)
