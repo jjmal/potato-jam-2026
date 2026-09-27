@@ -1,13 +1,22 @@
 [gd_scene format=3 uid="uid://by31vwaoa4prm"]
 
 [ext_resource type="Script" uid="uid://dj1n0gyobsdps" path="res://scripts/needle.gd" id="1_bfd1i"]
-[ext_resource type="Texture2D" uid="uid://bnyo0fux3026t" path="res://assets/assets/movables/dart_side_gold_red.png" id="1_gcph1"]
+[ext_resource type="Shader" uid="uid://w1sou5b3qokd" path="res://assets/shaders/outline.gdshader" id="2_bem87"]
+[ext_resource type="Texture2D" uid="uid://v56db7okfm1t" path="res://assets/needle/needle.png" id="3_bem87"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qyqk1"]
 size = Vector2(34, 2)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qyqk1"]
 radius = 49.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7n2h2"]
+shader = ExtResource("2_bem87")
+shader_parameter/outline_enabled = true
+shader_parameter/outline_color = Color(1, 0.11764706, 1, 1)
+shader_parameter/thickness = 1.0000000149012
+shader_parameter/sample_count = 64
+shader_parameter/inner_outline = false
 
 [node name="Needle" type="CharacterBody2D" unique_id=360757540]
 script = ExtResource("1_bfd1i")
@@ -24,6 +33,7 @@ collision_layer = 8
 
 [node name="CollisionPlatform" type="CollisionShape2D" parent="Collisions/CollisionPlatformBody" unique_id=2078299109]
 position = Vector2(3, 0)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_qyqk1")
 one_way_collision = true
 
@@ -38,8 +48,11 @@ shape = SubResource("CircleShape2D_qyqk1")
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=170071571]
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("1_gcph1")
+material = SubResource("ShaderMaterial_7n2h2")
+position = Vector2(3, 0)
+rotation = 3.1415927
+scale = Vector2(2, 2)
+texture = ExtResource("3_bem87")
 
 [connection signal="area_entered" from="Collisions/PickupRange" to="." method="_on_pickup_range_area_entered"]
 [connection signal="area_exited" from="Collisions/PickupRange" to="." method="_on_pickup_range_area_exited"]
