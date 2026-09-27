@@ -21,7 +21,6 @@ var is_attack_on_cooldown: bool = false
 var is_jump_unblocked: bool = true
 var is_walk_forward_unblocked: bool = true
 var speed = 300.0
-var current_max_ammo: int = 2
 var ammo: int:
 	set(value):
 		ammo = value
@@ -30,7 +29,7 @@ var ammo: int:
 var direction
 
 func _init():
-	self.ammo = current_max_ammo
+	self.ammo = Globals.current_max_ammo
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
