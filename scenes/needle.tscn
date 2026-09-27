@@ -11,12 +11,14 @@ size = Vector2(34, 2)
 radius = 49.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n2h2"]
+resource_local_to_scene = true
 shader = ExtResource("2_bem87")
 shader_parameter/outline_enabled = true
 shader_parameter/outline_color = Color(1, 0.11764706, 1, 1)
-shader_parameter/thickness = 1.0000000149012
+shader_parameter/thickness = 0.5000000074506
 shader_parameter/sample_count = 64
 shader_parameter/inner_outline = false
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfd1i"]
 radius = 2.236068
 

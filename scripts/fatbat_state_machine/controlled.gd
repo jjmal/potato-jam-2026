@@ -3,9 +3,11 @@ extends State
 
 func enter() -> void:
 	character.animated_sprite.pause()
+	Utils.set_outline(character, true)
 
 func exit() -> void:
 	character.animated_sprite.play()
+	Utils.set_outline(character, false)
 	
 func physics_update(delta: float) -> void:
 	character.move_controlled_process(delta)

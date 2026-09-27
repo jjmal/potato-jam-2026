@@ -35,10 +35,13 @@ var can_be_picked_up: bool = false: # only emit the signal if the value has chan
 		can_be_picked_up = new_value
 		pickup_status_has_changed.emit(self, new_value)
 
+		Utils.set_outline(self, can_be_picked_up)
+
 func _ready() -> void:
 	set_flip()
 	direction = get_direction()
 	disable_collision_platform()
+	Utils.set_outline(self, false)
 	
 func get_direction():
 	if direction_state == LEFT:

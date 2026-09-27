@@ -15,6 +15,8 @@ const EPSILON = 0.01
 @onready var needle_array = NeedleManager.needle_array
 @onready var pickable_needle_array = NeedleManager.pickable_needle_array
 @onready var animated_sprite = $AnimatedSprite
+
+
 var flipped: bool = false
 var is_shot_on_cooldown: bool = false
 var is_attack_on_cooldown: bool = false
@@ -31,11 +33,17 @@ var direction
 
 func _init():
 	self.ammo = current_max_ammo
+# In player.gd
+
+# Replaces direct animation calls and handles scale cleanly
+func play_animation(anim_name: String) -> void:
+	if animated_sprite.sprite_frames.has_animation(anim_name):
+		animated_sprite.play(anim_name)
 
 func _ready() -> void:
 	$ShootTimer.wait_time = shot_cooldown
 	$Hitbox/CollisionShape2D.disabled = true
-
+	
 func emit_ammo_changed(ammo: int):
 	ammo_changed.emit(ammo)
 
@@ -60,13 +68,11 @@ func move_process(delta: float) -> void:
 
 
 func flip_character():
-	if direction < - EPSILON:
-		rotation = PI
-		scale.y = -1
+	if direction < -EPSILON:
+		animated_sprite.flip_h = true
 		flipped = true
-	elif direction >  EPSILON:
-		rotation = 0
-		scale.y = 1
+	elif direction > EPSILON:
+		animated_sprite.flip_h = false
 		flipped = false
 
 func can_shoot() -> bool:
@@ -84,7 +90,7 @@ func spawn_needle(direction_state: int):
 func shoot_process():
 	if Input.is_action_just_pressed("shoot_forward")  and can_shoot():
 		process_shot()
-
+	
 		if Input.is_action_pressed("shoot_up"):
 			spawn_needle(Needle.UP)
 		elif Input.is_action_just_pressed("shoot_forward"):
@@ -92,7 +98,8 @@ func shoot_process():
 				spawn_needle(Needle.LEFT)
 			else:
 				spawn_needle(Needle.RIGHT)
-		
+		return true
+	return false
 
 func process_shot():
 	is_shot_on_cooldown = true
@@ -136,11 +143,13 @@ func can_attack_emitter():
 
 func attack_process():
 	if Input.is_action_just_pressed("attack") and can_attack():
-		is_attack_on_cooldown = true	
+		is_attack_on_cooldown = true
 		$Hitbox/CollisionShape2D.disabled = false
 		$AttackTimer.start()
 		$AttackFramesTimer.start()
-				
+		return true
+	return false
+
 func _physics_process(delta: float) -> void:
 	can_walk_forward_emitter()
 	can_jump_emitter()

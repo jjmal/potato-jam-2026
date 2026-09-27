@@ -5,12 +5,22 @@
 [ext_resource type="Script" uid="uid://dyowlrdoaqmev" path="res://scripts/brzydal_state_machine/aggro.gd" id="3_2bhvc"]
 [ext_resource type="Script" uid="uid://cky44jewlyk4o" path="res://scripts/brzydal_state_machine/roam.gd" id="3_4mjti"]
 [ext_resource type="Texture2D" uid="uid://cqeh2og4fmkkn" path="res://assets/characters/BugAnimations/rAT.png" id="3_5pfcd"]
+[ext_resource type="Shader" uid="uid://w1sou5b3qokd" path="res://assets/shaders/outline.gdshader" id="3_wstux"]
 [ext_resource type="Script" uid="uid://6mxorxg278lu" path="res://scripts/brzydal_state_machine/controlled.gd" id="4_erjbq"]
 [ext_resource type="Texture2D" uid="uid://bdtix0n8hj05n" path="res://assets/characters/BugAnimations/rATozn.png" id="4_r0lcf"]
 [ext_resource type="Texture2D" uid="uid://ccdqxwhimiacb" path="res://assets/characters/BugAnimations/robaltuptup.png" id="5_wstux"]
 [ext_resource type="Texture2D" uid="uid://wdgnypm6el6g" path="res://assets/characters/BugAnimations/robaltuptupozn.png" id="6_u0x7b"]
 [ext_resource type="Script" uid="uid://dyohbwc6fea63" path="res://scripts/brzydal_state_machine/dead.gd" id="7_66375"]
 [ext_resource type="PackedScene" uid="uid://bbm5mby328wdf" path="res://scenes/aggro_module.tscn" id="7_fmkpc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0lcf"]
+resource_local_to_scene = true
+shader = ExtResource("3_wstux")
+shader_parameter/outline_enabled = false
+shader_parameter/outline_color = Color(1, 0, 1, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/sample_count = 8
+shader_parameter/inner_outline = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0lcf"]
 atlas = ExtResource("3_5pfcd")
@@ -163,6 +173,7 @@ allow_random_aggro_jumps = false
 jump_velocity = -450.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0" unique_id=1716297206]
+material = SubResource("ShaderMaterial_r0lcf")
 sprite_frames = SubResource("SpriteFrames_4mjti")
 animation = &"attack"
 

@@ -29,4 +29,10 @@ func air_time(jump_velocity: float, gravity: float) -> float:
 func jump_length(speed: float, jump_velocity: float, gravity: float) -> float:
 	return abs(speed) * air_time(jump_velocity, gravity)
 
-# func set_outline()
+func set_outline(target: Node, enabled: bool) -> void:
+	if target == null:
+		return
+		
+	for child in target.find_children("*", "CanvasItem", true, false):
+		if child.material is ShaderMaterial:
+			child.material.set_shader_parameter("outline_enabled", enabled)
